@@ -40,6 +40,7 @@ import {
   Sparkles,
   ArrowRight,
   Mail,
+  Twitter,
 } from "lucide-react";
 
 export default function HomePage() {
@@ -709,6 +710,16 @@ export default function HomePage() {
               <p className="text-gray-400">
                 Your decentralized music festival experience, powered by AI.
               </p>
+              <div className="flex items-center space-x-2">
+                <a 
+                  href="https://twitter.com/festvibes" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
+                  <Twitter className="w-5 h-5" />
+                </a>
+              </div>
             </div>
 
             <div className="md:text-right">

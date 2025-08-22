@@ -1,6 +1,7 @@
 "use client";
 
 import type React from "react";
+import Link from "next/link";
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
@@ -711,14 +712,14 @@ export default function HomePage() {
                 Your decentralized music festival experience, powered by AI.
               </p>
               <div className="flex items-center space-x-2">
-                <a 
+                <Link 
                   href="https://twitter.com/festvibes" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   <Twitter className="w-5 h-5" />
-                </a>
+                </Link>
               </div>
             </div>
 

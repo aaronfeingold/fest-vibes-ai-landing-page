@@ -2,11 +2,12 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
+import { PHProvider } from "@/components/posthog-provider"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Fest-Vibes - Your AI-Powered Music Festival Experience",
+  title: "Fest-Vibes - Your Smart Music Festival Experience",
   description:
     "Transform any weekend into a personalized music festival. Discover local live music, plan with friends, and experience the ultimate decentralized festival in your pocket.",
   generator: "v0.dev",
@@ -24,7 +25,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <PHProvider>{children}</PHProvider>
+      </body>
     </html>
   )
 }

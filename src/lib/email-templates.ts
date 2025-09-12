@@ -19,7 +19,7 @@ export function generateBetaWelcomeEmail({
 
           <!-- Boomy Logo -->
           <div style="margin-bottom: 30px;">
-            <img src="${domain}/boomy-nav.png" alt="Boomy the Boombox" style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.2);" />
+            <img src="${domain}/boomy-nav.png" alt="Boomy the Cat" style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.2);" />
           </div>
 
           <h1 style="font-size: 2.5rem; margin-bottom: 20px; background: linear-gradient(to right, #a855f7, #ffffff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.2;">
@@ -33,7 +33,7 @@ export function generateBetaWelcomeEmail({
           <div style="background: rgba(255,255,255,0.1); border-radius: 12px; padding: 25px; margin: 30px 0; text-align: left;">
             <h2 style="color: #a855f7; margin-bottom: 15px; text-align: center;">What is Fest Vibes?</h2>
             <p style="color: #fdf4ff; line-height: 1.6; text-align: center;">
-              Your AI-powered festival planning companion that transforms any day into a personalized music festival experience. Discover live local music, plan with friends, and create unforgettable musical memories.
+              Your smart festival planning companion that transforms any day into a personalized music festival experience. Discover live local music, plan with friends, and create unforgettable musical memories.
             </p>
           </div>
 
@@ -43,7 +43,7 @@ export function generateBetaWelcomeEmail({
               <li>We're launching soon to revolutionize how you discover and experience live music</li>
               <li>You'll receive exclusive updates about our progress</li>
               <li>Get early access before the public launch</li>
-              <li>Chat with Boomy the Boombox for personalized festival planning</li>
+              <li>Chat with Boomy for personalized festival planning</li>
               <li>Discover local venues, artists, and create amazing music weekends</li>
             </ul>
           </div>

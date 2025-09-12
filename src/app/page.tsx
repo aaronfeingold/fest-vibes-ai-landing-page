@@ -2,6 +2,7 @@
 
 import type React from "react";
 import Link from "next/link";
+import { usePostHog } from 'posthog-js/react';
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
@@ -23,6 +24,7 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import BetaSignupModal from "@/components/BetaSignupModal";
+import { ABTestNavigation } from "@/components/ab-test-navigation";
 import {
   Music,
   Users,
@@ -45,6 +47,7 @@ import {
 } from "lucide-react";
 
 export default function HomePage() {
+  const posthog = usePostHog()
   const [isVisible, setIsVisible] = useState(false);
   const [showBetaModal, setShowBetaModal] = useState(false);
   const [showEmailForm, setShowEmailForm] = useState(false);
@@ -59,10 +62,14 @@ export default function HomePage() {
   }, []);
 
   const handleJoinBetaClick = () => {
+    posthog?.capture('beta_signup_clicked', {
+      source: 'main_cta'
+    })
     setShowBetaModal(true);
   };
 
   const handleBoomyClick = () => {
+    posthog?.capture('boomy_mascot_clicked')
     setShowBoomyVibes(true);
     setTimeout(() => {
       setShowBoomyVibes(false);
@@ -70,6 +77,7 @@ export default function HomePage() {
   };
 
   const handleJoinBeta = () => {
+    posthog?.capture('beta_signup_modal_proceed')
     setShowBetaModal(false);
     setShowEmailForm(true);
   };
@@ -91,6 +99,14 @@ export default function HomePage() {
       const data = await response.json();
 
       if (response.ok) {
+        posthog?.capture('beta_signup_completed', {
+          email: email
+        })
+        posthog?.identify(email, {
+          email: email,
+          signup_date: new Date().toISOString(),
+          source: 'landing_page'
+        })
         setIsSubmitted(true);
         setTimeout(() => {
           setShowEmailForm(false);
@@ -98,9 +114,17 @@ export default function HomePage() {
           setEmail("");
         }, 3000);
       } else {
+        posthog?.capture('beta_signup_failed', {
+          email: email,
+          error: data.error || "Unknown error"
+        })
         setSubmitError(data.error || "Something went wrong. Please try again.");
       }
     } catch (error) {
+      posthog?.capture('beta_signup_error', {
+        email: email,
+        error: error instanceof Error ? error.message : 'Network error'
+      })
       setSubmitError("Something went wrong. Please try again.");
     } finally {
       setIsSubmitting(false);
@@ -110,9 +134,9 @@ export default function HomePage() {
   const features = [
     {
       icon: MessageCircle,
-      title: "AI Planning Assistant",
+      title: "Planning Assistant",
       description:
-        "Chat with Boomy the Boombox to craft personalized weekend music experiences",
+        "Chat with Boomy to craft personalized weekend music experiences",
       color: "from-purple-500 to-pink-500",
     },
     {
@@ -285,7 +309,7 @@ export default function HomePage() {
             <div className="relative overflow-hidden rounded-3xl shadow-2xl border-4 border-purple-500/50">
               <img
                 src="/boomy-vibes.png"
-                alt="Boomy the Boombox in vibrant New Orleans street art style"
+                alt="Boomy the Cat in vibrant New Orleans street art style"
                 className="w-96 h-96 object-cover animate-pulse-glow"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent pointer-events-none" />
@@ -297,49 +321,10 @@ export default function HomePage() {
       )}
 
       {/* Navigation */}
-      <nav className="relative z-10 flex items-center justify-between p-6 lg:px-8">
-        <div className="flex items-center space-x-2">
-          <button
-            onClick={handleBoomyClick}
-            className="transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-lg"
-          >
-            <img
-              src="/boomy-nav.png"
-              alt="Boomy the Boombox"
-              className="w-14 h-14 rounded-lg object-cover"
-            />
-          </button>
-          <span className="text-2xl font-bold text-transparent bg-gradient-to-r from-purple-400 to-green-500 bg-clip-text">
-            Fest Vibes
-          </span>
-        </div>
-        <div className="hidden md:flex items-center space-x-8">
-          <a
-            href="#features"
-            className="text-gray-300 hover:text-white transition-colors"
-          >
-            Features
-          </a>
-          <a
-            href="#demo"
-            className="text-gray-300 hover:text-white transition-colors"
-          >
-            Demo
-          </a>
-          <a
-            href="#analytics"
-            className="text-gray-300 hover:text-white transition-colors"
-          >
-            Analytics
-          </a>
-          <Button
-            onClick={handleJoinBetaClick}
-            className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
-          >
-            Get Started
-          </Button>
-        </div>
-      </nav>
+      <ABTestNavigation 
+        onBoomyClick={handleBoomyClick}
+        onJoinBetaClick={handleJoinBetaClick}
+      />
 
       {/* Hero Section */}
       <section className="relative z-10 px-6 lg:px-8 pt-20 pb-32">
@@ -353,7 +338,7 @@ export default function HomePage() {
           >
             <Badge className="mb-6 bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-300 border-purple-500/30">
               <Sparkles className="w-4 h-4 mr-2" />
-              AI-Powered Festival Planning
+              Smart Festival Planning
             </Badge>
             <h1 className="text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
               Your Own Music
@@ -407,7 +392,7 @@ export default function HomePage() {
               </span>
             </h2>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              From AI-powered planning to social collaboration, we've got every
+              From smart planning to social collaboration, we've got every
               aspect of your music experience covered.
             </p>
           </div>
@@ -444,10 +429,10 @@ export default function HomePage() {
         <div className="mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-white mb-4">
-              Meet Boomy, Your AI Festival Planner
+              Meet Boomy, Your Festival Planning Assistant
             </h2>
             <p className="text-xl text-gray-300">
-              Chat with our AI assistant to discover and plan your perfect music
+              Chat with your planning assistant to discover and plan your perfect music
               weekend
             </p>
           </div>
@@ -456,7 +441,7 @@ export default function HomePage() {
             <div className="flex justify-center">
               <img
                 src="/boomy-chat-demo.png"
-                alt="Boomy the Boombox chat interface showing conversation about finding electronic music shows"
+                alt="Boomy the Cat chat interface showing conversation about finding electronic music shows"
                 className="w-full max-w-lg rounded-lg shadow-2xl hover:scale-105 transition-transform duration-300"
               />
             </div>
@@ -709,12 +694,12 @@ export default function HomePage() {
                 <span className="text-xl font-bold text-white">Fest-Vibes</span>
               </div>
               <p className="text-gray-400">
-                Your decentralized music festival experience, powered by AI.
+                Your decentralized music festival experience.
               </p>
               <div className="flex items-center space-x-2">
-                <Link 
-                  href="https://twitter.com/festvibes" 
-                  target="_blank" 
+                <Link
+                  href="https://twitter.com/festvibes"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition-colors"
                 >
@@ -726,28 +711,21 @@ export default function HomePage() {
             <div className="md:text-right">
               <ul className="space-y-2 text-gray-400">
                 <li>
-                  <a href="#" className="hover:text-white transition-colors">
+                  <Link href="/privacy" className="hover:text-white transition-colors">
                     Privacy
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition-colors">
+                  <Link href="/terms" className="hover:text-white transition-colors">
                     Terms
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Contact
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
           </div>
 
           <div className="border-t border-slate-700/50 mt-12 pt-8 text-center text-gray-400">
-            <p>
-              &copy; 2025 Fest-Vibes. All rights reserved.
-            </p>
+            <p>&copy; 2025 Fest-Vibes. All rights reserved.</p>
           </div>
         </div>
       </footer>

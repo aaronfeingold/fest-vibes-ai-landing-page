@@ -178,14 +178,13 @@ export default function HomePage() {
     {
       icon: Heart,
       title: "Artists First",
-      description: "Stan your favorite local musicians. Know where they be at",
+      description: "Follow local musicians and know where they be at",
       color: "from-pink-500 to-rose-500",
     },
     {
       icon: Music,
       title: "Discover Live Music",
-      description:
-        "Find and support local musicians, venues, and live performances.",
+      description: "Find something you've never heard of",
       color: "from-green-500 to-emerald-500",
     },
     {
@@ -197,16 +196,15 @@ export default function HomePage() {
     },
     {
       icon: Users,
-      title: "Social Collaboration",
-      description:
-        "Connect your fam, grow your krewe and share music event plans",
+      title: "Build-a-Krewe",
+      description: "Connect your fam and share plans",
       color: "from-blue-500 to-cyan-500",
     },
     {
       icon: MessageCircle,
-      title: "Assistant",
+      title: "Assistance",
       description:
-        "Chat with Boomy to craft personalized weekend music experiences",
+        "Chat with Bumi to craft personalized weekend music experiences",
       color: "from-purple-500 to-pink-500",
     },
   ];
@@ -345,7 +343,7 @@ export default function HomePage() {
             <div className="relative overflow-hidden rounded-3xl shadow-2xl">
               <img
                 src="/boomy-vibes.png"
-                alt="Boomy the Cat in vibrant New Orleans street art style"
+                alt="Bumi the Cat in vibrant New Orleans street art style"
                 className="w-96 h-96 object-cover"
                 style={{ animation: "spin 3s linear infinite" }}
               />
@@ -460,11 +458,10 @@ export default function HomePage() {
         <div className="mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-white mb-4">
-              Meet Boomy, Your Festival Planning Assistant
+              Meet Bumi, Your Planning Assistant
             </h2>
             <p className="text-xl text-gray-300">
-              Chat with your planning assistant to discover and plan your
-              perfect music weekend
+              Let Bumi suggest and organize your perfect music weekend
             </p>
           </div>
 

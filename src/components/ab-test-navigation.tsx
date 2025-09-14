@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { useLogoPosition, useLogoVariant } from '@/hooks/use-feature-flags'
+import { useLogoPosition, useLogoVariant, useAssistantName } from '@/hooks/use-feature-flags'
 
 interface ABTestNavigationProps {
   onBoomyClick: () => void
@@ -13,6 +13,7 @@ interface ABTestNavigationProps {
 export function ABTestNavigation({ onBoomyClick, onJoinBetaClick }: ABTestNavigationProps) {
   const logoPosition = useLogoPosition()
   const logoVariant = useLogoVariant()
+  const assistantName = useAssistantName()
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
 
@@ -57,7 +58,7 @@ export function ABTestNavigation({ onBoomyClick, onJoinBetaClick }: ABTestNaviga
       >
         <img
           src="/boomy-nav.png"
-          alt="Boomy the Cat"
+          alt={`${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} the Cat`}
           className="w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-lg object-cover"
         />
       </button>

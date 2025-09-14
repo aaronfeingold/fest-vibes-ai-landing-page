@@ -8,6 +8,7 @@ interface FeatureFlags {
   logoVariant: "1" | "2" | "3";
   copyVariant: "original" | "alternative" | "concise";
   heroLayout: "default" | "compact" | "expanded";
+  assistantName: "boomy" | "bumi";
 }
 
 // Get bootstrap flags from cookie (set by middleware)
@@ -28,6 +29,7 @@ function getBootstrapFlags(): Partial<FeatureFlags> {
       logoVariant: flags["logo-variant"] || "1",
       copyVariant: flags["copy-variant"] || "original",
       heroLayout: flags["hero-layout"] || "default",
+      assistantName: flags["assistant-name"] || "boomy",
     };
   } catch {
     return {};
@@ -40,6 +42,7 @@ export function useFeatureFlags(): FeatureFlags {
     logoVariant: "1",
     copyVariant: "original",
     heroLayout: "default",
+    assistantName: "boomy",
   }));
 
   // Get flags from PostHog (will override bootstrap once loaded)
@@ -47,6 +50,7 @@ export function useFeatureFlags(): FeatureFlags {
   const logoVariantFlag = useFeatureFlagEnabled("logo-variant");
   const copyVariantFlag = useFeatureFlagEnabled("copy-variant");
   const heroLayoutFlag = useFeatureFlagEnabled("hero-layout");
+  const assistantNameFlag = useFeatureFlagEnabled("assistant-name");
 
   useEffect(() => {
     // Start with bootstrap flags (from middleware)
@@ -66,6 +70,9 @@ export function useFeatureFlags(): FeatureFlags {
       heroLayout:
         (bootstrapFlags.heroLayout as "default" | "compact" | "expanded") ||
         prev.heroLayout,
+      assistantName:
+        (bootstrapFlags.assistantName as "boomy" | "bumi") ||
+        prev.assistantName,
     }));
   }, []);
 
@@ -106,6 +113,15 @@ export function useFeatureFlags(): FeatureFlags {
     }
   }, [heroLayoutFlag]);
 
+  useEffect(() => {
+    if (assistantNameFlag !== undefined) {
+      setFlags((prev) => ({
+        ...prev,
+        assistantName: assistantNameFlag as "boomy" | "bumi",
+      }));
+    }
+  }, [assistantNameFlag]);
+
   return flags;
 }
 
@@ -128,4 +144,9 @@ export function useLogoVariant() {
 export function useHeroLayout() {
   const { heroLayout } = useFeatureFlags();
   return heroLayout;
+}
+
+export function useAssistantName() {
+  const { assistantName } = useFeatureFlags();
+  return assistantName;
 }

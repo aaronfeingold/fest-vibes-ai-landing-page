@@ -25,7 +25,7 @@ import {
 import { Label } from "@/components/ui/label";
 import BetaSignupModal from "@/components/BetaSignupModal";
 import { ABTestNavigation } from "@/components/ab-test-navigation";
-import { useLogoVariant } from "@/hooks/use-feature-flags";
+import { useLogoVariant, useAssistantName } from "@/hooks/use-feature-flags";
 import {
   Music,
   Users,
@@ -73,6 +73,7 @@ interface ContentData {
 export default function HomePage() {
   const posthog = usePostHog();
   const logoVariant = useLogoVariant();
+  const assistantName = useAssistantName();
   const [isVisible, setIsVisible] = useState(false);
   const [showBetaModal, setShowBetaModal] = useState(false);
   const [showEmailForm, setShowEmailForm] = useState(false);
@@ -204,7 +205,7 @@ export default function HomePage() {
       icon: MessageCircle,
       title: "Assistance",
       description:
-        "Chat with Bumi to craft personalized weekend music experiences",
+        `Chat with ${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} to craft personalized weekend music experiences`,
       color: "from-purple-500 to-pink-500",
     },
   ];
@@ -343,7 +344,7 @@ export default function HomePage() {
             <div className="relative overflow-hidden rounded-3xl shadow-2xl">
               <img
                 src="/boomy-vibes.png"
-                alt="Bumi the Cat in vibrant New Orleans street art style"
+                alt={`${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} the Cat in vibrant New Orleans street art style`}
                 className="w-96 h-96 object-cover"
                 style={{ animation: "spin 3s linear infinite" }}
               />
@@ -458,10 +459,10 @@ export default function HomePage() {
         <div className="mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-white mb-4">
-              Meet Bumi, Your Planning Assistant
+              Meet {assistantName.charAt(0).toUpperCase() + assistantName.slice(1)}, Your Planning Assistant
             </h2>
             <p className="text-xl text-gray-300">
-              Let Bumi suggest and organize your perfect music weekend
+              Let {assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} suggest and organize your perfect music weekend
             </p>
           </div>
 
@@ -469,14 +470,14 @@ export default function HomePage() {
             <div className="flex justify-center">
               <img
                 src="/boomy-chat-demo.png"
-                alt="Boomy the Cat chat interface showing conversation about finding electronic music shows"
+                alt={`${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} the Cat chat interface showing conversation about finding electronic music shows`}
                 className="w-full max-w-lg rounded-lg shadow-2xl hover:scale-105 transition-transform duration-300"
               />
             </div>
 
             <div className="space-y-6">
               <h3 className="text-2xl font-bold text-white mb-4">
-                Boomy Can Help You:
+                {assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} Can Help You:
               </h3>
               <div className="space-y-4">
                 {[
@@ -661,7 +662,7 @@ export default function HomePage() {
             <div className="flex justify-center">
               <img
                 src="/social-mike-new.png"
-                alt="Mike R. social post about creating a 3-day festival itinerary with Boomy"
+                alt={`Mike R. social post about creating a 3-day festival itinerary with ${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)}`}
                 className="w-full max-w-sm rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
               />
             </div>
@@ -696,7 +697,7 @@ export default function HomePage() {
               >
                 <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 flex-shrink-0" />
                 <span className="text-center whitespace-normal">
-                  Start Planning with Boomy
+                  Start Planning with {assistantName.charAt(0).toUpperCase() + assistantName.slice(1)}
                 </span>
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-1 sm:ml-2 flex-shrink-0" />
               </Button>
@@ -722,7 +723,7 @@ export default function HomePage() {
               <div className="flex items-center space-x-2">
                 <img
                   src="/boomy-nav.png"
-                  alt="Boomy the Cat"
+                  alt={`${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} the Cat`}
                   className="w-8 h-8 rounded-lg object-cover"
                 />
                 <img

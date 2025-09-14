@@ -10,7 +10,7 @@ Fest-Vibes is an AI-powered weekend planning platform that brings the festival e
 
 ## Features
 
-- **AI Planning Assistant** - Chat for personalized music experiences
+- **AI Planning Assistant** - Chat with Boomy/Bumi for personalized music experiences (A/B tested)
 - **Social Collaboration** - Connect with friends to coordinate music event plans
 - **Live Music Discovery** - Find and support local musicians and venues
 - **Event Analytics Dashboard** - Interactive insights into music events and trends

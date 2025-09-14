@@ -1,11 +1,13 @@
 interface BetaWelcomeEmailData {
   email: string;
   domain: string;
+  assistantName?: string;
 }
 
 export function generateBetaWelcomeEmail({
   email,
   domain,
+  assistantName = "Boomy",
 }: BetaWelcomeEmailData) {
   const domainName = domain.replace(/^https?:\/\//, "").replace(/^www\./, "");
 
@@ -19,7 +21,7 @@ export function generateBetaWelcomeEmail({
 
           <!-- Boomy Logo -->
           <div style="margin-bottom: 30px;">
-            <img src="${domain}/boomy-nav.png" alt="Boomy the Cat" style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.2);" />
+            <img src="${domain}/boomy-nav.png" alt="${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} the Cat" style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.2);" />
           </div>
 
           <h1 style="font-size: 2.5rem; margin-bottom: 20px; background: linear-gradient(to right, #a855f7, #ffffff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.2;">
@@ -43,7 +45,7 @@ export function generateBetaWelcomeEmail({
               <li>We're launching soon to revolutionize how you discover and experience live music</li>
               <li>You'll receive exclusive updates about our progress</li>
               <li>Get early access before the public launch</li>
-              <li>Chat with Boomy for personalized festival planning</li>
+              <li>Chat with ${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} for personalized festival planning</li>
               <li>Discover local venues, artists, and create amazing music weekends</li>
             </ul>
           </div>

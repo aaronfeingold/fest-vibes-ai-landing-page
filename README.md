@@ -1,6 +1,6 @@
 # Fest Vibes landing page
 
-*AI-powered weekend music festival planning platform*
+_AI-powered weekend music festival planning platform_
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/aaronfeingold/fest-vibes-nola-landing-page)
 
@@ -10,7 +10,7 @@ Fest-Vibes is an AI-powered weekend planning platform that brings the festival e
 
 ## Features
 
-- **AI Planning Assistant** - Chat with Boomy the Boombox for personalized music experiences
+- **AI Planning Assistant** - Chat for personalized music experiences
 - **Social Collaboration** - Connect with friends to coordinate music event plans
 - **Live Music Discovery** - Find and support local musicians and venues
 - **Event Analytics Dashboard** - Interactive insights into music events and trends

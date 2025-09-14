@@ -160,39 +160,42 @@ export function ABTestNavigation({ onBoomyClick, onJoinBetaClick }: ABTestNaviga
     </button>
   )
 
-  // Mobile Logo component (mobile version - includes both mascot and logo)
+  // Mobile Logo component (mobile version - just the text logo, centered)
   const MobileLogoComponent = () => (
-    <div className="flex items-center space-x-2">
-      <MascotComponent />
-      <img
-        src={`/logo-${logoVariant}.png`}
-        alt="Fest Vibes Logo"
-        className="h-8 sm:h-10 w-auto object-contain transition-transform hover:scale-105"
-      />
-    </div>
+    <img
+      src={`/logo-${logoVariant}.png`}
+      alt="Fest Vibes Logo"
+      className="h-8 sm:h-10 w-auto object-contain transition-transform hover:scale-105"
+    />
   )
 
-  // Mobile layout with hamburger and logo on opposite sides
+  // Mobile layout with centered logo and A/B testing for mascot/hamburger positions
   const MobileLayout = () => {
     if (logoPosition === 'right') {
-      // Logo on left, hamburger on right
+      // A/B Test Variant: Hamburger on left, centered logo, mascot on right
       return (
         <nav className="relative z-10 md:hidden w-full">
           <div className="flex items-center justify-between w-full p-6">
-            <MobileLogoComponent />
             <HamburgerButton />
+            <div className="absolute left-1/2 transform -translate-x-1/2">
+              <MobileLogoComponent />
+            </div>
+            <MascotComponent />
           </div>
           <MobileMenu />
         </nav>
       )
     }
 
-    // Default: Hamburger on left, logo on right
+    // Default: Mascot on left, centered logo, hamburger on right
     return (
       <nav className="relative z-10 md:hidden w-full">
         <div className="flex items-center justify-between w-full p-6">
+          <MascotComponent />
+          <div className="absolute left-1/2 transform -translate-x-1/2">
+            <MobileLogoComponent />
+          </div>
           <HamburgerButton />
-          <MobileLogoComponent />
         </div>
         <MobileMenu />
       </nav>

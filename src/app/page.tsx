@@ -25,6 +25,7 @@ import {
 import { Label } from "@/components/ui/label";
 import BetaSignupModal from "@/components/BetaSignupModal";
 import { ABTestNavigation } from "@/components/ab-test-navigation";
+import { useLogoVariant } from "@/hooks/use-feature-flags";
 import {
   Music,
   Users,
@@ -46,8 +47,32 @@ import {
   Twitter,
 } from "lucide-react";
 
+interface ContentData {
+  hero: {
+    subtitle: string;
+  };
+  features: {
+    title: string;
+    subtitle: string;
+  };
+  social: {
+    title: string;
+    subtitle: string;
+  };
+  cta: {
+    title: string;
+    subtitle: string;
+  };
+  featuresIntro: {
+    title: string;
+    titleHighlight: string;
+    subtitle: string;
+  };
+}
+
 export default function HomePage() {
-  const posthog = usePostHog()
+  const posthog = usePostHog();
+  const logoVariant = useLogoVariant();
   const [isVisible, setIsVisible] = useState(false);
   const [showBetaModal, setShowBetaModal] = useState(false);
   const [showEmailForm, setShowEmailForm] = useState(false);
@@ -56,28 +81,46 @@ export default function HomePage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [showBoomyVibes, setShowBoomyVibes] = useState(false);
+  const [contentData, setContentData] = useState<ContentData | null>(null);
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
 
+  useEffect(() => {
+    const loadContentData = async () => {
+      try {
+        const response = await fetch("/data.json");
+        if (response.ok) {
+          const data = await response.json();
+          setContentData(data);
+        }
+      } catch (error) {
+        console.error("Failed to load content data:", error);
+        // Content data will remain null and defaults will be used
+      }
+    };
+
+    loadContentData();
+  }, []);
+
   const handleJoinBetaClick = () => {
-    posthog?.capture('beta_signup_clicked', {
-      source: 'main_cta'
-    })
+    posthog?.capture("beta_signup_clicked", {
+      source: "main_cta",
+    });
     setShowBetaModal(true);
   };
 
   const handleBoomyClick = () => {
-    posthog?.capture('boomy_mascot_clicked')
+    posthog?.capture("boomy_mascot_clicked");
     setShowBoomyVibes(true);
     setTimeout(() => {
       setShowBoomyVibes(false);
-    }, 3000);
+    }, 4500);
   };
 
   const handleJoinBeta = () => {
-    posthog?.capture('beta_signup_modal_proceed')
+    posthog?.capture("beta_signup_modal_proceed");
     setShowBetaModal(false);
     setShowEmailForm(true);
   };
@@ -99,14 +142,14 @@ export default function HomePage() {
       const data = await response.json();
 
       if (response.ok) {
-        posthog?.capture('beta_signup_completed', {
-          email: email
-        })
+        posthog?.capture("beta_signup_completed", {
+          email: email,
+        });
         posthog?.identify(email, {
           email: email,
           signup_date: new Date().toISOString(),
-          source: 'landing_page'
-        })
+          source: "landing_page",
+        });
         setIsSubmitted(true);
         setTimeout(() => {
           setShowEmailForm(false);
@@ -114,17 +157,17 @@ export default function HomePage() {
           setEmail("");
         }, 3000);
       } else {
-        posthog?.capture('beta_signup_failed', {
+        posthog?.capture("beta_signup_failed", {
           email: email,
-          error: data.error || "Unknown error"
-        })
+          error: data.error || "Unknown error",
+        });
         setSubmitError(data.error || "Something went wrong. Please try again.");
       }
     } catch (error) {
-      posthog?.capture('beta_signup_error', {
+      posthog?.capture("beta_signup_error", {
         email: email,
-        error: error instanceof Error ? error.message : 'Network error'
-      })
+        error: error instanceof Error ? error.message : "Network error",
+      });
       setSubmitError("Something went wrong. Please try again.");
     } finally {
       setIsSubmitting(false);
@@ -133,45 +176,38 @@ export default function HomePage() {
 
   const features = [
     {
-      icon: MessageCircle,
-      title: "Planning Assistant",
+      icon: Heart,
+      title: "Artists First",
+      description: "Stan your favorite local musicians. Know where they be at",
+      color: "from-pink-500 to-rose-500",
+    },
+    {
+      icon: Music,
+      title: "Discover Live Music",
       description:
-        "Chat with Boomy to craft personalized weekend music experiences",
-      color: "from-purple-500 to-pink-500",
+        "Find and support local musicians, venues, and live performances.",
+      color: "from-green-500 to-emerald-500",
+    },
+    {
+      icon: Calendar,
+      title: "Plan Ahead",
+      description:
+        "Curate multi-day timelines to pack your weekends with as much music as possible",
+      color: "from-indigo-500 to-purple-500",
     },
     {
       icon: Users,
       title: "Social Collaboration",
       description:
-        "Connect with friends to coordinate and share music event plans",
+        "Connect your fam, grow your krewe and share music event plans",
       color: "from-blue-500 to-cyan-500",
     },
     {
-      icon: Music,
-      title: "Live Music Discovery",
+      icon: MessageCircle,
+      title: "Assistant",
       description:
-        "Find and support local musicians, venues, and live performances",
-      color: "from-green-500 to-emerald-500",
-    },
-    {
-      icon: BarChart3,
-      title: "Event Analytics",
-      description:
-        "Interactive data tables with insights into music events and trends",
-      color: "from-orange-500 to-red-500",
-    },
-    {
-      icon: Calendar,
-      title: "Festival Planning",
-      description:
-        "Create Gantt charts and timelines for multi-day festival experiences",
-      color: "from-indigo-500 to-purple-500",
-    },
-    {
-      icon: Heart,
-      title: "Artist Following",
-      description: "Stay updated on your favorite musicians and music venues",
-      color: "from-pink-500 to-rose-500",
+        "Chat with Boomy to craft personalized weekend music experiences",
+      color: "from-purple-500 to-pink-500",
     },
   ];
 
@@ -306,11 +342,12 @@ export default function HomePage() {
                 : "opacity-0 scale-50"
             }`}
           >
-            <div className="relative overflow-hidden rounded-3xl shadow-2xl border-4 border-purple-500/50">
+            <div className="relative overflow-hidden rounded-3xl shadow-2xl">
               <img
                 src="/boomy-vibes.png"
                 alt="Boomy the Cat in vibrant New Orleans street art style"
-                className="w-96 h-96 object-cover animate-pulse-glow"
+                className="w-96 h-96 object-cover"
+                style={{ animation: "spin 3s linear infinite" }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent pointer-events-none" />
             </div>
@@ -321,7 +358,7 @@ export default function HomePage() {
       )}
 
       {/* Navigation */}
-      <ABTestNavigation 
+      <ABTestNavigation
         onBoomyClick={handleBoomyClick}
         onJoinBetaClick={handleJoinBetaClick}
       />
@@ -336,23 +373,25 @@ export default function HomePage() {
                 : "opacity-0 translate-y-10"
             }`}
           >
-            <Badge className="mb-6 bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-300 border-purple-500/30">
-              <Sparkles className="w-4 h-4 mr-2" />
-              Smart Festival Planning
-            </Badge>
-            <h1 className="text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-              Your Own Music
+            <h1 className="text-5xl lg:text-7xl font-bold font-neue-machina text-white mb-6 leading-tight">
+              Your
               <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-purple-300 dark:text-purple-200 supports-[background-clip:text]:text-transparent">
                 {" "}
-                Festival
+                Hometown
               </span>
               <br />
-              Starts Here
+              Is Your Own
+              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-purple-300 dark:text-purple-200 supports-[background-clip:text]:text-transparent">
+                {" "}
+                Music Fest
+              </span>
             </h1>
-            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
-              Transform any day into a personalized music festival. Discover
-              live local music, plan with friends, and experience the ultimate
-              decentralized festival vibes in your pocket.
+            <p
+              id="hero-subtitle"
+              className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed"
+            >
+              {contentData?.hero?.subtitle ||
+                "Transform any day into a personalized music festival. Discover live local music, plan with friends, and experience the ultimate decentralized festival vibes in your pocket."}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Button
@@ -362,18 +401,9 @@ export default function HomePage() {
               >
                 <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 flex-shrink-0" />
                 <span className="text-center whitespace-normal">
-                  Chat with Boomy
+                  Join the Waitlist!
                 </span>
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-1 sm:ml-2 flex-shrink-0" />
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                disabled
-                className="border-purple-500/50 text-purple-300/50 text-lg px-8 py-4 cursor-not-allowed opacity-50"
-              >
-                <Play className="w-5 h-5 mr-2" />
-                Watch Demo
               </Button>
             </div>
           </div>
@@ -385,15 +415,16 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-white mb-4">
-              Everything You Need for the Perfect
+              {contentData?.featuresIntro?.title ||
+                "Everything You Need for the Perfect"}
               <span className="text-purple-300 dark:text-purple-200">
                 {" "}
-                Music Weekend
+                {contentData?.featuresIntro?.titleHighlight || "Music Weekend"}
               </span>
             </h2>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              From smart planning to social collaboration, we've got every
-              aspect of your music experience covered.
+              {contentData?.featuresIntro?.subtitle ||
+                "From smart planning to social collaboration, we're covering every aspect of your music experience."}
             </p>
           </div>
 
@@ -432,8 +463,8 @@ export default function HomePage() {
               Meet Boomy, Your Festival Planning Assistant
             </h2>
             <p className="text-xl text-gray-300">
-              Chat with your planning assistant to discover and plan your perfect music
-              weekend
+              Chat with your planning assistant to discover and plan your
+              perfect music weekend
             </p>
           </div>
 
@@ -510,7 +541,7 @@ export default function HomePage() {
                 <CardHeader>
                   <CardTitle className="text-white flex items-center">
                     <BarChart3 className="w-5 h-5 mr-2 text-purple-400" />
-                    Trending Events This Weekend
+                    Trending Events This Saturday
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -557,7 +588,9 @@ export default function HomePage() {
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-gray-400 text-sm">Events This Week</p>
+                      <p className="text-gray-400 text-sm">
+                        Funk Events This Week
+                      </p>
                       <p className="text-3xl font-bold text-white">127</p>
                     </div>
                     <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg flex items-center justify-center">
@@ -574,14 +607,16 @@ export default function HomePage() {
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-gray-400 text-sm">Active Venues</p>
-                      <p className="text-3xl font-bold text-white">45</p>
+                      <p className="text-gray-400 text-sm">Weekend Events</p>
+                      <p className="text-3xl font-bold text-white">162</p>
                     </div>
                     <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center">
                       <MapPin className="w-6 h-6 text-white" />
                     </div>
                   </div>
-                  <p className="text-blue-400 text-sm mt-2">5 new this month</p>
+                  <p className="text-blue-400 text-sm mt-2">
+                    5 new added today
+                  </p>
                 </CardContent>
               </Card>
 
@@ -589,15 +624,15 @@ export default function HomePage() {
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-gray-400 text-sm">Community Size</p>
-                      <p className="text-3xl font-bold text-white">2.4K</p>
+                      <p className="text-gray-400 text-sm">Lit Fam</p>
+                      <p className="text-3xl font-bold text-white">16</p>
                     </div>
                     <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
                       <Users className="w-6 h-6 text-white" />
                     </div>
                   </div>
                   <p className="text-purple-400 text-sm mt-2">
-                    Music lovers connected
+                    Your Krewe Vibes
                   </p>
                 </CardContent>
               </Card>
@@ -688,10 +723,16 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-4">
               <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-                  <Radio className="w-4 h-4 text-white" />
-                </div>
-                <span className="text-xl font-bold text-white">Fest-Vibes</span>
+                <img
+                  src="/boomy-nav.png"
+                  alt="Boomy the Cat"
+                  className="w-8 h-8 rounded-lg object-cover"
+                />
+                <img
+                  src={`/logo-${logoVariant}.png`}
+                  alt="Fest Vibes Logo"
+                  className="h-6 w-auto object-contain"
+                />
               </div>
               <p className="text-gray-400">
                 Your decentralized music festival experience.
@@ -711,12 +752,18 @@ export default function HomePage() {
             <div className="md:text-right">
               <ul className="space-y-2 text-gray-400">
                 <li>
-                  <Link href="/privacy" className="hover:text-white transition-colors">
+                  <Link
+                    href="/privacy"
+                    className="hover:text-white transition-colors"
+                  >
                     Privacy
                   </Link>
                 </li>
                 <li>
-                  <Link href="/terms" className="hover:text-white transition-colors">
+                  <Link
+                    href="/terms"
+                    className="hover:text-white transition-colors"
+                  >
                     Terms
                   </Link>
                 </li>

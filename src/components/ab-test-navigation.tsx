@@ -1,9 +1,9 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { useLogoPosition } from '@/hooks/use-feature-flags'
+import { useLogoPosition, useLogoVariant } from '@/hooks/use-feature-flags'
 
 interface ABTestNavigationProps {
   onBoomyClick: () => void
@@ -12,27 +12,102 @@ interface ABTestNavigationProps {
 
 export function ABTestNavigation({ onBoomyClick, onJoinBetaClick }: ABTestNavigationProps) {
   const logoPosition = useLogoPosition()
+  const logoVariant = useLogoVariant()
+  const [showMobileMenu, setShowMobileMenu] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  // Check if we're on mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768) // md breakpoint
+    }
+
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (showMobileMenu && !(event.target as Element).closest('nav')) {
+        setShowMobileMenu(false)
+      }
+    }
+
+    document.addEventListener('click', handleClickOutside)
+    return () => document.removeEventListener('click', handleClickOutside)
+  }, [showMobileMenu])
+
+  // Handle Boomy click - show menu on mobile, vibes on desktop
+  const handleBoomyClick = () => {
+    if (isMobile) {
+      setShowMobileMenu(!showMobileMenu)
+    } else {
+      onBoomyClick() // Show vibes animation
+    }
+  }
 
   // Logo component
   const LogoComponent = () => (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center space-x-2 sm:space-x-3">
       <button
-        onClick={onBoomyClick}
+        onClick={handleBoomyClick}
         className="transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-lg"
       >
         <img
           src="/boomy-nav.png"
           alt="Boomy the Cat"
-          className="w-14 h-14 rounded-lg object-cover"
+          className="w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-lg object-cover"
         />
       </button>
-      <span className="text-2xl font-bold text-transparent bg-gradient-to-r from-purple-400 to-green-500 bg-clip-text">
-        Fest Vibes
-      </span>
+      <img
+        src={`/logo-${logoVariant}.png`}
+        alt="Fest Vibes Logo"
+        className="h-14 sm:h-16 md:h-16 w-auto object-contain transition-transform hover:scale-105"
+      />
     </div>
   )
 
-  // Navigation links component
+  // Mobile dropdown menu
+  const MobileMenu = () => (
+    <div className={`absolute top-full left-0 right-0 bg-slate-900/98 backdrop-blur-lg border-t border-slate-600 shadow-xl transition-all duration-300 ${showMobileMenu ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}`}>
+      <div className="px-6 py-4 space-y-4">
+        <a
+          href="#features"
+          onClick={() => setShowMobileMenu(false)}
+          className="block text-gray-300 hover:text-white transition-colors text-lg py-2"
+        >
+          Features
+        </a>
+        <a
+          href="#demo"
+          onClick={() => setShowMobileMenu(false)}
+          className="block text-gray-300 hover:text-white transition-colors text-lg py-2"
+        >
+          Demo
+        </a>
+        <a
+          href="#analytics"
+          onClick={() => setShowMobileMenu(false)}
+          className="block text-gray-300 hover:text-white transition-colors text-lg py-2"
+        >
+          Analytics
+        </a>
+        <Button
+          onClick={() => {
+            setShowMobileMenu(false)
+            onJoinBetaClick()
+          }}
+          className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 mt-4"
+        >
+          Get Started
+        </Button>
+      </div>
+    </div>
+  )
+
+  // Navigation links component (desktop only)
   const NavLinks = () => (
     <div className="hidden md:flex items-center space-x-8">
       <a
@@ -62,30 +137,49 @@ export function ABTestNavigation({ onBoomyClick, onJoinBetaClick }: ABTestNaviga
     </div>
   )
 
-  // Render based on logo position A/B test
-  if (logoPosition === 'right') {
-    return (
-      <nav className="relative z-10 flex items-center justify-between p-6 lg:px-8">
-        <NavLinks />
+  // Mobile layout (always centered)
+  const MobileLayout = () => (
+    <nav className="relative z-10 md:hidden">
+      <div className="flex items-center justify-center p-6">
         <LogoComponent />
-      </nav>
-    )
-  }
-
-  if (logoPosition === 'center') {
-    return (
-      <nav className="relative z-10 flex flex-col items-center p-6 lg:px-8 space-y-4">
-        <LogoComponent />
-        <NavLinks />
-      </nav>
-    )
-  }
-
-  // Default: left position
-  return (
-    <nav className="relative z-10 flex items-center justify-between p-6 lg:px-8">
-      <LogoComponent />
-      <NavLinks />
+      </div>
+      <MobileMenu />
     </nav>
+  )
+
+  // Desktop layout (based on A/B test)
+  const DesktopLayout = () => {
+    if (logoPosition === 'right') {
+      return (
+        <nav className="hidden md:flex items-center justify-between p-6 lg:px-8">
+          <NavLinks />
+          <LogoComponent />
+        </nav>
+      )
+    }
+
+    if (logoPosition === 'center') {
+      return (
+        <nav className="hidden md:flex flex-col items-center p-6 lg:px-8 space-y-4">
+          <LogoComponent />
+          <NavLinks />
+        </nav>
+      )
+    }
+
+    // Default: left position
+    return (
+      <nav className="hidden md:flex items-center justify-between p-6 lg:px-8">
+        <LogoComponent />
+        <NavLinks />
+      </nav>
+    )
+  }
+
+  return (
+    <>
+      <MobileLayout />
+      <DesktopLayout />
+    </>
   )
 }

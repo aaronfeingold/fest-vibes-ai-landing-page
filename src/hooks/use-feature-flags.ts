@@ -5,7 +5,8 @@ import { useFeatureFlagEnabled } from "posthog-js/react";
 
 interface FeatureFlags {
   logoPosition: "left" | "right" | "center";
-  logoVariant: "1" | "2" | "3";
+  mascotVariant: "1" | "2" | "3";
+  logoType: "minimal" | "standard" | "full";
   copyVariant: "original" | "alternative" | "concise";
   heroLayout: "default" | "compact" | "expanded";
   assistantName: "boomy" | "bumi";
@@ -26,7 +27,8 @@ function getBootstrapFlags(): Partial<FeatureFlags> {
     const flags = JSON.parse(decodeURIComponent(flagsCookie));
     return {
       logoPosition: flags["logo-position"] || "left",
-      logoVariant: flags["logo-variant"] || "1",
+      mascotVariant: flags["mascot-variant"] || "1",
+      logoType: flags["logo-type"] || "standard",
       copyVariant: flags["copy-variant"] || "original",
       heroLayout: flags["hero-layout"] || "default",
       assistantName: flags["assistant-name"] || "boomy",
@@ -39,7 +41,8 @@ function getBootstrapFlags(): Partial<FeatureFlags> {
 export function useFeatureFlags(): FeatureFlags {
   const [flags, setFlags] = useState<FeatureFlags>(() => ({
     logoPosition: "left",
-    logoVariant: "1",
+    mascotVariant: "1",
+    logoType: "standard",
     copyVariant: "original",
     heroLayout: "default",
     assistantName: "boomy",
@@ -47,7 +50,8 @@ export function useFeatureFlags(): FeatureFlags {
 
   // Get flags from PostHog (will override bootstrap once loaded)
   const logoPositionFlag = useFeatureFlagEnabled("logo-position");
-  const logoVariantFlag = useFeatureFlagEnabled("logo-variant");
+  const mascotVariantFlag = useFeatureFlagEnabled("mascot-variant");
+  const logoTypeFlag = useFeatureFlagEnabled("logo-type");
   const copyVariantFlag = useFeatureFlagEnabled("copy-variant");
   const heroLayoutFlag = useFeatureFlagEnabled("hero-layout");
   const assistantNameFlag = useFeatureFlagEnabled("assistant-name");
@@ -60,8 +64,11 @@ export function useFeatureFlags(): FeatureFlags {
       logoPosition:
         (bootstrapFlags.logoPosition as "left" | "right" | "center") ||
         prev.logoPosition,
-      logoVariant:
-        (bootstrapFlags.logoVariant as "1" | "2" | "3") || prev.logoVariant,
+      mascotVariant:
+        (bootstrapFlags.mascotVariant as "1" | "2" | "3") || prev.mascotVariant,
+      logoType:
+        (bootstrapFlags.logoType as "minimal" | "standard" | "full") ||
+        prev.logoType,
       copyVariant:
         (bootstrapFlags.copyVariant as
           | "original"
@@ -87,13 +94,22 @@ export function useFeatureFlags(): FeatureFlags {
   }, [logoPositionFlag]);
 
   useEffect(() => {
-    if (logoVariantFlag !== undefined) {
+    if (mascotVariantFlag !== undefined) {
       setFlags((prev) => ({
         ...prev,
-        logoVariant: logoVariantFlag as "1" | "2" | "3",
+        mascotVariant: mascotVariantFlag as "1" | "2" | "3",
       }));
     }
-  }, [logoVariantFlag]);
+  }, [mascotVariantFlag]);
+
+  useEffect(() => {
+    if (logoTypeFlag !== undefined) {
+      setFlags((prev) => ({
+        ...prev,
+        logoType: logoTypeFlag as "minimal" | "standard" | "full",
+      }));
+    }
+  }, [logoTypeFlag]);
 
   useEffect(() => {
     if (copyVariantFlag !== undefined) {
@@ -136,9 +152,14 @@ export function useCopyVariant() {
   return copyVariant;
 }
 
-export function useLogoVariant() {
-  const { logoVariant } = useFeatureFlags();
-  return logoVariant;
+export function useMascotVariant() {
+  const { mascotVariant } = useFeatureFlags();
+  return mascotVariant;
+}
+
+export function useLogoType() {
+  const { logoType } = useFeatureFlags();
+  return logoType;
 }
 
 export function useHeroLayout() {

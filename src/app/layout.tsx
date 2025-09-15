@@ -1,10 +1,13 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Poppins } from "next/font/google"
 import "./globals.css"
 import { PHProvider } from "@/components/posthog-provider"
 
-const inter = Inter({ subsets: ["latin"] })
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"]
+})
 
 export const metadata: Metadata = {
   title: "Fest-Vibes - Your Smart Music Festival Experience",
@@ -25,7 +28,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={inter.className}>
+      <body className={poppins.className}>
         <PHProvider>{children}</PHProvider>
       </body>
     </html>

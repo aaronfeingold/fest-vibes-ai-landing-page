@@ -25,7 +25,8 @@ import {
 import { Label } from "@/components/ui/label";
 import BetaSignupModal from "@/components/BetaSignupModal";
 import { ABTestNavigation } from "@/components/ab-test-navigation";
-import { useLogoVariant, useAssistantName } from "@/hooks/use-feature-flags";
+import { useAssistantName } from "@/hooks/use-feature-flags";
+import { useMascotAsset, useLogoAsset } from "@/hooks/use-brand-assets";
 import {
   Music,
   Users,
@@ -75,8 +76,9 @@ interface ContentData {
 
 export default function HomePage() {
   const posthog = usePostHog();
-  const logoVariant = useLogoVariant();
   const assistantName = useAssistantName();
+  const mascotStandalone = useMascotAsset("standalone");
+  const footerLogo = useLogoAsset("footer");
   const [isVisible, setIsVisible] = useState(false);
   const [showBetaModal, setShowBetaModal] = useState(false);
   const [showEmailForm, setShowEmailForm] = useState(false);
@@ -258,7 +260,10 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-brand-gradient-br dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       {/* Animated Background Elements */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+      <div
+        id="background-elements"
+        className="fixed inset-0 overflow-hidden pointer-events-none"
+      >
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-brand-primary/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute top-3/4 right-1/4 w-96 h-96 bg-brand-secondary/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
         <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-500"></div>
@@ -285,7 +290,7 @@ export default function HomePage() {
             <div className="text-center py-8">
               <div className="relative mx-auto mb-4">
                 <img
-                  src="/mascots/mascot-alt.png"
+                  src={mascotStandalone}
                   alt={`${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} the Cat`}
                   className="w-24 h-24 object-cover animate-spin mx-auto"
                   style={{ animationDuration: "2s" }}
@@ -372,7 +377,7 @@ export default function HomePage() {
           >
             <div className="relative overflow-hidden rounded-3xl shadow-2xl">
               <img
-                src="/mascots/mascot.png"
+                src={mascotStandalone}
                 alt={`${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} the Cat in vibrant New Orleans street art style`}
                 className="w-96 h-96 object-cover animate-spin"
                 style={{ animationDuration: "3s" }}
@@ -392,7 +397,7 @@ export default function HomePage() {
       />
 
       {/* Hero Section */}
-      <section className="relative z-10 px-6 lg:px-8 pt-20 pb-32">
+      <section id="hero" className="relative z-10 px-6 lg:px-8 pt-20 pb-32">
         <div className="mx-auto max-w-4xl text-center">
           <div
             className={`transition-all duration-1000 ${
@@ -854,7 +859,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative z-10 px-6 lg:px-8 py-20">
+      <section id="cta" className="relative z-10 px-6 lg:px-8 py-20">
         <div className="mx-auto max-w-4xl text-center">
           <div className="bg-gradient-to-r from-brand-primary/10 to-brand-secondary/10 rounded-3xl p-12 border border-brand-primary/20 backdrop-blur-sm">
             <h2 className="text-4xl font-bold text-white mb-6">
@@ -883,13 +888,16 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="relative z-10 px-6 lg:px-8 py-12 border-t border-slate-700/50 dark:border-gray-700/50">
+      <footer
+        id="footer"
+        className="relative z-10 px-6 lg:px-8 py-12 border-t border-slate-700/50 dark:border-gray-700/50"
+      >
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-4">
               <div className="flex items-center">
                 <img
-                  src="/logos/footer/footer-logo.png"
+                  src={footerLogo}
                   alt="Fest Vibes Logo"
                   className="h-12 sm:h-12 md:h-10 w-auto object-contain"
                 />

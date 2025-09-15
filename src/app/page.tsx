@@ -68,6 +68,9 @@ interface ContentData {
     titleHighlight: string;
     subtitle: string;
   };
+  brand: {
+    motto: string;
+  };
 }
 
 export default function HomePage() {
@@ -178,71 +181,82 @@ export default function HomePage() {
   const features = [
     {
       icon: Heart,
-      title: "Artists First",
-      description: "Follow local musicians and know where they be at",
+      iconImage: "/icons/saints.png",
+      title: "Local Musician Search",
+      description: "Be the first to know where they be at",
       color: "from-pink-500 to-rose-500",
     },
     {
       icon: Music,
+      iconImage: "/icons/trumpet.png",
       title: "Discover Live Music",
-      description: "Find something you've never heard of",
+      description: "Find what you love or step outside the box",
       color: "from-green-500 to-emerald-500",
     },
     {
       icon: Calendar,
+      iconImage: "/icons/plan.png",
       title: "Plan Ahead",
-      description:
-        "Curate multi-day timelines to pack your weekends with as much music as possible",
+      description: "Curate multi-day timelines and jam pack your weekends",
       color: "from-indigo-500 to-purple-500",
     },
     {
       icon: Users,
+      iconImage: "/icons/krewe.png",
       title: "Build-a-Krewe",
-      description: "Connect your fam and share plans",
+      description: "Connect your fam and share your plans",
       color: "from-blue-500 to-cyan-500",
     },
     {
       icon: MessageCircle,
-      title: "Assistance",
-      description:
-        `Chat with ${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} to craft personalized weekend music experiences`,
+      iconImage: "/icons/chat.png",
+      title: "Chat Assistance",
+      description: `Vibe with ${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} to craft personalized weekend music experiences`,
       color: "from-purple-500 to-pink-500",
     },
+    {
+        icon: MapPin,
+        iconImage: "/icons/analytics.png",
+        title: "Nightlife Analytics",
+        description:
+          "Understand the landscape of your own nightlife with insights and trends",
+        color: "from-blue-500 to-indigo-500",
+      },
   ];
 
   const mockEvents = [
     {
       name: "Trombone Shorty",
-      venue: "Tipitinas",
+      venue: "Tipitina's",
       time: "9:00 PM",
       genre: "Funk",
       attendees: 234,
     },
     {
-      name: "Soul Rebels",
+      name: "Tank & The Bangas",
       venue: "Blue Nile",
-      time: "7:30 PM",
-      genre: "New Orleans Popular Music",
-      attendees: 89,
+      time: "6:00 PM",
+      genre: "Jazz",
+      attendees: 156,
     },
     {
-      name: "Rebirth Brass Band",
+      name: "The Iceman Special",
       venue: "Maple Leaf",
-      time: "8:00 PM",
-      genre: "Brass",
+      time: "10:00 PM",
+      genre: "Psychedelic",
       attendees: 133,
     },
     {
-      name: "Tank & The Bangas",
-      venue: "Music Box Village",
-      time: "6:00 PM",
-      genre: "Funk",
-      attendees: 156,
+      name: "Boyfriend",
+      venue: "Saturn Bar",
+      time: "7:30 PM",
+      genre: "Hip-Hop",
+      attendees: 89,
     },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       {/* Animated Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -258,16 +272,33 @@ export default function HomePage() {
 
       {/* Email Form Modal */}
       <Dialog open={showEmailForm} onOpenChange={setShowEmailForm}>
-        <DialogContent className="bg-slate-800 border-slate-700 text-white max-w-md">
+        <DialogContent className="bg-slate-800 dark:bg-gray-800 border-slate-700 dark:border-gray-700 text-white max-w-md">
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold text-center mb-2">
-              🎧 Join the Beta Waitlist
+              Join the Beta Waitlist
             </DialogTitle>
             <DialogDescription className="text-gray-300 text-center">
               Enter your email to get notified when Fest-Vibes launches!
             </DialogDescription>
           </DialogHeader>
-          {!isSubmitted ? (
+          {isSubmitting ? (
+            <div className="text-center py-8">
+              <div className="relative mx-auto mb-4">
+                <img
+                  src="/mascots/mascot-alt.png"
+                  alt={`${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} the Cat`}
+                  className="w-24 h-24 object-cover animate-spin mx-auto"
+                  style={{ animationDuration: "2s" }}
+                />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">
+                Adding you to the list...
+              </h3>
+              <p className="text-gray-300">
+                Just a moment while we get you signed up!
+              </p>
+            </div>
+          ) : !isSubmitted ? (
             <form onSubmit={handleEmailSubmit} className="space-y-4 pt-4">
               <div className="space-y-2">
                 <Label htmlFor="email" className="text-gray-300">
@@ -281,7 +312,7 @@ export default function HomePage() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   disabled={isSubmitting}
-                  className="bg-slate-700 border-slate-600 text-white placeholder-gray-400 focus:border-purple-500 disabled:opacity-50"
+                  className="bg-slate-700 dark:bg-gray-700 border-slate-600 dark:border-gray-600 text-white placeholder-gray-400 focus:border-purple-500 disabled:opacity-50"
                 />
               </div>
               {submitError && (
@@ -296,9 +327,7 @@ export default function HomePage() {
                   className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 disabled:opacity-50"
                 >
                   <Mail className="w-4 h-4 mr-2" />
-                  {isSubmitting
-                    ? "Adding you to the list..."
-                    : "Get Early Access"}
+                  Get Early Access
                 </Button>
                 <Button
                   type="button"
@@ -317,7 +346,7 @@ export default function HomePage() {
                 <Mail className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-bold text-white mb-2">
-                You're on the list! 🎉
+                You're on the list!
               </h3>
               <p className="text-gray-300">
                 We'll notify you as soon as Fest-Vibes is ready to rock your
@@ -343,10 +372,10 @@ export default function HomePage() {
           >
             <div className="relative overflow-hidden rounded-3xl shadow-2xl">
               <img
-                src="/boomy-vibes.png"
+                src="/mascots/mascot.png"
                 alt={`${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} the Cat in vibrant New Orleans street art style`}
-                className="w-96 h-96 object-cover"
-                style={{ animation: "spin 3s linear infinite" }}
+                className="w-96 h-96 object-cover animate-spin"
+                style={{ animationDuration: "3s" }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent pointer-events-none" />
             </div>
@@ -372,15 +401,15 @@ export default function HomePage() {
                 : "opacity-0 translate-y-10"
             }`}
           >
-            <h1 className="text-5xl lg:text-7xl font-bold font-neue-machina text-white mb-6 leading-tight">
+            <h1 className="text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
               Your
-              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-purple-300 dark:text-purple-200 supports-[background-clip:text]:text-transparent">
+              <span className="text-purple-400">
                 {" "}
                 Hometown
               </span>
               <br />
               Is Your Own
-              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-purple-300 dark:text-purple-200 supports-[background-clip:text]:text-transparent">
+              <span className="text-pink-400">
                 {" "}
                 Music Fest
               </span>
@@ -398,7 +427,6 @@ export default function HomePage() {
                 onClick={handleJoinBetaClick}
                 className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-base sm:text-lg px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-center"
               >
-                <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 flex-shrink-0" />
                 <span className="text-center whitespace-normal">
                   Join the Waitlist!
                 </span>
@@ -431,13 +459,25 @@ export default function HomePage() {
             {features.map((feature, index) => (
               <Card
                 key={index}
-                className="bg-slate-800/50 border-slate-700/50 backdrop-blur-sm hover:bg-slate-800/70 transition-all duration-300 group"
+                className="bg-slate-800/50 dark:bg-gray-800/50 border-slate-700/50 dark:border-gray-700/50 backdrop-blur-sm hover:bg-slate-800/70 dark:hover:bg-gray-800/70 transition-all duration-300 group"
               >
                 <CardHeader>
                   <div
-                    className={`w-12 h-12 bg-gradient-to-r ${feature.color} rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}
+                    className={`w-12 h-12 rounded-lg mb-4 group-hover:scale-110 transition-transform duration-300 ${
+                      feature.iconImage
+                        ? ""
+                        : `bg-gradient-to-r ${feature.color} flex items-center justify-center`
+                    }`}
                   >
-                    <feature.icon className="w-6 h-6 text-white" />
+                    {feature.iconImage ? (
+                      <img
+                        src={feature.iconImage}
+                        alt={`${feature.title} icon`}
+                        className="w-full h-full object-cover rounded-lg"
+                      />
+                    ) : (
+                      <feature.icon className="w-6 h-6 text-white" />
+                    )}
                   </div>
                   <CardTitle className="text-white text-xl">
                     {feature.title}
@@ -454,22 +494,179 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Pricing Section */}
+      <section id="pricing" className="relative z-10 px-6 lg:px-8 py-20">
+        <div className="mx-auto max-w-6xl">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-white mb-4">
+              Choose Your Vibe
+            </h2>
+            <p className="text-xl text-gray-300">
+              Start free, upgrade when you're ready to chat with{" "}
+              {assistantName.charAt(0).toUpperCase() + assistantName.slice(1)}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Free Plan */}
+            <Card className="bg-slate-800/50 dark:bg-gray-800/50 border-slate-700/50 dark:border-gray-700/50 backdrop-blur-sm hover:bg-slate-800/70 dark:hover:bg-gray-800/70 transition-all duration-300 relative">
+              <CardHeader className="text-center pb-8">
+                <CardTitle className="text-2xl font-bold text-white mb-2">
+                  Free Plan
+                </CardTitle>
+                <div className="text-4xl font-bold text-white mb-2">
+                  $0
+                  <span className="text-lg font-normal text-gray-400">
+                    /month
+                  </span>
+                </div>
+                <CardDescription className="text-gray-300">
+                  Perfect for getting started with music discovery
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-3">
+                  {[
+                    "Visual heat map discovery",
+                    "Dynamic data filtering",
+                    "Manual timeline builder",
+                    "Drag-and-drop planning",
+                    "Shareable festival plans",
+                    "Export to social media",
+                  ].map((feature, index) => (
+                    <div key={index} className="flex items-center space-x-3">
+                      <div className="w-5 h-5 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg
+                          className="w-3 h-3 text-white"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                      <span className="text-gray-300">{feature}</span>
+                    </div>
+                  ))}
+                  <div className="flex items-center space-x-3 opacity-50">
+                    <div className="w-5 h-5 bg-gray-600 rounded-full flex items-center justify-center flex-shrink-0">
+                      <svg
+                        className="w-3 h-3 text-gray-400"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                    <span className="text-gray-500">No AI chat assistance</span>
+                  </div>
+                </div>
+                <Button
+                  onClick={handleJoinBetaClick}
+                  className="w-full bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 mt-6"
+                >
+                  Get Started Free
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Vibes Plan */}
+            <Card className="bg-slate-800/50 dark:bg-gray-800/50 border-purple-500/50 backdrop-blur-sm hover:bg-slate-800/70 dark:hover:bg-gray-800/70 transition-all duration-300 relative">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-1">
+                  Most Popular
+                </Badge>
+              </div>
+              <CardHeader className="text-center pb-8">
+                <CardTitle className="text-2xl font-bold text-white mb-2">
+                  Vibes Plan
+                </CardTitle>
+                <div className="text-4xl font-bold text-white mb-2">
+                  $9.99
+                  <span className="text-lg font-normal text-gray-400">
+                    /month
+                  </span>
+                </div>
+                <CardDescription className="text-gray-300">
+                  Everything in Free, plus unlimited AI assistance
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-3">
+                  {[
+                    "Everything in Free Plan",
+                    "Unlimited AI chat with " +
+                      assistantName.charAt(0).toUpperCase() +
+                      assistantName.slice(1),
+                    "Personalized recommendations",
+                    "Smart schedule optimization",
+                    "Venue and artist insights",
+                    "Priority customer support",
+                  ].map((feature, index) => (
+                    <div key={index} className="flex items-center space-x-3">
+                      <div className="w-5 h-5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg
+                          className="w-3 h-3 text-white"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                      <span className="text-gray-300">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+                <Button
+                  onClick={handleJoinBetaClick}
+                  className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 mt-6"
+                >
+                  Start Free Trial
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="text-center mt-8">
+            <p className="text-gray-400 text-sm">
+              All plans include access to New Orleans music events. Cancel
+              anytime.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Boomy Chat Demo */}
       <section id="demo" className="relative z-10 px-6 lg:px-8 py-20">
         <div className="mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-white mb-4">
-              Meet {assistantName.charAt(0).toUpperCase() + assistantName.slice(1)}, Your Planning Assistant
+              Test {" "}
+              {assistantName.charAt(0).toUpperCase() + assistantName.slice(1)},
+              Your Planning Assistant
             </h2>
             <p className="text-xl text-gray-300">
-              Let {assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} suggest and organize your perfect music weekend
+              Let{" "}
+              {assistantName.charAt(0).toUpperCase() + assistantName.slice(1)}{" "}
+              suggest and organize your perfect music weekend
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="flex justify-center">
               <img
-                src="/boomy-chat-demo.png"
+                src="/demo/chat-demo.png"
                 alt={`${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} the Cat chat interface showing conversation about finding electronic music shows`}
                 className="w-full max-w-lg rounded-lg shadow-2xl hover:scale-105 transition-transform duration-300"
               />
@@ -477,7 +674,8 @@ export default function HomePage() {
 
             <div className="space-y-6">
               <h3 className="text-2xl font-bold text-white mb-4">
-                {assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} Can Help You:
+                {assistantName.charAt(0).toUpperCase() + assistantName.slice(1)}{" "}
+                Can Help You:
               </h3>
               <div className="space-y-4">
                 {[
@@ -535,7 +733,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Event Table */}
             <div className="lg:col-span-2">
-              <Card className="bg-slate-800/50 border-slate-700/50 backdrop-blur-sm">
+              <Card className="bg-slate-800/50 dark:bg-gray-800/50 border-slate-700/50 dark:border-gray-700/50 backdrop-blur-sm">
                 <CardHeader>
                   <CardTitle className="text-white flex items-center">
                     <BarChart3 className="w-5 h-5 mr-2 text-purple-400" />
@@ -551,7 +749,29 @@ export default function HomePage() {
                       >
                         <div className="flex items-center space-x-3">
                           <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-                            <Mic2 className="w-5 h-5 text-white" />
+                            {event.name === "Trombone Shorty" ? (
+                              <img
+                                src="/icons/trumpet-no-bg-2.png"
+                                alt="Trumpet icon"
+                                className="w-6 h-6 object-contain"
+                              />
+                            ) : event.name === "Tank & The Bangas" ? (
+                              <Mic2 className="w-5 h-5 text-white" />
+                            ) : event.name === "The Iceman Special" ? (
+                              <img
+                                src="/icons/guitar-no-bg.png"
+                                alt="Guitar icon"
+                                className="w-6 h-6 object-contain"
+                              />
+                            ) : event.name === "Boyfriend" ? (
+                              <img
+                                src="/icons/xo-boyfriend.png"
+                                alt="XO Boyfriend icon"
+                                className="w-6 h-6 object-contain"
+                              />
+                            ) : (
+                              <Mic2 className="w-5 h-5 text-white" />
+                            )}
                           </div>
                           <div>
                             <h4 className="text-white font-medium">
@@ -582,7 +802,7 @@ export default function HomePage() {
 
             {/* Stats Cards */}
             <div className="space-y-6">
-              <Card className="bg-slate-800/50 border-slate-700/50 backdrop-blur-sm">
+              <Card className="bg-slate-800/50 dark:bg-gray-800/50 border-slate-700/50 dark:border-gray-700/50 backdrop-blur-sm">
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between">
                     <div>
@@ -601,7 +821,7 @@ export default function HomePage() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-slate-800/50 border-slate-700/50 backdrop-blur-sm">
+              <Card className="bg-slate-800/50 dark:bg-gray-800/50 border-slate-700/50 dark:border-gray-700/50 backdrop-blur-sm">
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between">
                     <div>
@@ -618,7 +838,7 @@ export default function HomePage() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-slate-800/50 border-slate-700/50 backdrop-blur-sm">
+              <Card className="bg-slate-800/50 dark:bg-gray-800/50 border-slate-700/50 dark:border-gray-700/50 backdrop-blur-sm">
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between">
                     <div>
@@ -639,43 +859,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Social Features */}
-      <section className="relative z-10 px-6 lg:px-8 py-20">
-        <div className="mx-auto max-w-6xl">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-white mb-4">
-              Music is Better with Friends
-            </h2>
-            <p className="text-xl text-gray-300">
-              Connect, share, and experience live music together
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="flex justify-center">
-              <img
-                src="/social-sarah.png"
-                alt="Sarah M. social post about jazz trio discovery"
-                className="w-full max-w-sm rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-            <div className="flex justify-center">
-              <img
-                src="/social-mike-new.png"
-                alt={`Mike R. social post about creating a 3-day festival itinerary with ${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)}`}
-                className="w-full max-w-sm rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-            <div className="flex justify-center">
-              <img
-                src="/social-alex-new.png"
-                alt="Alex K. social post about following local artists and discovering impromptu shows"
-                className="w-full max-w-sm rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="relative z-10 px-6 lg:px-8 py-20">
@@ -689,7 +872,7 @@ export default function HomePage() {
               their perfect festival experience. Start planning your next music
               adventure today.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex justify-center">
               <Button
                 size="lg"
                 onClick={handleJoinBetaClick}
@@ -697,18 +880,9 @@ export default function HomePage() {
               >
                 <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 flex-shrink-0" />
                 <span className="text-center whitespace-normal">
-                  Start Planning with {assistantName.charAt(0).toUpperCase() + assistantName.slice(1)}
+                  Join for Free!
                 </span>
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-1 sm:ml-2 flex-shrink-0" />
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                disabled
-                className="border-purple-500/50 text-purple-300/50 text-lg px-8 py-4 cursor-not-allowed opacity-50"
-              >
-                <Volume2 className="w-5 h-5 mr-2" />
-                Explore Features
               </Button>
             </div>
           </div>
@@ -716,24 +890,19 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="relative z-10 px-6 lg:px-8 py-12 border-t border-slate-700/50">
+      <footer className="relative z-10 px-6 lg:px-8 py-12 border-t border-slate-700/50 dark:border-gray-700/50">
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-4">
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center">
                 <img
-                  src="/boomy-nav.png"
-                  alt={`${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} the Cat`}
-                  className="w-8 h-8 rounded-lg object-cover"
-                />
-                <img
-                  src={`/logo-${logoVariant}.png`}
+                  src="/logos/footer/footer-logo.png"
                   alt="Fest Vibes Logo"
-                  className="h-6 w-auto object-contain"
+                  className="h-12 sm:h-12 md:h-10 w-auto object-contain"
                 />
               </div>
               <p className="text-gray-400">
-                Your decentralized music festival experience.
+                {contentData?.brand?.motto || "Discover. Curate. Experience."}
               </p>
               <div className="flex items-center space-x-2">
                 <Link
@@ -769,8 +938,10 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="border-t border-slate-700/50 mt-12 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 Fest-Vibes. All rights reserved.</p>
+          <div className="border-t border-slate-700/50 dark:border-gray-700/50 mt-12 pt-8 text-center text-gray-400">
+            <p>
+              &copy; {new Date().getFullYear()} Fest Vibes. All rights reserved.
+            </p>
           </div>
         </div>
       </footer>

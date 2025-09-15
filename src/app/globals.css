@@ -32,7 +32,7 @@
 
     /* Festival Brand Colors */
     /* Main Background Gradient Colors */
-    --festival-slate-900: 220.9 39.3% 11%;  /* #0F172A */
+    --festival-slate-900: 220.9 39.3% 11%; /* #0F172A */
     --festival-purple-900: 263.4 70% 32.2%; /* #581C87 */
 
     /* Primary CTA Gradient Colors */
@@ -143,7 +143,11 @@ html {
 
 /* Custom gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, hsl(var(--brand-primary)), hsl(var(--brand-secondary)));
+  background: linear-gradient(
+    135deg,
+    hsl(var(--brand-primary)),
+    hsl(var(--brand-secondary))
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

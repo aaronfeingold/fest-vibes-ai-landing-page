@@ -2,7 +2,7 @@
 
 import type React from "react";
 import Link from "next/link";
-import { usePostHog } from 'posthog-js/react';
+import { usePostHog } from "posthog-js/react";
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
@@ -215,13 +215,13 @@ export default function HomePage() {
       color: "from-brand-primary to-brand-secondary",
     },
     {
-        icon: MapPin,
-        iconImage: "/icons/analytics.png",
-        title: "Nightlife Analytics",
-        description:
-          "Understand the landscape of your own nightlife with insights and trends",
-        color: "from-stage-sky to-indigo-500",
-      },
+      icon: MapPin,
+      iconImage: "/icons/analytics.png",
+      title: "Nightlife Analytics",
+      description:
+        "Understand the landscape of your own nightlife with insights and trends",
+      color: "from-stage-sky to-indigo-500",
+    },
   ];
 
   const mockEvents = [
@@ -403,16 +403,10 @@ export default function HomePage() {
           >
             <h1 className="text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
               Your
-              <span className="text-brand-accent">
-                {" "}
-                Hometown
-              </span>
+              <span className="text-brand-accent"> Hometown</span>
               <br />
               Is Your Own
-              <span className="text-festival-pink-400">
-                {" "}
-                Music Fest
-              </span>
+              <span className="text-festival-pink-400"> Music Fest</span>
             </h1>
             <p
               id="hero-subtitle"
@@ -652,7 +646,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-white mb-4">
-              Test {" "}
+              Test{" "}
               {assistantName.charAt(0).toUpperCase() + assistantName.slice(1)},
               Your Planning Assistant
             </h2>
@@ -858,7 +852,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
 
       {/* CTA Section */}
       <section className="relative z-10 px-6 lg:px-8 py-20">

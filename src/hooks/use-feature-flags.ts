@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react'
-import { useFeatureFlagEnabled } from 'posthog-js/react'
+import { useEffect, useState } from "react";
+import { useFeatureFlagEnabled } from "posthog-js/react";
 
 interface FeatureFlags {
   logoPosition: "left" | "right" | "center";
@@ -127,13 +127,13 @@ export function useFeatureFlags(): FeatureFlags {
 
 // Individual flag hooks for convenience
 export function useLogoPosition() {
-  const { logoPosition } = useFeatureFlags()
-  return logoPosition
+  const { logoPosition } = useFeatureFlags();
+  return logoPosition;
 }
 
 export function useCopyVariant() {
-  const { copyVariant } = useFeatureFlags()
-  return copyVariant
+  const { copyVariant } = useFeatureFlags();
+  return copyVariant;
 }
 
 export function useLogoVariant() {

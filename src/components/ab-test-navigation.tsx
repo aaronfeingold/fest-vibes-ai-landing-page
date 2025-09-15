@@ -1,58 +1,64 @@
-'use client'
+"use client";
 
-import React, { useState, useEffect } from 'react'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { Menu, X, Sun, Moon } from 'lucide-react'
-import { useLogoPosition, useLogoVariant, useAssistantName } from '@/hooks/use-feature-flags'
-import { useDarkMode } from '@/hooks/use-dark-mode'
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import {
+  useLogoPosition,
+  useLogoVariant,
+  useAssistantName,
+} from "@/hooks/use-feature-flags";
+import { useDarkMode } from "@/hooks/use-dark-mode";
 
 interface ABTestNavigationProps {
-  onBoomyClick: () => void
-  onJoinBetaClick: () => void
+  onBoomyClick: () => void;
+  onJoinBetaClick: () => void;
 }
 
-export function ABTestNavigation({ onBoomyClick, onJoinBetaClick }: ABTestNavigationProps) {
-  const logoPosition = useLogoPosition()
-  const logoVariant = useLogoVariant()
-  const assistantName = useAssistantName()
-  const { isDarkMode, toggleDarkMode } = useDarkMode()
-  const [showMobileMenu, setShowMobileMenu] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
+export function ABTestNavigation({
+  onBoomyClick,
+  onJoinBetaClick,
+}: ABTestNavigationProps) {
+  const logoPosition = useLogoPosition();
+  const logoVariant = useLogoVariant();
+  const assistantName = useAssistantName();
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   // Check if we're on mobile
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768) // md breakpoint
-    }
+      setIsMobile(window.innerWidth < 768); // md breakpoint
+    };
 
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (showMobileMenu && !(event.target as Element).closest('nav')) {
-        setShowMobileMenu(false)
+      if (showMobileMenu && !(event.target as Element).closest("nav")) {
+        setShowMobileMenu(false);
       }
-    }
+    };
 
-    document.addEventListener('click', handleClickOutside)
-    return () => document.removeEventListener('click', handleClickOutside)
-  }, [showMobileMenu])
-
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [showMobileMenu]);
 
   // Handle hamburger menu click (mobile only)
   const handleMenuClick = () => {
-    setShowMobileMenu(!showMobileMenu)
-  }
+    setShowMobileMenu(!showMobileMenu);
+  };
 
   // Handle Boomy click - always show vibes animation (easter egg)
   const handleBoomyClick = () => {
-    onBoomyClick() // Show vibes animation
-  }
+    onBoomyClick(); // Show vibes animation
+  };
 
   // Mascot component (just the mascot)
   const MascotComponent = () => (
@@ -115,7 +121,11 @@ export function ABTestNavigation({ onBoomyClick, onJoinBetaClick }: ABTestNaviga
           className="flex items-center text-gray-300 hover:text-white transition-colors text-lg py-2 w-full"
         >
           <span className="mr-2">Vibes</span>
-          {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+          {isDarkMode ? (
+            <Sun className="w-4 h-4" />
+          ) : (
+            <Moon className="w-4 h-4" />
+          )}
         </button>
         <Button
           onClick={() => {
@@ -156,7 +166,11 @@ export function ABTestNavigation({ onBoomyClick, onJoinBetaClick }: ABTestNaviga
         className="flex items-center text-gray-300 hover:text-white transition-colors"
       >
         <span className="mr-2">Vibes</span>
-        {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+        {isDarkMode ? (
+          <Sun className="w-4 h-4" />
+        ) : (
+          <Moon className="w-4 h-4" />
+        )}
       </button>
       <Button
         onClick={onJoinBetaClick}
@@ -193,7 +207,7 @@ export function ABTestNavigation({ onBoomyClick, onJoinBetaClick }: ABTestNaviga
 
   // Mobile layout with centered logo and A/B testing for mascot/hamburger positions
   const MobileLayout = () => {
-    if (logoPosition === 'right') {
+    if (logoPosition === "right") {
       // A/B Test Variant: Hamburger on left, centered logo, mascot on right
       return (
         <nav className="relative z-10 md:hidden w-full">
@@ -206,7 +220,7 @@ export function ABTestNavigation({ onBoomyClick, onJoinBetaClick }: ABTestNaviga
           </div>
           <MobileMenu />
         </nav>
-      )
+      );
     }
 
     // Default: Mascot on left, centered logo, hamburger on right
@@ -221,27 +235,27 @@ export function ABTestNavigation({ onBoomyClick, onJoinBetaClick }: ABTestNaviga
         </div>
         <MobileMenu />
       </nav>
-    )
-  }
+    );
+  };
 
   // Desktop layout (based on A/B test)
   const DesktopLayout = () => {
-    if (logoPosition === 'right') {
+    if (logoPosition === "right") {
       return (
         <nav className="hidden md:flex items-center justify-between p-6 lg:px-8">
           <NavLinks />
           <LogoComponent />
         </nav>
-      )
+      );
     }
 
-    if (logoPosition === 'center') {
+    if (logoPosition === "center") {
       return (
         <nav className="hidden md:flex flex-col items-center p-6 lg:px-8 space-y-4">
           <LogoComponent />
           <NavLinks />
         </nav>
-      )
+      );
     }
 
     // Default: left position
@@ -250,13 +264,13 @@ export function ABTestNavigation({ onBoomyClick, onJoinBetaClick }: ABTestNaviga
         <LogoComponent />
         <NavLinks />
       </nav>
-    )
-  }
+    );
+  };
 
   return (
     <>
       <MobileLayout />
       <DesktopLayout />
     </>
-  )
+  );
 }

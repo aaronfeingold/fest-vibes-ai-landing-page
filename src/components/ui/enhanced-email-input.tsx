@@ -27,7 +27,7 @@ export const EnhancedEmailInput = forwardRef<
       disabled,
       error,
     },
-    ref
+    ref,
   ) => {
     const handleGmailClick = () => {
       if (!value.includes("@") && value.trim()) {
@@ -84,7 +84,7 @@ export const EnhancedEmailInput = forwardRef<
         {error && <p className="text-red-300 text-sm mt-1">{error}</p>}
       </div>
     );
-  }
+  },
 );
 
 EnhancedEmailInput.displayName = "EnhancedEmailInput";

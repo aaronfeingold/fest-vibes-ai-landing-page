@@ -1,15 +1,15 @@
-'use client'
+"use client";
 
-import { PostHogProvider } from 'posthog-js/react'
-import { useEffect, Suspense } from 'react'
-import { usePathname, useSearchParams } from 'next/navigation'
-import posthog from 'posthog-js'
+import { PostHogProvider } from "posthog-js/react";
+import { useEffect, Suspense } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
+import posthog from "posthog-js";
 
 if (typeof window !== "undefined") {
   // Parse allowed URLs from environment variable
   const allowedUrls = process.env.NEXT_PUBLIC_POSTHOG_URL_ALLOWLIST
     ? process.env.NEXT_PUBLIC_POSTHOG_URL_ALLOWLIST.split(",").map((url) =>
-        url.trim()
+        url.trim(),
       )
     : [];
 

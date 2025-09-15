@@ -47,8 +47,10 @@ export default function DonationModal({
           <p className="text-gray-300 leading-relaxed">
             Love the idea of Fest Vibes? Support our development with just{" "}
             <span className="font-bold text-brand-accent">$1</span> and get{" "}
-            <span className="font-bold text-festival-pink-400">2 free months</span> when
-            we launch!
+            <span className="font-bold text-festival-pink-400">
+              2 free months
+            </span>{" "}
+            when we launch!
           </p>
         </div>
 

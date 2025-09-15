@@ -70,7 +70,7 @@ export default function EnhancedBetaSignup({
 
   const submitSignup = async (
     wantsDonation: boolean,
-    hasSeenDonationModal: boolean
+    hasSeenDonationModal: boolean,
   ) => {
     setIsSubmitting(true);
     setApiError("");

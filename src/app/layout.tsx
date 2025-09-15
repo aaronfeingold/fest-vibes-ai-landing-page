@@ -1,13 +1,13 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Poppins } from "next/font/google"
-import "./globals.css"
-import { PHProvider } from "@/components/posthog-provider"
+import type React from "react";
+import type { Metadata } from "next";
+import { Poppins } from "next/font/google";
+import "./globals.css";
+import { PHProvider } from "@/components/posthog-provider";
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"]
-})
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+});
 
 export const metadata: Metadata = {
   title: "Fest-Vibes - Your Smart Music Festival Experience",
@@ -19,12 +19,12 @@ export const metadata: Metadata = {
     shortcut: "/favicon.png",
     apple: "/favicon.png",
   },
-}
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en" className="scroll-smooth">
@@ -32,5 +32,5 @@ export default function RootLayout({
         <PHProvider>{children}</PHProvider>
       </body>
     </html>
-  )
+  );
 }

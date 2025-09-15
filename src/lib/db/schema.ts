@@ -33,7 +33,7 @@ export const betaSignups = pgTable(
     index("idx_beta_signups_normalized_email").on(table.normalizedEmail),
     index("idx_beta_signups_created_at").on(table.createdAt.desc()),
     index("idx_beta_signups_wants_donation").on(table.wantsDonation),
-  ]
+  ],
 );
 
 export type BetaSignup = typeof betaSignups.$inferSelect;
@@ -64,7 +64,7 @@ export const analyticsEvents = pgTable(
     index("idx_analytics_events_category").on(table.eventCategory),
     index("idx_analytics_events_user_id").on(table.userId),
     index("idx_analytics_events_created_at").on(table.createdAt.desc()),
-  ]
+  ],
 );
 
 // Email analytics table
@@ -89,7 +89,7 @@ export const emailAnalytics = pgTable(
     index("idx_email_analytics_campaign").on(table.campaignName),
     index("idx_email_analytics_event_type").on(table.eventType),
     index("idx_email_analytics_created_at").on(table.createdAt.desc()),
-  ]
+  ],
 );
 
 export type AnalyticsEvent = typeof analyticsEvents.$inferSelect;

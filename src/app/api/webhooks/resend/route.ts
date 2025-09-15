@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
     if (!eventType) {
       return NextResponse.json(
         { message: "Event type not tracked" },
-        { status: 200 }
+        { status: 200 },
       );
     }
 
@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
     console.error("Resend webhook error:", error);
     return NextResponse.json(
       { error: "Webhook processing failed" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

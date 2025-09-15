@@ -14,7 +14,8 @@ async function getFeatureFlags(distinctId: string): Promise<PostHogFlags> {
     console.warn("PostHog API key not found, returning default flags");
     return {
       "logo-position": "left",
-      "logo-variant": "1",
+      "mascot-variant": "1",
+      "logo-type": "standard",
       "copy-variant": "original",
       "hero-layout": "default",
     };
@@ -38,6 +39,8 @@ async function getFeatureFlags(distinctId: string): Promise<PostHogFlags> {
       console.error("Failed to fetch feature flags:", response.status);
       return {
         "logo-position": "left",
+        "mascot-variant": "1",
+        "logo-type": "standard",
         "copy-variant": "original",
         "hero-layout": "default",
       };
@@ -55,7 +58,8 @@ async function getFeatureFlags(distinctId: string): Promise<PostHogFlags> {
     console.error("Error fetching feature flags:", error);
     return {
       "logo-position": "left",
-      "logo-variant": "1",
+      "mascot-variant": "1",
+      "logo-type": "standard",
       "copy-variant": "original",
       "hero-layout": "default",
     };

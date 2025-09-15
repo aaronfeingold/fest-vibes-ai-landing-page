@@ -21,7 +21,7 @@ export function generateBetaWelcomeEmail({
 
           <!-- Boomy Logo -->
           <div style="margin-bottom: 30px;">
-            <img src="${domain}/boomy-nav.png" alt="${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} the Cat" style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.2);" />
+            <img src="${domain}/mascots/nav/mascot-nav.png" alt="${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} the Cat" style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.2);" />
           </div>
 
           <h1 style="font-size: 2.5rem; margin-bottom: 20px; background: linear-gradient(to right, #a855f7, #ffffff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.2;">

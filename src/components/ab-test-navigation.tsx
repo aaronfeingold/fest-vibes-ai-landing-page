@@ -4,11 +4,8 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Sun, Moon } from "lucide-react";
-import {
-  useLogoPosition,
-  useLogoVariant,
-  useAssistantName,
-} from "@/hooks/use-feature-flags";
+import { useLogoPosition, useAssistantName } from "@/hooks/use-feature-flags";
+import { useMascotAsset, useLogoAsset } from "@/hooks/use-brand-assets";
 import { useDarkMode } from "@/hooks/use-dark-mode";
 
 interface ABTestNavigationProps {
@@ -21,8 +18,9 @@ export function ABTestNavigation({
   onJoinBetaClick,
 }: ABTestNavigationProps) {
   const logoPosition = useLogoPosition();
-  const logoVariant = useLogoVariant();
   const assistantName = useAssistantName();
+  const mascotAsset = useMascotAsset("nav");
+  const logoAsset = useLogoAsset("nav");
   const { isDarkMode, toggleDarkMode } = useDarkMode();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -67,7 +65,7 @@ export function ABTestNavigation({
       className="transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand-primary rounded-lg"
     >
       <img
-        src="/mascots/nav/mascot-nav.png"
+        src={mascotAsset}
         alt={`${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} the Cat`}
         className="w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-lg object-cover"
       />
@@ -79,7 +77,7 @@ export function ABTestNavigation({
     <div className="flex items-center space-x-2 sm:space-x-3">
       <MascotComponent />
       <img
-        src="/logos/nav/nav-logo.png"
+        src={logoAsset}
         alt="Fest Vibes Logo"
         className="h-20 sm:h-24 md:h-28 w-auto object-contain transition-transform hover:scale-105"
       />
@@ -92,27 +90,34 @@ export function ABTestNavigation({
       className={`absolute top-full left-0 right-0 bg-festival-slate-900/95 dark:bg-gray-900/95 backdrop-blur-md border-t border-slate-600 dark:border-gray-600 shadow-xl transition-all duration-300 ${showMobileMenu ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"}`}
     >
       <div className="px-6 py-4 space-y-4">
-        <a
+        <Link
           href="#features"
           onClick={() => setShowMobileMenu(false)}
           className="block text-gray-300 hover:text-white transition-colors text-lg py-2"
         >
           Features
-        </a>
-        <a
+        </Link>
+        <Link
+          href="#pricing"
+          onClick={() => setShowMobileMenu(false)}
+          className="block text-gray-300 hover:text-white transition-colors text-lg py-2"
+        >
+          Pricing
+        </Link>
+        <Link
           href="#demo"
           onClick={() => setShowMobileMenu(false)}
           className="block text-gray-300 hover:text-white transition-colors text-lg py-2"
         >
           Demo
-        </a>
-        <a
+        </Link>
+        <Link
           href="#analytics"
           onClick={() => setShowMobileMenu(false)}
           className="block text-gray-300 hover:text-white transition-colors text-lg py-2"
         >
           Analytics
-        </a>
+        </Link>
         <button
           onClick={() => {
             setShowMobileMenu(false);
@@ -143,24 +148,30 @@ export function ABTestNavigation({
   // Navigation links component (desktop only)
   const NavLinks = () => (
     <div className="hidden md:flex items-center space-x-8">
-      <a
+      <Link
         href="#features"
         className="text-gray-300 hover:text-white transition-colors"
       >
         Features
-      </a>
-      <a
+      </Link>
+      <Link
+        href="#pricing"
+        className="text-gray-300 hover:text-white transition-colors"
+      >
+        Pricing
+      </Link>
+      <Link
         href="#demo"
         className="text-gray-300 hover:text-white transition-colors"
       >
         Demo
-      </a>
-      <a
+      </Link>
+      <Link
         href="#analytics"
         className="text-gray-300 hover:text-white transition-colors"
       >
         Analytics
-      </a>
+      </Link>
       <button
         onClick={toggleDarkMode}
         className="flex items-center text-gray-300 hover:text-white transition-colors"

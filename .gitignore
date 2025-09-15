@@ -18,6 +18,7 @@ yarn-error.log*
 
 # env files
 .env*
+!.env.example
 
 # vercel
 .vercel
@@ -29,3 +30,4 @@ next-env.d.ts
 data/
 AI-Product-Development-Toolkit/
 .claude
+plans/

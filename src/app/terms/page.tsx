@@ -4,7 +4,7 @@ import { ArrowLeft } from "lucide-react";
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-brand-gradient-br">
       <div className="container mx-auto px-6 py-12">
         <div className="max-w-4xl mx-auto bg-slate-800/50 backdrop-blur-sm rounded-lg border border-slate-700/50 p-8">
           <div className="mb-6">

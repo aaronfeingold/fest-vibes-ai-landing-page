@@ -58,7 +58,7 @@ export function ABTestNavigation({ onBoomyClick, onJoinBetaClick }: ABTestNaviga
   const MascotComponent = () => (
     <button
       onClick={onBoomyClick}
-      className="transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-lg"
+      className="transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand-primary rounded-lg"
     >
       <img
         src="/mascots/nav/mascot-nav.png"
@@ -83,7 +83,7 @@ export function ABTestNavigation({ onBoomyClick, onJoinBetaClick }: ABTestNaviga
   // Mobile dropdown menu
   const MobileMenu = () => (
     <div
-      className={`absolute top-full left-0 right-0 bg-slate-900/95 dark:bg-gray-900/95 backdrop-blur-md border-t border-slate-600 dark:border-gray-600 shadow-xl transition-all duration-300 ${showMobileMenu ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"}`}
+      className={`absolute top-full left-0 right-0 bg-festival-slate-900/95 dark:bg-gray-900/95 backdrop-blur-md border-t border-slate-600 dark:border-gray-600 shadow-xl transition-all duration-300 ${showMobileMenu ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"}`}
     >
       <div className="px-6 py-4 space-y-4">
         <a
@@ -122,7 +122,7 @@ export function ABTestNavigation({ onBoomyClick, onJoinBetaClick }: ABTestNaviga
             setShowMobileMenu(false);
             onJoinBetaClick();
           }}
-          className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 mt-4"
+          className="w-full bg-brand-gradient hover:from-festival-purple-500 hover:to-festival-pink-500 mt-4"
         >
           Join the Waitlist
         </Button>
@@ -160,7 +160,7 @@ export function ABTestNavigation({ onBoomyClick, onJoinBetaClick }: ABTestNaviga
       </button>
       <Button
         onClick={onJoinBetaClick}
-        className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
+        className="bg-brand-gradient hover:from-festival-purple-500 hover:to-festival-pink-500"
       >
         Join the Waitlist
       </Button>
@@ -171,7 +171,7 @@ export function ABTestNavigation({ onBoomyClick, onJoinBetaClick }: ABTestNaviga
   const HamburgerButton = () => (
     <button
       onClick={handleMenuClick}
-      className="flex items-center justify-center w-10 h-10 rounded-lg bg-slate-800/50 dark:bg-gray-800/50 border border-slate-600 dark:border-gray-600 hover:bg-slate-700/50 dark:hover:bg-gray-700/50 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500"
+      className="flex items-center justify-center w-10 h-10 rounded-lg bg-slate-800/50 dark:bg-gray-800/50 border border-slate-600 dark:border-gray-600 hover:bg-slate-700/50 dark:hover:bg-gray-700/50 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-primary"
       aria-label="Toggle navigation menu"
     >
       {showMobileMenu ? (

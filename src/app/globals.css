@@ -29,6 +29,38 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
+
+    /* Festival Brand Colors */
+    /* Main Background Gradient Colors */
+    --festival-slate-900: 220.9 39.3% 11%;  /* #0F172A */
+    --festival-purple-900: 263.4 70% 32.2%; /* #581C87 */
+
+    /* Primary CTA Gradient Colors */
+    --festival-purple-500: 256 91.9% 67.8%; /* #A855F7 */
+    --festival-pink-500: 330.4 81.2% 60.4%; /* #EC4899 */
+
+    /* Text Accent Gradient Colors */
+    --festival-purple-400: 269.2 83.3% 76.1%; /* #C084FC */
+    --festival-pink-400: 327.3 87.1% 71.8%; /* #F472B6 */
+
+    /* Custom Festival Gradient Colors */
+    --festival-gradient-light: 229 81% 71.4%; /* #667EEA */
+    --festival-gradient-dark: 251 23% 45.5%; /* #764BA2 */
+
+    /* Stage Lights Colors */
+    --stage-coral: 0 79% 70%; /* #FF6B6B */
+    --stage-turquoise: 174 56% 59%; /* #4ECDC4 */
+    --stage-sky: 202 84% 55%; /* #45B7D1 */
+    --stage-mint: 143 30% 72%; /* #96CEB4 */
+    --stage-yellow: 50 100% 83%; /* #FFEAA7 */
+
+    /* Semantic Brand Colors */
+    --brand-primary: var(--festival-purple-500);
+    --brand-secondary: var(--festival-pink-500);
+    --brand-accent: var(--festival-purple-400);
+    --brand-background-start: var(--festival-slate-900);
+    --brand-background-middle: var(--festival-purple-900);
+    --brand-background-end: var(--festival-slate-900);
   }
 
   .dark {
@@ -56,6 +88,27 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+
+    /* Festival Brand Colors remain the same in dark mode */
+    --festival-slate-900: 220.9 39.3% 11%;
+    --festival-purple-900: 263.4 70% 32.2%;
+    --festival-purple-500: 256 91.9% 67.8%;
+    --festival-pink-500: 330.4 81.2% 60.4%;
+    --festival-purple-400: 269.2 83.3% 76.1%;
+    --festival-pink-400: 327.3 87.1% 71.8%;
+    --festival-gradient-light: 229 81% 71.4%;
+    --festival-gradient-dark: 251 23% 45.5%;
+    --stage-coral: 0 79% 70%;
+    --stage-turquoise: 174 56% 59%;
+    --stage-sky: 202 84% 55%;
+    --stage-mint: 143 30% 72%;
+    --stage-yellow: 50 100% 83%;
+    --brand-primary: var(--festival-purple-500);
+    --brand-secondary: var(--festival-pink-500);
+    --brand-accent: var(--festival-purple-400);
+    --brand-background-start: var(--festival-slate-900);
+    --brand-background-middle: var(--festival-purple-900);
+    --brand-background-end: var(--festival-slate-900);
   }
 }
 
@@ -90,7 +143,7 @@ html {
 
 /* Custom gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, #a855f7, #ec4899);
+  background: linear-gradient(135deg, hsl(var(--brand-primary)), hsl(var(--brand-secondary)));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

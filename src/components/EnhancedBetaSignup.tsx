@@ -114,7 +114,7 @@ export default function EnhancedBetaSignup({
           We'll notify you when Fest Vibes launches.
         </p>
         {showDonationModal && (
-          <p className="text-purple-300 text-sm mt-2">
+          <p className="text-brand-accent text-sm mt-2">
             Thanks for supporting Fest Vibes! You'll get 2 free months. 🎵
           </p>
         )}
@@ -141,7 +141,7 @@ export default function EnhancedBetaSignup({
         <Button
           type="submit"
           disabled={!isValidEmail || isSubmitting}
-          className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 disabled:opacity-50 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300"
+          className="w-full bg-brand-gradient hover:from-festival-purple-500 hover:to-festival-pink-500 disabled:opacity-50 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300"
         >
           {isSubmitting ? "Processing..." : "Join Beta List"}
         </Button>

@@ -184,35 +184,35 @@ export default function HomePage() {
       iconImage: "/icons/saints.png",
       title: "Local Musician Search",
       description: "Be the first to know where they be at",
-      color: "from-pink-500 to-rose-500",
+      color: "from-festival-pink-500 to-red-500",
     },
     {
       icon: Music,
       iconImage: "/icons/trumpet.png",
       title: "Discover Live Music",
       description: "Find what you love or step outside the box",
-      color: "from-green-500 to-emerald-500",
+      color: "from-stage-mint to-emerald-500",
     },
     {
       icon: Calendar,
       iconImage: "/icons/plan.png",
       title: "Plan Ahead",
       description: "Curate multi-day timelines and jam pack your weekends",
-      color: "from-indigo-500 to-purple-500",
+      color: "from-indigo-500 to-brand-primary",
     },
     {
       icon: Users,
       iconImage: "/icons/krewe.png",
       title: "Build-a-Krewe",
       description: "Connect your fam and share your plans",
-      color: "from-blue-500 to-cyan-500",
+      color: "from-stage-sky to-stage-turquoise",
     },
     {
       icon: MessageCircle,
       iconImage: "/icons/chat.png",
       title: "Chat Assistance",
       description: `Vibe with ${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} to craft personalized weekend music experiences`,
-      color: "from-purple-500 to-pink-500",
+      color: "from-brand-primary to-brand-secondary",
     },
     {
         icon: MapPin,
@@ -220,7 +220,7 @@ export default function HomePage() {
         title: "Nightlife Analytics",
         description:
           "Understand the landscape of your own nightlife with insights and trends",
-        color: "from-blue-500 to-indigo-500",
+        color: "from-stage-sky to-indigo-500",
       },
   ];
 
@@ -256,11 +256,11 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <div className="min-h-screen bg-brand-gradient-br dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       {/* Animated Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-3/4 right-1/4 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-brand-primary/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-3/4 right-1/4 w-96 h-96 bg-brand-secondary/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
         <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-500"></div>
       </div>
 
@@ -324,7 +324,7 @@ export default function HomePage() {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 disabled:opacity-50"
+                  className="bg-brand-gradient hover:from-festival-purple-500 hover:to-festival-pink-500 disabled:opacity-50"
                 >
                   <Mail className="w-4 h-4 mr-2" />
                   Get Early Access
@@ -342,7 +342,7 @@ export default function HomePage() {
             </form>
           ) : (
             <div className="text-center py-8">
-              <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-brand-gradient rounded-full flex items-center justify-center mx-auto mb-4">
                 <Mail className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-bold text-white mb-2">
@@ -379,8 +379,8 @@ export default function HomePage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent pointer-events-none" />
             </div>
-            <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full animate-ping" />
-            <div className="absolute -bottom-2 -left-2 w-6 h-6 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full animate-ping delay-500" />
+            <div className="absolute -top-2 -right-2 w-8 h-8 bg-brand-gradient rounded-full animate-ping" />
+            <div className="absolute -bottom-2 -left-2 w-6 h-6 bg-gradient-to-r from-stage-sky to-stage-turquoise rounded-full animate-ping delay-500" />
           </div>
         </div>
       )}
@@ -403,13 +403,13 @@ export default function HomePage() {
           >
             <h1 className="text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
               Your
-              <span className="text-purple-400">
+              <span className="text-brand-accent">
                 {" "}
                 Hometown
               </span>
               <br />
               Is Your Own
-              <span className="text-pink-400">
+              <span className="text-festival-pink-400">
                 {" "}
                 Music Fest
               </span>
@@ -425,7 +425,7 @@ export default function HomePage() {
               <Button
                 size="lg"
                 onClick={handleJoinBetaClick}
-                className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-base sm:text-lg px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-center"
+                className="bg-brand-gradient hover:from-festival-purple-500 hover:to-festival-pink-500 text-base sm:text-lg px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-center"
               >
                 <span className="text-center whitespace-normal">
                   Join the Waitlist!
@@ -444,7 +444,7 @@ export default function HomePage() {
             <h2 className="text-4xl font-bold text-white mb-4">
               {contentData?.featuresIntro?.title ||
                 "Everything You Need for the Perfect"}
-              <span className="text-purple-300 dark:text-purple-200">
+              <span className="text-festival-purple-400 dark:text-festival-purple-400">
                 {" "}
                 {contentData?.featuresIntro?.titleHighlight || "Music Weekend"}
               </span>
@@ -535,7 +535,7 @@ export default function HomePage() {
                     "Export to social media",
                   ].map((feature, index) => (
                     <div key={index} className="flex items-center space-x-3">
-                      <div className="w-5 h-5 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center flex-shrink-0">
+                      <div className="w-5 h-5 bg-gradient-to-r from-stage-mint to-emerald-500 rounded-full flex items-center justify-center flex-shrink-0">
                         <svg
                           className="w-3 h-3 text-white"
                           fill="currentColor"
@@ -580,7 +580,7 @@ export default function HomePage() {
             {/* Vibes Plan */}
             <Card className="bg-slate-800/50 dark:bg-gray-800/50 border-purple-500/50 backdrop-blur-sm hover:bg-slate-800/70 dark:hover:bg-gray-800/70 transition-all duration-300 relative">
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-1">
+                <Badge className="bg-brand-gradient text-white px-4 py-1">
                   Most Popular
                 </Badge>
               </div>
@@ -611,7 +611,7 @@ export default function HomePage() {
                     "Priority customer support",
                   ].map((feature, index) => (
                     <div key={index} className="flex items-center space-x-3">
-                      <div className="w-5 h-5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
+                      <div className="w-5 h-5 bg-brand-gradient rounded-full flex items-center justify-center flex-shrink-0">
                         <svg
                           className="w-3 h-3 text-white"
                           fill="currentColor"
@@ -630,7 +630,7 @@ export default function HomePage() {
                 </div>
                 <Button
                   onClick={handleJoinBetaClick}
-                  className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 mt-6"
+                  className="w-full bg-brand-gradient hover:from-festival-purple-500 hover:to-festival-pink-500 mt-6"
                 >
                   Start Free Trial
                 </Button>
@@ -705,8 +705,8 @@ export default function HomePage() {
                     key={index}
                     className="flex items-center space-x-3 text-gray-300"
                   >
-                    <div className="w-8 h-8 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg flex items-center justify-center">
-                      <item.icon className="w-4 h-4 text-purple-400" />
+                    <div className="w-8 h-8 bg-gradient-to-r from-brand-primary/20 to-brand-secondary/20 rounded-lg flex items-center justify-center">
+                      <item.icon className="w-4 h-4 text-brand-accent" />
                     </div>
                     <span>{item.text}</span>
                   </div>
@@ -736,7 +736,7 @@ export default function HomePage() {
               <Card className="bg-slate-800/50 dark:bg-gray-800/50 border-slate-700/50 dark:border-gray-700/50 backdrop-blur-sm">
                 <CardHeader>
                   <CardTitle className="text-white flex items-center">
-                    <BarChart3 className="w-5 h-5 mr-2 text-purple-400" />
+                    <BarChart3 className="w-5 h-5 mr-2 text-brand-accent" />
                     Trending Events This Saturday
                   </CardTitle>
                 </CardHeader>
@@ -748,7 +748,7 @@ export default function HomePage() {
                         className="flex items-center justify-between p-3 bg-slate-700/30 rounded-lg hover:bg-slate-700/50 transition-colors"
                       >
                         <div className="flex items-center space-x-3">
-                          <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+                          <div className="w-10 h-10 bg-brand-gradient rounded-lg flex items-center justify-center">
                             {event.name === "Trombone Shorty" ? (
                               <img
                                 src="/icons/trumpet-no-bg-2.png"
@@ -785,7 +785,7 @@ export default function HomePage() {
                         <div className="text-right">
                           <Badge
                             variant="secondary"
-                            className="bg-purple-500/20 text-purple-300"
+                            className="bg-brand-primary/20 text-brand-accent"
                           >
                             {event.genre}
                           </Badge>
@@ -811,7 +811,7 @@ export default function HomePage() {
                       </p>
                       <p className="text-3xl font-bold text-white">127</p>
                     </div>
-                    <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg flex items-center justify-center">
+                    <div className="w-12 h-12 bg-gradient-to-r from-stage-mint to-emerald-500 rounded-lg flex items-center justify-center">
                       <TrendingUp className="w-6 h-6 text-white" />
                     </div>
                   </div>
@@ -828,7 +828,7 @@ export default function HomePage() {
                       <p className="text-gray-400 text-sm">Weekend Events</p>
                       <p className="text-3xl font-bold text-white">162</p>
                     </div>
-                    <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center">
+                    <div className="w-12 h-12 bg-gradient-to-r from-stage-sky to-stage-turquoise rounded-lg flex items-center justify-center">
                       <MapPin className="w-6 h-6 text-white" />
                     </div>
                   </div>
@@ -845,11 +845,11 @@ export default function HomePage() {
                       <p className="text-gray-400 text-sm">Lit Fam</p>
                       <p className="text-3xl font-bold text-white">16</p>
                     </div>
-                    <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+                    <div className="w-12 h-12 bg-brand-gradient rounded-lg flex items-center justify-center">
                       <Users className="w-6 h-6 text-white" />
                     </div>
                   </div>
-                  <p className="text-purple-400 text-sm mt-2">
+                  <p className="text-brand-accent text-sm mt-2">
                     Your Krewe Vibes
                   </p>
                 </CardContent>
@@ -863,7 +863,7 @@ export default function HomePage() {
       {/* CTA Section */}
       <section className="relative z-10 px-6 lg:px-8 py-20">
         <div className="mx-auto max-w-4xl text-center">
-          <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-3xl p-12 border border-purple-500/20 backdrop-blur-sm">
+          <div className="bg-gradient-to-r from-brand-primary/10 to-brand-secondary/10 rounded-3xl p-12 border border-brand-primary/20 backdrop-blur-sm">
             <h2 className="text-4xl font-bold text-white mb-6">
               Ready to Transform Your Weekends?
             </h2>
@@ -876,7 +876,7 @@ export default function HomePage() {
               <Button
                 size="lg"
                 onClick={handleJoinBetaClick}
-                className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-base sm:text-lg px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-center"
+                className="bg-brand-gradient hover:from-festival-purple-500 hover:to-festival-pink-500 text-base sm:text-lg px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-center"
               >
                 <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 flex-shrink-0" />
                 <span className="text-center whitespace-normal">

@@ -35,7 +35,7 @@ export default function DonationModal({
 
         <div className="text-center mb-6">
           <div className="mb-4 flex justify-center">
-            <div className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-full p-3">
+            <div className="bg-brand-gradient rounded-full p-3">
               <Gift className="text-white" size={32} />
             </div>
           </div>
@@ -46,15 +46,15 @@ export default function DonationModal({
 
           <p className="text-gray-300 leading-relaxed">
             Love the idea of Fest Vibes? Support our development with just{" "}
-            <span className="font-bold text-purple-400">$1</span> and get{" "}
-            <span className="font-bold text-pink-400">2 free months</span> when
+            <span className="font-bold text-brand-accent">$1</span> and get{" "}
+            <span className="font-bold text-festival-pink-400">2 free months</span> when
             we launch!
           </p>
         </div>
 
         <div className="bg-slate-700/30 rounded-2xl p-4 mb-6 border border-slate-600/50">
           <div className="flex items-center gap-3 mb-3">
-            <Heart className="text-pink-400" size={20} />
+            <Heart className="text-festival-pink-400" size={20} />
             <span className="text-white font-semibold">What you get:</span>
           </div>
           <ul className="text-gray-300 space-y-2 text-sm">
@@ -71,7 +71,7 @@ export default function DonationModal({
             amount={1}
             note="Fest Vibes Beta - 2 Free Months"
             onClick={onAccept}
-            className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
+            className="w-full bg-brand-gradient hover:from-festival-purple-500 hover:to-festival-pink-500 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
           >
             <DollarSign className="mr-2" size={20} />
             Donate $1 via Venmo
@@ -86,7 +86,7 @@ export default function DonationModal({
           </Button>
         </div>
 
-        <p className="text-xs text-purple-400 text-center mt-4">
+        <p className="text-xs text-brand-accent text-center mt-4">
           Your email: <span className="font-mono">{email}</span>
         </p>
       </div>

@@ -3,8 +3,9 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Sun, Moon } from 'lucide-react'
 import { useLogoPosition, useLogoVariant, useAssistantName } from '@/hooks/use-feature-flags'
+import { useDarkMode } from '@/hooks/use-dark-mode'
 
 interface ABTestNavigationProps {
   onBoomyClick: () => void
@@ -15,6 +16,7 @@ export function ABTestNavigation({ onBoomyClick, onJoinBetaClick }: ABTestNaviga
   const logoPosition = useLogoPosition()
   const logoVariant = useLogoVariant()
   const assistantName = useAssistantName()
+  const { isDarkMode, toggleDarkMode } = useDarkMode()
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
 
@@ -41,6 +43,7 @@ export function ABTestNavigation({ onBoomyClick, onJoinBetaClick }: ABTestNaviga
     return () => document.removeEventListener('click', handleClickOutside)
   }, [showMobileMenu])
 
+
   // Handle hamburger menu click (mobile only)
   const handleMenuClick = () => {
     setShowMobileMenu(!showMobileMenu)
@@ -54,32 +57,34 @@ export function ABTestNavigation({ onBoomyClick, onJoinBetaClick }: ABTestNaviga
   // Mascot component (just the mascot)
   const MascotComponent = () => (
     <button
-      onClick={handleBoomyClick}
+      onClick={onBoomyClick}
       className="transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-lg"
     >
       <img
-        src="/mascot-nav.png"
+        src="/mascots/nav/mascot-nav.png"
         alt={`${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} the Cat`}
         className="w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-lg object-cover"
       />
     </button>
-  )
+  );
 
   // Logo component (desktop - includes both mascot and logo)
   const LogoComponent = () => (
     <div className="flex items-center space-x-2 sm:space-x-3">
       <MascotComponent />
       <img
-        src={`/logo-${logoVariant}.png`}
+        src="/logos/nav/nav-logo.png"
         alt="Fest Vibes Logo"
-        className="h-14 sm:h-16 md:h-16 w-auto object-contain transition-transform hover:scale-105"
+        className="h-20 sm:h-24 md:h-28 w-auto object-contain transition-transform hover:scale-105"
       />
     </div>
-  )
+  );
 
   // Mobile dropdown menu
   const MobileMenu = () => (
-    <div className={`absolute top-full left-0 right-0 bg-slate-900 border-t border-slate-600 shadow-xl transition-all duration-300 ${showMobileMenu ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}`}>
+    <div
+      className={`absolute top-full left-0 right-0 bg-slate-900/95 dark:bg-gray-900/95 backdrop-blur-md border-t border-slate-600 dark:border-gray-600 shadow-xl transition-all duration-300 ${showMobileMenu ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"}`}
+    >
       <div className="px-6 py-4 space-y-4">
         <a
           href="#features"
@@ -102,10 +107,20 @@ export function ABTestNavigation({ onBoomyClick, onJoinBetaClick }: ABTestNaviga
         >
           Analytics
         </a>
+        <button
+          onClick={() => {
+            setShowMobileMenu(false);
+            toggleDarkMode();
+          }}
+          className="flex items-center text-gray-300 hover:text-white transition-colors text-lg py-2 w-full"
+        >
+          <span className="mr-2">Vibes</span>
+          {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+        </button>
         <Button
           onClick={() => {
-            setShowMobileMenu(false)
-            onJoinBetaClick()
+            setShowMobileMenu(false);
+            onJoinBetaClick();
           }}
           className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 mt-4"
         >
@@ -113,7 +128,7 @@ export function ABTestNavigation({ onBoomyClick, onJoinBetaClick }: ABTestNaviga
         </Button>
       </div>
     </div>
-  )
+  );
 
   // Navigation links component (desktop only)
   const NavLinks = () => (
@@ -136,6 +151,13 @@ export function ABTestNavigation({ onBoomyClick, onJoinBetaClick }: ABTestNaviga
       >
         Analytics
       </a>
+      <button
+        onClick={toggleDarkMode}
+        className="flex items-center text-gray-300 hover:text-white transition-colors"
+      >
+        <span className="mr-2">Vibes</span>
+        {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+      </button>
       <Button
         onClick={onJoinBetaClick}
         className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
@@ -143,13 +165,13 @@ export function ABTestNavigation({ onBoomyClick, onJoinBetaClick }: ABTestNaviga
         Join the Waitlist
       </Button>
     </div>
-  )
+  );
 
   // Hamburger menu button component
   const HamburgerButton = () => (
     <button
       onClick={handleMenuClick}
-      className="flex items-center justify-center w-10 h-10 rounded-lg bg-slate-800/50 border border-slate-600 hover:bg-slate-700/50 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500"
+      className="flex items-center justify-center w-10 h-10 rounded-lg bg-slate-800/50 dark:bg-gray-800/50 border border-slate-600 dark:border-gray-600 hover:bg-slate-700/50 dark:hover:bg-gray-700/50 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500"
       aria-label="Toggle navigation menu"
     >
       {showMobileMenu ? (
@@ -158,16 +180,16 @@ export function ABTestNavigation({ onBoomyClick, onJoinBetaClick }: ABTestNaviga
         <Menu className="w-5 h-5 text-white" />
       )}
     </button>
-  )
+  );
 
   // Mobile Logo component (mobile version - just the text logo, centered)
   const MobileLogoComponent = () => (
     <img
-      src={`/logo-${logoVariant}.png`}
+      src="/logos/nav/nav-logo.png"
       alt="Fest Vibes Logo"
-      className="h-8 sm:h-10 w-auto object-contain transition-transform hover:scale-105"
+      className="h-24 sm:h-28 md:h-32 w-auto object-contain transition-transform hover:scale-105"
     />
-  )
+  );
 
   // Mobile layout with centered logo and A/B testing for mascot/hamburger positions
   const MobileLayout = () => {

@@ -10,10 +10,10 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Fest-Vibes - Your Smart Music Festival Experience",
+  title: "Fest-Vibes",
   description:
-    "Transform any weekend into a personalized music festival. Discover local live music, plan with friends, and experience the ultimate decentralized festival in your pocket.",
-  generator: "v0.dev",
+    "Transform any weekend into a personalized music festival. Discover local live music, curate plan with friends, and experience the ultimate decentralized festival in your pocket.",
+  generator: "afdc.dev",
   icons: {
     icon: "/favicon.png",
     shortcut: "/favicon.png",

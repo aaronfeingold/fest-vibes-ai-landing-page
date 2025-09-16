@@ -9,12 +9,12 @@ import { useMascotAsset, useLogoAsset } from "@/hooks/use-brand-assets";
 import { useDarkMode } from "@/hooks/use-dark-mode";
 
 interface ABTestNavigationProps {
-  onBoomyClick: () => void;
+  onMascotClick: () => void;
   onJoinBetaClick: () => void;
 }
 
 export function ABTestNavigation({
-  onBoomyClick,
+  onMascotClick,
   onJoinBetaClick,
 }: ABTestNavigationProps) {
   const logoPosition = useLogoPosition();
@@ -24,6 +24,14 @@ export function ABTestNavigation({
   const { isDarkMode, toggleDarkMode } = useDarkMode();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+
+  // Shared navigation items
+  const navItems = [
+    { href: "#features", label: "Features" },
+    { href: "#pricing", label: "Pricing" },
+    { href: "#demo", label: "Demo" },
+    { href: "#analytics", label: "Analytics" },
+  ];
 
   // Check if we're on mobile
   useEffect(() => {
@@ -53,15 +61,10 @@ export function ABTestNavigation({
     setShowMobileMenu(!showMobileMenu);
   };
 
-  // Handle Boomy click - always show vibes animation (easter egg)
-  const handleBoomyClick = () => {
-    onBoomyClick(); // Show vibes animation
-  };
-
   // Mascot component (just the mascot)
   const MascotComponent = () => (
     <button
-      onClick={onBoomyClick}
+      onClick={onMascotClick}
       className="transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand-primary rounded-lg"
     >
       <img
@@ -85,45 +88,67 @@ export function ABTestNavigation({
   );
 
   // Mobile dropdown menu
-  const MobileMenu = () => (
-    <div
-      className={`absolute top-full left-0 right-0 bg-festival-slate-900/95 dark:bg-gray-900/95 backdrop-blur-md border-t border-slate-600 dark:border-gray-600 shadow-xl transition-all duration-300 ${showMobileMenu ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"}`}
-    >
-      <div className="px-6 py-4 space-y-4">
-        <Link
-          href="#features"
-          onClick={() => setShowMobileMenu(false)}
-          className="block text-gray-300 hover:text-white transition-colors text-lg py-2"
-        >
-          Features
-        </Link>
-        <Link
-          href="#pricing"
-          onClick={() => setShowMobileMenu(false)}
-          className="block text-gray-300 hover:text-white transition-colors text-lg py-2"
-        >
-          Pricing
-        </Link>
-        <Link
-          href="#demo"
-          onClick={() => setShowMobileMenu(false)}
-          className="block text-gray-300 hover:text-white transition-colors text-lg py-2"
-        >
-          Demo
-        </Link>
-        <Link
-          href="#analytics"
-          onClick={() => setShowMobileMenu(false)}
-          className="block text-gray-300 hover:text-white transition-colors text-lg py-2"
-        >
-          Analytics
-        </Link>
+  const MobileMenu = () => {
+    const mobileLinkClassName =
+      "block text-gray-300 hover:text-white transition-colors text-lg py-2";
+
+    return (
+      <div
+        className={`absolute top-full left-0 right-0 bg-festival-slate-900/95 dark:bg-gray-900/95 backdrop-blur-md border-t border-slate-600 dark:border-gray-600 shadow-xl transition-all duration-300 ${showMobileMenu ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"}`}
+      >
+        <div className="px-6 py-4 space-y-4">
+          {navItems.map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              onClick={() => setShowMobileMenu(false)}
+              className={mobileLinkClassName}
+            >
+              {label}
+            </Link>
+          ))}
+          <button
+            onClick={() => {
+              setShowMobileMenu(false);
+              toggleDarkMode();
+            }}
+            className={`flex items-center ${mobileLinkClassName} w-full`}
+          >
+            <span className="mr-2">Vibes</span>
+            {isDarkMode ? (
+              <Sun className="w-4 h-4" />
+            ) : (
+              <Moon className="w-4 h-4" />
+            )}
+          </button>
+          <Button
+            onClick={() => {
+              setShowMobileMenu(false);
+              onJoinBetaClick();
+            }}
+            className="w-full bg-brand-gradient hover:from-festival-purple-500 hover:to-festival-pink-500 mt-4"
+          >
+            Join the Waitlist
+          </Button>
+        </div>
+      </div>
+    );
+  };
+
+  // Navigation links component (desktop only)
+  const NavLinks = () => {
+    const linkClassName = "text-gray-300 hover:text-white transition-colors";
+
+    return (
+      <div className="hidden md:flex items-center space-x-8">
+        {navItems.map(({ href, label }) => (
+          <Link key={href} href={href} className={linkClassName}>
+            {label}
+          </Link>
+        ))}
         <button
-          onClick={() => {
-            setShowMobileMenu(false);
-            toggleDarkMode();
-          }}
-          className="flex items-center text-gray-300 hover:text-white transition-colors text-lg py-2 w-full"
+          onClick={toggleDarkMode}
+          className={`flex items-center ${linkClassName}`}
         >
           <span className="mr-2">Vibes</span>
           {isDarkMode ? (
@@ -133,64 +158,14 @@ export function ABTestNavigation({
           )}
         </button>
         <Button
-          onClick={() => {
-            setShowMobileMenu(false);
-            onJoinBetaClick();
-          }}
-          className="w-full bg-brand-gradient hover:from-festival-purple-500 hover:to-festival-pink-500 mt-4"
+          onClick={onJoinBetaClick}
+          className="bg-brand-gradient hover:from-festival-purple-500 hover:to-festival-pink-500"
         >
           Join the Waitlist
         </Button>
       </div>
-    </div>
-  );
-
-  // Navigation links component (desktop only)
-  const NavLinks = () => (
-    <div className="hidden md:flex items-center space-x-8">
-      <Link
-        href="#features"
-        className="text-gray-300 hover:text-white transition-colors"
-      >
-        Features
-      </Link>
-      <Link
-        href="#pricing"
-        className="text-gray-300 hover:text-white transition-colors"
-      >
-        Pricing
-      </Link>
-      <Link
-        href="#demo"
-        className="text-gray-300 hover:text-white transition-colors"
-      >
-        Demo
-      </Link>
-      <Link
-        href="#analytics"
-        className="text-gray-300 hover:text-white transition-colors"
-      >
-        Analytics
-      </Link>
-      <button
-        onClick={toggleDarkMode}
-        className="flex items-center text-gray-300 hover:text-white transition-colors"
-      >
-        <span className="mr-2">Vibes</span>
-        {isDarkMode ? (
-          <Sun className="w-4 h-4" />
-        ) : (
-          <Moon className="w-4 h-4" />
-        )}
-      </button>
-      <Button
-        onClick={onJoinBetaClick}
-        className="bg-brand-gradient hover:from-festival-purple-500 hover:to-festival-pink-500"
-      >
-        Join the Waitlist
-      </Button>
-    </div>
-  );
+    );
+  };
 
   // Hamburger menu button component
   const HamburgerButton = () => (

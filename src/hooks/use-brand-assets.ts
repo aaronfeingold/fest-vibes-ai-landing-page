@@ -1,6 +1,6 @@
 "use client";
 
-import { useMascotVariant, useLogoType } from "./use-feature-flags";
+import { useMascotVariant } from "./use-feature-flags";
 
 interface BrandAssets {
   mascot: {
@@ -19,7 +19,8 @@ interface BrandAssets {
  */
 export function useBrandAssets(): BrandAssets {
   const mascotVariant = useMascotVariant();
-  const logoType = useLogoType();
+  // Note: logoType could be used for future logo variants
+  // const logoType = useLogoType();
 
   return {
     mascot: {
@@ -27,8 +28,8 @@ export function useBrandAssets(): BrandAssets {
       standalone: `/mascots/standalone/mascot-${mascotVariant}.png`,
     },
     logo: {
-      nav: `/logos/nav/logo-${logoType}-${mascotVariant}.png`,
-      footer: `/logos/footer/logo-${logoType}-${mascotVariant}.png`,
+      nav: `/logos/nav/nav-logo.png`,
+      footer: `/logos/footer/footer-logo.png`,
     },
   };
 }

@@ -19,17 +19,15 @@ export function HeroSection({
       <div className="mx-auto max-w-4xl text-center">
         <div
           className={`transition-all duration-1000 ${
-            isVisible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-10"
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
           <h1 className="text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
             Your
-            <span className="text-brand-accent"> Hometown</span>
+            <span className="text-white"> Hometown</span>
             <br />
             Is Your Own
-            <span className="text-festival-pink-400"> Music Fest</span>
+            <span className="text-white"> Music Fest</span>
           </h1>
           <p
             id="hero-subtitle"

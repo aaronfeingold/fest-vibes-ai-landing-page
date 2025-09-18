@@ -57,7 +57,7 @@ const config = {
           foreground: "hsl(var(--card-foreground))",
         },
         // Festival Brand Colors
-        "festival": {
+        festival: {
           "slate-900": "hsl(var(--festival-slate-900))",
           "purple-900": "hsl(var(--festival-purple-900))",
           "purple-500": "hsl(var(--festival-purple-500))",
@@ -68,22 +68,22 @@ const config = {
           "gradient-dark": "hsl(var(--festival-gradient-dark))",
         },
         // Stage Colors
-        "stage": {
-          "coral": "hsl(var(--stage-coral))",
-          "turquoise": "hsl(var(--stage-turquoise))",
-          "sky": "hsl(var(--stage-sky))",
-          "mint": "hsl(var(--stage-mint))",
-          "yellow": "hsl(var(--stage-yellow))",
+        stage: {
+          coral: "hsl(var(--stage-coral))",
+          turquoise: "hsl(var(--stage-turquoise))",
+          sky: "hsl(var(--stage-sky))",
+          mint: "hsl(var(--stage-mint))",
+          yellow: "hsl(var(--stage-yellow))",
         },
         // Semantic Brand Colors
-        "brand": {
-          "primary": "hsl(var(--brand-primary))",
-          "secondary": "hsl(var(--brand-secondary))",
-          "accent": "hsl(var(--brand-accent))",
-          "background": {
-            "start": "hsl(var(--brand-background-start))",
-            "middle": "hsl(var(--brand-background-middle))",
-            "end": "hsl(var(--brand-background-end))",
+        brand: {
+          primary: "hsl(var(--brand-primary))",
+          secondary: "hsl(var(--brand-secondary))",
+          accent: "hsl(var(--brand-accent))",
+          background: {
+            start: "hsl(var(--brand-background-start))",
+            middle: "hsl(var(--brand-background-middle))",
+            end: "hsl(var(--brand-background-end))",
           },
         },
       },
@@ -119,8 +119,6 @@ const config = {
           "linear-gradient(to right, hsl(var(--brand-primary)), hsl(var(--brand-secondary)))",
         "brand-gradient-br":
           "linear-gradient(to bottom right, hsl(var(--brand-background-start)) 0%, hsl(var(--brand-background-middle)) 50%, hsl(var(--brand-background-end)) 100%)",
-        "brand-text-gradient":
-          "linear-gradient(135deg, hsl(var(--festival-purple-400)), hsl(var(--festival-pink-400)))",
       },
     },
   },

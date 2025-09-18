@@ -29,7 +29,7 @@ export function FeaturesSection({ contentData }: FeaturesSectionProps) {
           <h2 className="text-4xl font-bold text-white mb-4">
             {contentData?.featuresIntro?.title ||
               "Everything You Need for the Perfect"}
-            <span className="text-festival-purple-400 dark:text-festival-purple-400">
+            <span className="text-white">
               {" "}
               {contentData?.featuresIntro?.titleHighlight || "Music Weekend"}
             </span>

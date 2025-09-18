@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { usePostHog } from "posthog-js/react";
 import { useAssistantName } from "@/hooks/use-feature-flags";
-import { useMascotAsset, useLogoAsset } from "@/hooks/use-brand-assets";
+import { useMascotAsset } from "@/hooks/use-brand-assets";
 
 export interface ContentData {
   hero: {
@@ -39,7 +39,6 @@ export function useHomepageState() {
   const posthog = usePostHog();
   const assistantName = useAssistantName();
   const mascotStandalone = useMascotAsset("standalone");
-  const footerLogo = useLogoAsset("footer");
 
   // UI State
   const [isVisible, setIsVisible] = useState(false);
@@ -148,7 +147,6 @@ export function useHomepageState() {
     // Assets
     assistantName,
     mascotStandalone,
-    footerLogo,
     contentData,
 
     // UI State
@@ -210,7 +208,6 @@ export function useHomepageState() {
 
     footerProps: {
       contentData,
-      footerLogo,
     },
   };
 }

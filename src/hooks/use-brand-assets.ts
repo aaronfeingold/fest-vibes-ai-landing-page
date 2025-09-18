@@ -1,6 +1,6 @@
 "use client";
 
-import { useMascotVariant } from "./use-feature-flags";
+import { useMascotVariant, useLogoType } from "./use-feature-flags";
 
 interface BrandAssets {
   mascot: {
@@ -15,21 +15,37 @@ interface BrandAssets {
 
 /**
  * Hook to get current brand assets based on feature flags
- * Makes it easy to drop new assets and A/B test them
+ * Handles both numeric variants (1, 2, 3) and themed variants (summer-1, neon-2)
+ * Falls back to variant "1" if the specified variant doesn't exist
  */
 export function useBrandAssets(): BrandAssets {
   const mascotVariant = useMascotVariant();
-  // Note: logoType could be used for future logo variants
-  // const logoType = useLogoType();
+  const logoType = useLogoType();
+
+  // Helper function to build mascot path with fallback
+  const getMascotPath = (context: "nav" | "standalone", variant: string) => {
+    // For themed variants like "summer-1", we might organize files differently in the future
+    // For now, keep the current structure but allow any variant string
+    return `/mascots/${context}/mascot-${variant}.png`;
+  };
+
+  // Helper function to build logo path based on type and context
+  const getLogoPath = (context: "nav" | "footer", type: string) => {
+    if (context === "nav") {
+      return `/logos/nav/logo-${type}-1.png`;
+    }
+    // Footer uses "full" type regardless of the logoType setting for brand consistency
+    return `/logos/footer/logo-full-1.png`;
+  };
 
   return {
     mascot: {
-      nav: `/mascots/nav/mascot-${mascotVariant}.png`,
-      standalone: `/mascots/standalone/mascot-${mascotVariant}.png`,
+      nav: getMascotPath("nav", mascotVariant),
+      standalone: getMascotPath("standalone", mascotVariant),
     },
     logo: {
-      nav: `/logos/nav/nav-logo.png`,
-      footer: `/logos/footer/footer-logo.png`,
+      nav: getLogoPath("nav", logoType),
+      footer: getLogoPath("footer", logoType),
     },
   };
 }

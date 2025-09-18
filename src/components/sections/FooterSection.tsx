@@ -5,10 +5,9 @@ import { ContentData } from "@/hooks/use-homepage-state";
 
 interface FooterSectionProps {
   contentData: ContentData | null;
-  footerLogo: string;
 }
 
-export function FooterSection({ contentData, footerLogo }: FooterSectionProps) {
+export function FooterSection({ contentData }: FooterSectionProps) {
   return (
     <footer
       id="footer"
@@ -17,16 +16,17 @@ export function FooterSection({ contentData, footerLogo }: FooterSectionProps) {
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="space-y-4">
-            <div className="flex items-center">
-              <img
-                src={footerLogo}
-                alt="Fest Vibes Logo"
-                className="h-16 sm:h-18 md:h-20 w-auto object-contain"
-              />
+            <div className="space-y-2">
+              <p className="text-xl font-semibold text-white">
+                {contentData?.brand?.motto || "Discover. Curate. Experience."}
+              </p>
             </div>
             <div className="flex items-center space-x-4">
               <Link
-                href={contentData?.socialMedia?.twitter || "https://twitter.com/festvibes"}
+                href={
+                  contentData?.socialMedia?.twitter ||
+                  "https://twitter.com/festvibes"
+                }
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors"
@@ -34,7 +34,10 @@ export function FooterSection({ contentData, footerLogo }: FooterSectionProps) {
                 <Twitter className="w-5 h-5" />
               </Link>
               <Link
-                href={contentData?.socialMedia?.instagram || "https://www.instagram.com/fest_vibes_nola/"}
+                href={
+                  contentData?.socialMedia?.instagram ||
+                  "https://www.instagram.com/fest_vibes_nola/"
+                }
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors"

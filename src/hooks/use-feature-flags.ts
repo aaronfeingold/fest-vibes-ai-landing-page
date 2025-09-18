@@ -1,15 +1,23 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useFeatureFlagEnabled } from "posthog-js/react";
+import { usePostHog } from "posthog-js/react";
 
+// Define valid values as const assertions for technical/UI flags
+const VALID_LOGO_POSITIONS = ["left", "right", "center"] as const;
+const VALID_LOGO_TYPES = ["minimal", "standard", "full"] as const;
+const VALID_COPY_VARIANTS = ["original", "alternative", "concise"] as const;
+const VALID_HERO_LAYOUTS = ["default", "compact", "expanded"] as const;
+
+// Derive types from the const values for technical flags
+// assistantName is a marketing string - can be any name marketing wants to test
 interface FeatureFlags {
-  logoPosition: "left" | "right" | "center";
-  mascotVariant: "1" | "2" | "3";
-  logoType: "minimal" | "standard" | "full";
-  copyVariant: "original" | "alternative" | "concise";
-  heroLayout: "default" | "compact" | "expanded";
-  assistantName: "boomy" | "bumi";
+  logoPosition: (typeof VALID_LOGO_POSITIONS)[number];
+  mascotVariant: string; // Brand content - can be numbered themes like "summer-1", "neon-2", or simple "1", "2"
+  logoType: (typeof VALID_LOGO_TYPES)[number];
+  copyVariant: (typeof VALID_COPY_VARIANTS)[number];
+  heroLayout: (typeof VALID_HERO_LAYOUTS)[number];
+  assistantName: string; // Marketing content - can be any name
 }
 
 // Get bootstrap flags from cookie (set by middleware)
@@ -48,95 +56,76 @@ export function useFeatureFlags(): FeatureFlags {
     assistantName: "boomy",
   }));
 
-  // Get flags from PostHog (will override bootstrap once loaded)
-  const logoPositionFlag = useFeatureFlagEnabled("logo-position");
-  const mascotVariantFlag = useFeatureFlagEnabled("mascot-variant");
-  const logoTypeFlag = useFeatureFlagEnabled("logo-type");
-  const copyVariantFlag = useFeatureFlagEnabled("copy-variant");
-  const heroLayoutFlag = useFeatureFlagEnabled("hero-layout");
-  const assistantNameFlag = useFeatureFlagEnabled("assistant-name");
+  const posthog = usePostHog();
 
   useEffect(() => {
     // Start with bootstrap flags (from middleware)
     const bootstrapFlags = getBootstrapFlags();
 
-    setFlags((prev) => ({
-      logoPosition:
-        (bootstrapFlags.logoPosition as "left" | "right" | "center") ||
-        prev.logoPosition,
-      mascotVariant:
-        (bootstrapFlags.mascotVariant as "1" | "2" | "3") || prev.mascotVariant,
-      logoType:
-        (bootstrapFlags.logoType as "minimal" | "standard" | "full") ||
-        prev.logoType,
-      copyVariant:
-        (bootstrapFlags.copyVariant as
-          | "original"
-          | "alternative"
-          | "concise") || prev.copyVariant,
-      heroLayout:
-        (bootstrapFlags.heroLayout as "default" | "compact" | "expanded") ||
-        prev.heroLayout,
-      assistantName:
-        (bootstrapFlags.assistantName as "boomy" | "bumi") ||
-        prev.assistantName,
-    }));
-  }, []);
+    // Get flags from PostHog
+    const getPostHogFlag = (flagName: string, defaultValue: string) => {
+      try {
+        return posthog?.getFeatureFlag(flagName) || defaultValue;
+      } catch {
+        return defaultValue;
+      }
+    };
 
-  // Update with PostHog flags when available
-  useEffect(() => {
-    if (logoPositionFlag !== undefined) {
-      setFlags((prev) => ({
-        ...prev,
-        logoPosition: logoPositionFlag as "left" | "right" | "center",
-      }));
-    }
-  }, [logoPositionFlag]);
+    const validateFlag = <T extends string>(
+      value: any,
+      validValues: readonly T[],
+      defaultValue: T
+    ): T => {
+      if (typeof value === "string" && validValues.includes(value as T)) {
+        return value as T;
+      }
+      return defaultValue;
+    };
 
-  useEffect(() => {
-    if (mascotVariantFlag !== undefined) {
-      setFlags((prev) => ({
-        ...prev,
-        mascotVariant: mascotVariantFlag as "1" | "2" | "3",
-      }));
-    }
-  }, [mascotVariantFlag]);
+    const validateStringFlag = (value: any, defaultValue: string): string => {
+      if (typeof value === "string" && value.trim().length > 0) {
+        return value.trim();
+      }
+      return defaultValue;
+    };
 
-  useEffect(() => {
-    if (logoTypeFlag !== undefined) {
-      setFlags((prev) => ({
-        ...prev,
-        logoType: logoTypeFlag as "minimal" | "standard" | "full",
-      }));
-    }
-  }, [logoTypeFlag]);
-
-  useEffect(() => {
-    if (copyVariantFlag !== undefined) {
-      setFlags((prev) => ({
-        ...prev,
-        copyVariant: copyVariantFlag as "original" | "alternative" | "concise",
-      }));
-    }
-  }, [copyVariantFlag]);
-
-  useEffect(() => {
-    if (heroLayoutFlag !== undefined) {
-      setFlags((prev) => ({
-        ...prev,
-        heroLayout: heroLayoutFlag as "default" | "compact" | "expanded",
-      }));
-    }
-  }, [heroLayoutFlag]);
-
-  useEffect(() => {
-    if (assistantNameFlag !== undefined) {
-      setFlags((prev) => ({
-        ...prev,
-        assistantName: assistantNameFlag as "boomy" | "bumi",
-      }));
-    }
-  }, [assistantNameFlag]);
+    setFlags({
+      logoPosition: validateFlag(
+        getPostHogFlag("logo-position", bootstrapFlags.logoPosition || "left"),
+        VALID_LOGO_POSITIONS,
+        "left"
+      ),
+      mascotVariant: validateStringFlag(
+        getPostHogFlag("mascot-variant", bootstrapFlags.mascotVariant || "1"),
+        "1"
+      ),
+      logoType: validateFlag(
+        getPostHogFlag("logo-type", bootstrapFlags.logoType || "standard"),
+        VALID_LOGO_TYPES,
+        "standard"
+      ),
+      copyVariant: validateFlag(
+        getPostHogFlag(
+          "copy-variant",
+          bootstrapFlags.copyVariant || "original"
+        ),
+        VALID_COPY_VARIANTS,
+        "original"
+      ),
+      heroLayout: validateFlag(
+        getPostHogFlag("hero-layout", bootstrapFlags.heroLayout || "default"),
+        VALID_HERO_LAYOUTS,
+        "default"
+      ),
+      assistantName: validateStringFlag(
+        getPostHogFlag(
+          "assistant-name",
+          bootstrapFlags.assistantName || "boomy"
+        ),
+        "boomy"
+      ),
+    });
+  }, [posthog]);
 
   return flags;
 }

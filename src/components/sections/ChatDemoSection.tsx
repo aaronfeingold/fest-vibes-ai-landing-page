@@ -15,8 +15,7 @@ export function ChatDemoSection() {
             Your Planning Assistant
           </h2>
           <p className="text-xl text-gray-300">
-            Let{" "}
-            {assistantName.charAt(0).toUpperCase() + assistantName.slice(1)}{" "}
+            Let {assistantName.charAt(0).toUpperCase() + assistantName.slice(1)}{" "}
             suggest and organize your perfect music weekend
           </p>
         </div>

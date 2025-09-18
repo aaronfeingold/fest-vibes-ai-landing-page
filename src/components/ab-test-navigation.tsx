@@ -24,6 +24,7 @@ export function ABTestNavigation({
   const { isDarkMode, toggleDarkMode } = useDarkMode();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
 
   // Shared navigation items
   const navItems = [
@@ -33,15 +34,24 @@ export function ABTestNavigation({
     { href: "#analytics", label: "Analytics" },
   ];
 
-  // Check if we're on mobile
+  // Check if we're on mobile and track scroll position
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768); // md breakpoint
     };
 
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
     checkMobile();
+    handleScroll();
     window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   // Close mobile menu when clicking outside
@@ -61,6 +71,16 @@ export function ABTestNavigation({
     setShowMobileMenu(!showMobileMenu);
   };
 
+  // Handle smooth scrolling to sections
+  const handleSmoothScroll = (href: string) => {
+    if (href.startsWith('#')) {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   // Mascot component (just the mascot)
   const MascotComponent = () => (
     <button
@@ -70,7 +90,7 @@ export function ABTestNavigation({
       <img
         src={mascotAsset}
         alt={`${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} the Cat`}
-        className="w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-lg object-cover"
+        className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-lg object-cover"
       />
     </button>
   );
@@ -82,7 +102,7 @@ export function ABTestNavigation({
       <img
         src={logoAsset}
         alt="Fest Vibes Logo"
-        className="h-20 sm:h-24 md:h-28 w-auto object-contain transition-transform hover:scale-105"
+        className="h-16 sm:h-18 md:h-20 w-auto object-contain transition-transform hover:scale-105"
       />
     </div>
   );
@@ -94,18 +114,20 @@ export function ABTestNavigation({
 
     return (
       <div
-        className={`absolute top-full left-0 right-0 bg-festival-slate-900/95 dark:bg-gray-900/95 backdrop-blur-md border-t border-slate-600 dark:border-gray-600 shadow-xl transition-all duration-300 ${showMobileMenu ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"}`}
+        className={`absolute top-full left-0 right-0 bg-black/90 backdrop-blur-md border-t border-white/10 shadow-xl transition-all duration-300 ${showMobileMenu ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"}`}
       >
         <div className="px-6 py-4 space-y-4">
           {navItems.map(({ href, label }) => (
-            <Link
+            <button
               key={href}
-              href={href}
-              onClick={() => setShowMobileMenu(false)}
+              onClick={() => {
+                setShowMobileMenu(false);
+                handleSmoothScroll(href);
+              }}
               className={mobileLinkClassName}
             >
               {label}
-            </Link>
+            </button>
           ))}
           <button
             onClick={() => {
@@ -142,9 +164,13 @@ export function ABTestNavigation({
     return (
       <div className="hidden md:flex items-center space-x-8">
         {navItems.map(({ href, label }) => (
-          <Link key={href} href={href} className={linkClassName}>
+          <button
+            key={href}
+            onClick={() => handleSmoothScroll(href)}
+            className={linkClassName}
+          >
             {label}
-          </Link>
+          </button>
         ))}
         <button
           onClick={toggleDarkMode}
@@ -187,7 +213,7 @@ export function ABTestNavigation({
     <img
       src="/logos/nav/nav-logo.png"
       alt="Fest Vibes Logo"
-      className="h-24 sm:h-28 md:h-32 w-auto object-contain transition-transform hover:scale-105"
+      className="h-16 sm:h-18 md:h-20 w-auto object-contain transition-transform hover:scale-105"
     />
   );
 
@@ -197,7 +223,7 @@ export function ABTestNavigation({
       // A/B Test Variant: Hamburger on left, centered logo, mascot on right
       return (
         <nav className="relative z-10 md:hidden w-full">
-          <div className="flex items-center justify-between w-full p-6">
+          <div className="flex items-center justify-between w-full p-3 sm:p-4">
             <HamburgerButton />
             <div className="absolute left-1/2 transform -translate-x-1/2">
               <MobileLogoComponent />
@@ -212,7 +238,7 @@ export function ABTestNavigation({
     // Default: Mascot on left, centered logo, hamburger on right
     return (
       <nav className="relative z-10 md:hidden w-full">
-        <div className="flex items-center justify-between w-full p-6">
+        <div className="flex items-center justify-between w-full p-3 sm:p-4">
           <MascotComponent />
           <div className="absolute left-1/2 transform -translate-x-1/2">
             <MobileLogoComponent />
@@ -228,7 +254,7 @@ export function ABTestNavigation({
   const DesktopLayout = () => {
     if (logoPosition === "right") {
       return (
-        <nav className="hidden md:flex items-center justify-between p-6 lg:px-8">
+        <nav className="hidden md:flex items-center justify-between p-3 lg:px-6">
           <NavLinks />
           <LogoComponent />
         </nav>
@@ -237,7 +263,7 @@ export function ABTestNavigation({
 
     if (logoPosition === "center") {
       return (
-        <nav className="hidden md:flex flex-col items-center p-6 lg:px-8 space-y-4">
+        <nav className="hidden md:flex flex-col items-center p-3 lg:px-6 space-y-2">
           <LogoComponent />
           <NavLinks />
         </nav>
@@ -246,17 +272,23 @@ export function ABTestNavigation({
 
     // Default: left position
     return (
-      <nav className="hidden md:flex items-center justify-between p-6 lg:px-8">
+      <nav className="hidden md:flex items-center justify-between p-3 lg:px-6">
         <LogoComponent />
         <NavLinks />
       </nav>
     );
   };
 
+  // Calculate dynamic transparency based on scroll
+  const scrollOpacity = Math.min(scrollY / 100, 0.9); // Max opacity of 0.9
+  const backgroundClass = `bg-black/${Math.round(20 + scrollOpacity * 60)}`; // 20% to 80% opacity
+  const borderOpacity = Math.min(scrollY / 200, 0.3); // Max border opacity of 0.3
+
   return (
-    <>
+    <div className={`fixed top-0 left-0 right-0 z-50 ${backgroundClass} backdrop-blur-md border-b transition-all duration-300`}
+         style={{ borderColor: `rgba(255, 255, 255, ${0.1 + borderOpacity})` }}>
       <MobileLayout />
       <DesktopLayout />
-    </>
+    </div>
   );
 }

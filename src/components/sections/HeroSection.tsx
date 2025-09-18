@@ -15,7 +15,7 @@ export function HeroSection({
   onJoinBetaClick,
 }: HeroSectionProps) {
   return (
-    <section id="hero" className="relative z-10 px-6 lg:px-8 pt-20 pb-32">
+    <section id="hero" className="relative z-10 px-6 lg:px-8 pt-24 sm:pt-28 md:pt-32 pb-32">
       <div className="mx-auto max-w-4xl text-center">
         <div
           className={`transition-all duration-1000 ${

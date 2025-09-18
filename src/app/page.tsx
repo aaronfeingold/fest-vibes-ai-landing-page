@@ -1,7 +1,9 @@
 "use client";
 
 import type React from "react";
+import { useState, useEffect } from "react";
 import { AnimatedBackground } from "@/components/ui/AnimatedBackground";
+import { PageLoader } from "@/components/ui/page-loader";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { PricingSection } from "@/components/sections/PricingSection";
@@ -16,26 +18,46 @@ import { ABTestNavigation } from "@/components/ab-test-navigation";
 import { useHomepageState } from "@/hooks/use-homepage-state";
 
 export default function HomePage() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [showContent, setShowContent] = useState(false);
   const state = useHomepageState();
 
+  useEffect(() => {
+    // Show loader, then start content animations
+    const loaderTimer = setTimeout(() => {
+      setIsLoading(false);
+      // Start content animations shortly after loader disappears
+      setTimeout(() => {
+        setShowContent(true);
+      }, 100);
+    }, 3000); // Show loader for 3 seconds
+
+    return () => clearTimeout(loaderTimer);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-brand-gradient-br dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      <AnimatedBackground />
+    <>
+      <PageLoader isLoading={isLoading} />
 
-      <ABTestNavigation {...state.navigationProps} />
+      <div className="min-h-screen bg-brand-gradient-br dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"
+           style={{ display: isLoading ? 'none' : 'block' }}>
+        <AnimatedBackground />
 
-      <HeroSection {...state.heroProps} />
-      <FeaturesSection contentData={state.contentData} />
-      <PricingSection onJoinBetaClick={state.handleJoinBetaClick} />
-      <ChatDemoSection />
-      <AnalyticsSection />
-      <CTASection onJoinBetaClick={state.handleJoinBetaClick} />
-      <FooterSection {...state.footerProps} />
+        <ABTestNavigation {...state.navigationProps} />
 
-      {/* Modals */}
-      <BetaSignupModal {...state.betaModalProps} />
-      <EmailSignupModal {...state.emailModalProps} />
-      <MascotVibesOverlay {...state.mascotProps} />
-    </div>
+        <HeroSection {...state.heroProps} showContent={showContent} />
+        <FeaturesSection contentData={state.contentData} />
+        <PricingSection onJoinBetaClick={state.handleJoinBetaClick} />
+        <ChatDemoSection />
+        <AnalyticsSection />
+        <CTASection onJoinBetaClick={state.handleJoinBetaClick} />
+        <FooterSection {...state.footerProps} />
+
+        {/* Modals */}
+        <BetaSignupModal {...state.betaModalProps} />
+        <EmailSignupModal {...state.emailModalProps} />
+        <MascotVibesOverlay {...state.mascotProps} />
+      </div>
+    </>
   );
 }

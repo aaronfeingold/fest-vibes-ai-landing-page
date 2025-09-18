@@ -24,12 +24,9 @@ export function FooterSection({ contentData, footerLogo }: FooterSectionProps) {
                 className="h-16 sm:h-18 md:h-20 w-auto object-contain"
               />
             </div>
-            <p className="text-gray-400">
-              {contentData?.brand?.motto || "Discover. Curate. Experience."}
-            </p>
             <div className="flex items-center space-x-4">
               <Link
-                href="https://twitter.com/festvibes"
+                href={contentData?.socialMedia?.twitter || "https://twitter.com/festvibes"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors"
@@ -37,7 +34,7 @@ export function FooterSection({ contentData, footerLogo }: FooterSectionProps) {
                 <Twitter className="w-5 h-5" />
               </Link>
               <Link
-                href="https://www.instagram.com/fest_vibes_nola/"
+                href={contentData?.socialMedia?.instagram || "https://www.instagram.com/fest_vibes_nola/"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors"

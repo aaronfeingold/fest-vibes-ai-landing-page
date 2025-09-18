@@ -29,6 +29,10 @@ export interface ContentData {
   brand: {
     motto: string;
   };
+  socialMedia: {
+    twitter: string;
+    instagram: string;
+  };
 }
 
 export function useHomepageState() {

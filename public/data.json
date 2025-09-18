@@ -21,5 +21,9 @@
   },
   "brand": {
     "motto": "Discover. Curate. Experience."
+  },
+  "socialMedia": {
+    "twitter": "https://twitter.com/festvibes",
+    "instagram": "https://www.instagram.com/fest_vibes_nola/"
   }
 }

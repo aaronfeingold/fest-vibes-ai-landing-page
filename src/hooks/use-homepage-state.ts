@@ -38,7 +38,7 @@ export interface ContentData {
 export function useHomepageState() {
   const posthog = usePostHog();
   const assistantName = useAssistantName();
-  const mascotStandalone = useMascotAsset("standalone");
+  const mascotNoBackground = useMascotAsset("noBackground");
 
   // UI State
   const [isVisible, setIsVisible] = useState(false);
@@ -146,7 +146,7 @@ export function useHomepageState() {
   return {
     // Assets
     assistantName,
-    mascotStandalone,
+    mascotNoBackground,
     contentData,
 
     // UI State
@@ -197,13 +197,13 @@ export function useHomepageState() {
       submitError,
       onSubmit: handleEmailSubmit,
       assistantName,
-      mascotStandalone,
+      mascotNoBackground,
     },
 
     mascotProps: {
       show: showBoomyVibes,
       assistantName,
-      mascotStandalone,
+      mascotNoBackground,
     },
 
     footerProps: {

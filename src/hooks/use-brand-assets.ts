@@ -1,11 +1,11 @@
 "use client";
 
-import { useMascotVariant, useLogoType } from "./use-feature-flags";
+import { useMascotVariant, useLogoType, useNavMascotVariant, useNoBackgroundMascotVariant } from "./use-feature-flags";
 
 interface BrandAssets {
   mascot: {
     nav: string;
-    standalone: string;
+    noBackground: string;
   };
   logo: {
     nav: string;
@@ -19,13 +19,16 @@ interface BrandAssets {
  * Falls back to variant "1" if the specified variant doesn't exist
  */
 export function useBrandAssets(): BrandAssets {
-  const mascotVariant = useMascotVariant();
+  const noBackgroundMascotVariant = useNoBackgroundMascotVariant();
   const logoType = useLogoType();
 
   // Helper function to build mascot path with fallback
-  const getMascotPath = (context: "nav" | "standalone", variant: string) => {
-    // For themed variants like "summer-1", we might organize files differently in the future
-    // For now, keep the current structure but allow any variant string
+  const getMascotPath = (context: "nav" | "no-background", variant: string, navVariant?: string) => {
+    if (context === "nav" && navVariant) {
+      // Use A/B directory structure for nav mascots: /mascots/nav/A/mascot-1.png
+      return `/mascots/${context}/${navVariant}/mascot-${variant}.png`;
+    }
+    // For no-background, use direct structure: /mascots/no-background/mascot-1.png
     return `/mascots/${context}/mascot-${variant}.png`;
   };
 
@@ -40,8 +43,8 @@ export function useBrandAssets(): BrandAssets {
 
   return {
     mascot: {
-      nav: getMascotPath("nav", mascotVariant),
-      standalone: getMascotPath("standalone", mascotVariant),
+      nav: getMascotPath("no-background", noBackgroundMascotVariant),
+      noBackground: getMascotPath("no-background", noBackgroundMascotVariant),
     },
     logo: {
       nav: getLogoPath("nav", logoType),
@@ -53,7 +56,7 @@ export function useBrandAssets(): BrandAssets {
 /**
  * Individual hooks for specific use cases
  */
-export function useMascotAsset(type: "nav" | "standalone" = "nav") {
+export function useMascotAsset(type: "nav" | "noBackground" = "nav") {
   const { mascot } = useBrandAssets();
   return mascot[type];
 }
@@ -61,4 +64,19 @@ export function useMascotAsset(type: "nav" | "standalone" = "nav") {
 export function useLogoAsset(location: "nav" | "footer" = "nav") {
   const { logo } = useBrandAssets();
   return logo[location];
+}
+
+/**
+ * Hook to get all available no-background mascot images
+ * Useful for parallax sections where multiple mascots may be displayed
+ */
+export function useNoBackgroundMascots(): string[] {
+  // Return the known files based on the current structure
+  const availableMascots = [
+    "/mascots/no-background/mascot-1.png",
+    "/mascots/no-background/mascot-2.png",
+    "/mascots/no-background/mascot-3.png"
+  ];
+
+  return availableMascots;
 }

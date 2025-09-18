@@ -15,11 +15,8 @@ interface FeatureCardProps {
 
 export function FeatureCard({ feature, index }: FeatureCardProps) {
   return (
-    <Card
-      key={index}
-      className="bg-slate-800/50 dark:bg-gray-800/50 border-slate-700/50 dark:border-gray-700/50 backdrop-blur-sm hover:bg-slate-800/70 dark:hover:bg-gray-800/70 transition-all duration-300 group"
-    >
-      <CardHeader>
+    <div className="flex h-[320px] w-[320px] max-w-[90vw] min-w-[280px] shrink-0 flex-col items-start rounded-[24px] border border-white/10 bg-slate-800/50 backdrop-blur-sm hover:bg-slate-800/70 transition-all duration-300 group p-6">
+      <div className="mb-4 w-full">
         <div
           className={`w-12 h-12 rounded-lg mb-4 group-hover:scale-110 transition-transform duration-300 ${
             feature.iconImage
@@ -37,13 +34,18 @@ export function FeatureCard({ feature, index }: FeatureCardProps) {
             <feature.icon className="w-6 h-6 text-white" />
           )}
         </div>
-        <CardTitle className="text-white text-xl">{feature.title}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <CardDescription className="text-gray-300 text-base leading-relaxed">
+
+        <h3 className="mb-4 font-sans text-[20px] leading-6 font-medium text-white">
+          {feature.title}
+        </h3>
+
+        <div className="mb-6 font-sans text-[16px] leading-6 font-medium text-white/70">
           {feature.description}
-        </CardDescription>
-      </CardContent>
-    </Card>
+        </div>
+      </div>
+
+      {/* Spacer to push content to bottom if needed */}
+      <div className="flex-grow"></div>
+    </div>
   );
 }

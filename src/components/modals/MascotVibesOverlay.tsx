@@ -3,13 +3,13 @@ import type React from "react";
 interface MascotVibesOverlayProps {
   show: boolean;
   assistantName: string;
-  mascotStandalone: string;
+  mascotNoBackground: string;
 }
 
 export function MascotVibesOverlay({
   show,
   assistantName,
-  mascotStandalone,
+  mascotNoBackground,
 }: MascotVibesOverlayProps) {
   if (!show) return null;
 
@@ -24,7 +24,7 @@ export function MascotVibesOverlay({
       >
         <div className="relative overflow-hidden rounded-3xl shadow-2xl">
           <img
-            src={mascotStandalone}
+            src={mascotNoBackground}
             alt={`${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} the Cat in vibrant New Orleans street art style`}
             className="w-96 h-96 object-cover animate-spin"
             style={{ animationDuration: "3s" }}

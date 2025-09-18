@@ -21,7 +21,7 @@ interface EmailSignupModalProps {
   submitError: string;
   onSubmit: (e: React.FormEvent) => void;
   assistantName: string;
-  mascotStandalone: string;
+  mascotNoBackground: string;
 }
 
 export function EmailSignupModal({
@@ -34,7 +34,7 @@ export function EmailSignupModal({
   submitError,
   onSubmit,
   assistantName,
-  mascotStandalone,
+  mascotNoBackground,
 }: EmailSignupModalProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -51,7 +51,7 @@ export function EmailSignupModal({
           <div className="text-center py-8">
             <div className="relative mx-auto mb-4">
               <img
-                src={mascotStandalone}
+                src={mascotNoBackground}
                 alt={`${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} the Cat`}
                 className="w-24 h-24 object-cover animate-spin mx-auto"
                 style={{ animationDuration: "2s" }}

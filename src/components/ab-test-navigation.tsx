@@ -90,7 +90,7 @@ export function ABTestNavigation({
       <img
         src={mascotAsset}
         alt={`${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} the Cat`}
-        className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-lg object-cover"
+        className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-lg object-contain"
       />
     </button>
   );
@@ -114,7 +114,7 @@ export function ABTestNavigation({
 
     return (
       <div
-        className={`absolute top-full left-0 right-0 bg-black/90 backdrop-blur-md border-t border-white/10 shadow-xl transition-all duration-300 ${showMobileMenu ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"}`}
+        className={`absolute top-full left-0 right-0 bg-black/90 backdrop-blur-md shadow-xl transition-all duration-300 ${showMobileMenu ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"}`}
       >
         <div className="px-6 py-4 space-y-4">
           {navItems.map(({ href, label }) => (
@@ -208,10 +208,10 @@ export function ABTestNavigation({
     </button>
   );
 
-  // Mobile Logo component (mobile version - just the text logo, centered)
+  // Mobile Logo component (mobile version - uses the same dynamic logo as desktop)
   const MobileLogoComponent = () => (
     <img
-      src="/logos/nav/nav-logo.png"
+      src={logoAsset}
       alt="Fest Vibes Logo"
       className="h-16 sm:h-18 md:h-20 w-auto object-contain transition-transform hover:scale-105"
     />
@@ -285,8 +285,7 @@ export function ABTestNavigation({
   const borderOpacity = Math.min(scrollY / 200, 0.3); // Max border opacity of 0.3
 
   return (
-    <div className={`fixed top-0 left-0 right-0 z-50 ${backgroundClass} backdrop-blur-md border-b transition-all duration-300`}
-         style={{ borderColor: `rgba(255, 255, 255, ${0.1 + borderOpacity})` }}>
+    <div className={`fixed top-0 left-0 right-0 z-50 ${backgroundClass} backdrop-blur-md transition-all duration-300`}>
       <MobileLayout />
       <DesktopLayout />
     </div>

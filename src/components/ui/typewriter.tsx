@@ -8,6 +8,7 @@ interface TypewriterProps {
   deleteSpeed?: number;
   pauseDuration?: number;
   initialDelay?: number;
+  firstMessagePause?: number;
   className?: string;
 }
 
@@ -17,6 +18,7 @@ export function Typewriter({
   deleteSpeed = 50,
   pauseDuration = 2000,
   initialDelay = 4000,
+  firstMessagePause = 5000,
   className = ""
 }: TypewriterProps) {
   const [displayText, setDisplayText] = useState(messages[0] || "");
@@ -46,9 +48,11 @@ export function Typewriter({
         return () => clearTimeout(timer);
       } else {
         // Finished typing, pause then start deleting
+        // Use longer pause for first message
+        const currentPause = messageIndex === 0 ? firstMessagePause : pauseDuration;
         const timer = setTimeout(() => {
           setIsTyping(false);
-        }, pauseDuration);
+        }, currentPause);
         return () => clearTimeout(timer);
       }
     } else {
@@ -64,16 +68,26 @@ export function Typewriter({
         setIsTyping(true);
       }
     }
-  }, [displayText, messageIndex, isTyping, hasStarted, messages, typeSpeed, deleteSpeed, pauseDuration, initialDelay]);
+  }, [displayText, messageIndex, isTyping, hasStarted, messages, typeSpeed, deleteSpeed, pauseDuration, initialDelay, firstMessagePause]);
 
-  // Cursor blinking effect
+  // Cursor blinking effect - sync with typing state
   useEffect(() => {
-    const cursorTimer = setInterval(() => {
-      setShowCursor(prev => !prev);
-    }, 500);
+    let cursorTimer: NodeJS.Timeout;
 
-    return () => clearInterval(cursorTimer);
-  }, []);
+    if (hasStarted && (isTyping || displayText.length === 0)) {
+      // Show solid cursor during typing and deleting
+      setShowCursor(true);
+    } else {
+      // Blink cursor during pauses
+      cursorTimer = setInterval(() => {
+        setShowCursor(prev => !prev);
+      }, 500);
+    }
+
+    return () => {
+      if (cursorTimer) clearInterval(cursorTimer);
+    };
+  }, [isTyping, hasStarted, displayText.length]);
 
   return (
     <span className={className}>

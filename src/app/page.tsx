@@ -20,27 +20,36 @@ import { useHomepageState } from "@/hooks/use-homepage-state";
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
   const [showContent, setShowContent] = useState(false);
+  const [contentVisible, setContentVisible] = useState(false);
   const state = useHomepageState();
 
   useEffect(() => {
-    // Show loader, then start content animations
-    const loaderTimer = setTimeout(() => {
-      setIsLoading(false);
-      // Start content animations shortly after loader disappears
-      setTimeout(() => {
-        setShowContent(true);
-      }, 100);
-    }, 3000); // Show loader for 3 seconds
+    // Step 1: Prepare animations (while content is still hidden)
+    const prepareTimer = setTimeout(() => {
+      setShowContent(true);
 
-    return () => clearTimeout(loaderTimer);
+      // Step 2: Make content visible AFTER animations are ready
+      setTimeout(() => {
+        setContentVisible(true);
+
+        // Step 3: Hide loader AFTER content is visible
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 50);
+      }, 100);
+    }, 2800); // Start preparing 200ms before loader finishes
+
+    return () => clearTimeout(prepareTimer);
   }, []);
 
   return (
     <>
       <PageLoader isLoading={isLoading} />
 
-      <div className="min-h-screen bg-brand-gradient-br dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-slate-950"
-           style={{ display: isLoading ? 'none' : 'block' }}>
+      <div
+        className="min-h-screen bg-brand-gradient-br dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-slate-950"
+        style={{ display: contentVisible ? 'block' : 'none' }}
+      >
         <AnimatedBackground />
 
         <ABTestNavigation {...state.navigationProps} />

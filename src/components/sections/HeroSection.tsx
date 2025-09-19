@@ -32,7 +32,7 @@ export function HeroSection({
         >
           {/* Left floating mascot - behind header */}
           <div
-            className={`absolute hidden md:block w-40 lg:w-48 -z-10 ${showContent ? "animate-slide-in-left" : ""}`}
+            className={`absolute hidden md:block w-40 lg:w-48 -z-10 ${showContent ? "animate-slide-in-left" : "opacity-0"}`}
             style={{
               animationDelay: "0.5s",
               left: "-200px",
@@ -55,7 +55,7 @@ export function HeroSection({
 
           {/* Right floating mascot - behind header */}
           <div
-            className={`absolute hidden md:block w-40 lg:w-48 -z-10 ${showContent ? "animate-slide-in-right" : ""}`}
+            className={`absolute hidden md:block w-40 lg:w-48 -z-10 ${showContent ? "animate-slide-in-right" : "opacity-0"}`}
             style={{
               animationDelay: "0.5s",
               right: "-200px",
@@ -78,7 +78,7 @@ export function HeroSection({
 
           {/* Hero text with slide up animation */}
           <div
-            className={`${showContent ? "animate-slide-up" : ""}`}
+            className={`${showContent ? "animate-slide-up" : "opacity-0 translate-y-12"}`}
             style={{ animationDelay: "1.2s" }}
           >
             <h1 className="text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight relative z-20">
@@ -95,7 +95,8 @@ export function HeroSection({
                 typeSpeed={60}
                 deleteSpeed={15}
                 pauseDuration={3000}
-                initialDelay={4000}
+                initialDelay={7000}
+                firstMessagePause={6000}
               />
             </h1>
             <p

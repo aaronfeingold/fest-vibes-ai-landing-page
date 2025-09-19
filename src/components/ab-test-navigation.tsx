@@ -21,7 +21,7 @@ export function ABTestNavigation({
   const assistantName = useAssistantName();
   const mascotAsset = useMascotAsset("nav");
   const logoAsset = useLogoAsset("nav");
-  const { isDarkMode, toggleDarkMode } = useDarkMode();
+  const { isDarkMode, toggleDarkMode, isHydrated } = useDarkMode();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [scrollY, setScrollY] = useState(0);
@@ -134,14 +134,20 @@ export function ABTestNavigation({
               setShowMobileMenu(false);
               toggleDarkMode();
             }}
-            className={`flex items-center ${mobileLinkClassName} w-full`}
+            className={`flex items-center ${mobileLinkClassName} w-full group`}
           >
-            <span className="mr-2">Vibes</span>
-            {isDarkMode ? (
-              <Sun className="w-4 h-4" />
-            ) : (
-              <Moon className="w-4 h-4" />
-            )}
+            <span className="mr-3">Vibes</span>
+            <div className="relative w-4 h-4 flex items-center justify-center">
+              {isHydrated ? (
+                isDarkMode ? (
+                  <Sun className="w-4 h-4 text-yellow-400 group-hover:text-yellow-300 transition-colors" />
+                ) : (
+                  <Moon className="w-4 h-4 text-blue-300 group-hover:text-blue-200 transition-colors" />
+                )
+              ) : (
+                <div className="w-4 h-4 bg-gray-300 rounded-full animate-pulse" />
+              )}
+            </div>
           </button>
           <Button
             onClick={() => {
@@ -174,14 +180,20 @@ export function ABTestNavigation({
         ))}
         <button
           onClick={toggleDarkMode}
-          className={`flex items-center ${linkClassName}`}
+          className={`flex items-center ${linkClassName} group`}
         >
-          <span className="mr-2">Vibes</span>
-          {isDarkMode ? (
-            <Sun className="w-4 h-4" />
-          ) : (
-            <Moon className="w-4 h-4" />
-          )}
+          <span className="mr-3">Vibes</span>
+          <div className="relative w-4 h-4 flex items-center justify-center">
+            {isHydrated ? (
+              isDarkMode ? (
+                <Sun className="w-4 h-4 text-yellow-400 group-hover:text-yellow-300 transition-colors" />
+              ) : (
+                <Moon className="w-4 h-4 text-blue-300 group-hover:text-blue-200 transition-colors" />
+              )
+            ) : (
+              <div className="w-4 h-4 bg-gray-300 rounded-full animate-pulse" />
+            )}
+          </div>
         </button>
         <Button
           onClick={onJoinBetaClick}
@@ -197,7 +209,7 @@ export function ABTestNavigation({
   const HamburgerButton = () => (
     <button
       onClick={handleMenuClick}
-      className="flex items-center justify-center w-10 h-10 rounded-lg bg-slate-800/50 dark:bg-gray-800/50 border border-slate-600 dark:border-gray-600 hover:bg-slate-700/50 dark:hover:bg-gray-700/50 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-primary"
+      className="flex items-center justify-center w-10 h-10 rounded-lg bg-slate-800/50 dark:bg-slate-800/70 border border-slate-600 dark:border-slate-600/80 hover:bg-slate-700/50 dark:hover:bg-slate-700/80 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-primary"
       aria-label="Toggle navigation menu"
     >
       {showMobileMenu ? (

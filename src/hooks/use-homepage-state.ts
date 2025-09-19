@@ -8,6 +8,7 @@ import { useMascotAsset } from "@/hooks/use-brand-assets";
 export interface ContentData {
   hero: {
     subtitle: string;
+    typewriterMessages: string[];
   };
   features: {
     title: string;

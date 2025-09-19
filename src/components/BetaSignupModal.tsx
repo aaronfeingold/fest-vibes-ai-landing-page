@@ -15,10 +15,10 @@ export default function BetaSignupModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      <div className="bg-slate-800/90 dark:bg-gray-800/90 backdrop-blur-md border border-slate-700/50 dark:border-gray-700/50 rounded-2xl p-8 max-w-md mx-4 relative">
+      <div className="bg-slate-800/90 dark:bg-slate-800/95 backdrop-blur-md border border-slate-700/50 dark:border-slate-600/60 rounded-2xl p-8 max-w-md mx-4 relative">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl font-bold transition-colors"
+          className="absolute top-4 right-4 text-gray-400 dark:text-gray-300 hover:text-white dark:hover:text-white text-2xl font-bold transition-colors"
         >
           ×
         </button>
@@ -37,7 +37,7 @@ export default function BetaSignupModal({
               className="w-8 h-8 object-contain transform rotate-[270deg]"
             />
           </h3>
-          <p className="text-gray-300">
+          <p className="text-gray-300 dark:text-gray-200">
             Be in that number when Fest Vibes launches in New Orleans.
           </p>
         </div>

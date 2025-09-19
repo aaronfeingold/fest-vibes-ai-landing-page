@@ -39,7 +39,7 @@ export default function HomePage() {
     <>
       <PageLoader isLoading={isLoading} />
 
-      <div className="min-h-screen bg-brand-gradient-br dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"
+      <div className="min-h-screen bg-brand-gradient-br dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-slate-950"
            style={{ display: isLoading ? 'none' : 'block' }}>
         <AnimatedBackground />
 

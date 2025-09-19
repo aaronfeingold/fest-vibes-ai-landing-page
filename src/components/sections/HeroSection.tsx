@@ -24,7 +24,6 @@ export function HeroSection({
       id="hero"
       className="relative flex min-h-[100vh] animate-fade-in flex-col items-center justify-center px-6 lg:px-8"
     >
-
       <div className="mx-auto max-w-4xl text-center">
         <div
           className={`relative transition-all duration-1000 ${
@@ -38,7 +37,7 @@ export function HeroSection({
               animationDelay: "0.5s",
               left: "-200px",
               top: "50%",
-              transform: "translateY(-50%)"
+              transform: "translateY(-50%)",
             }}
           >
             <div className="animate-float-mascot-left">
@@ -61,7 +60,7 @@ export function HeroSection({
               animationDelay: "0.5s",
               right: "-200px",
               top: "50%",
-              transform: "translateY(-50%)"
+              transform: "translateY(-50%)",
             }}
           >
             <div className="animate-float-mascot-right">
@@ -84,15 +83,17 @@ export function HeroSection({
           >
             <h1 className="text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight relative z-20">
               <Typewriter
-                messages={[
-                  "Make Your Hometown your own Music Fest",
-                  "Jam pack my weekend with all the funk",
-                  "When can I catch my favorite band this month?",
-                  "Help me bop around downtown.",
-                ]}
+                messages={
+                  contentData?.hero?.typewriterMessages || [
+                    "Make Your Hometown your own Music Fest",
+                    "Jam pack my weekend with all the funk",
+                    "When can I catch my favorite band this month?",
+                    "Help me bop around downtown.",
+                  ]
+                }
                 className="text-white"
-                typeSpeed={80}
-                deleteSpeed={40}
+                typeSpeed={60}
+                deleteSpeed={15}
                 pauseDuration={3000}
                 initialDelay={4000}
               />

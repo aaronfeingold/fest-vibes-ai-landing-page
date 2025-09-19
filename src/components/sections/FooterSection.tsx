@@ -11,7 +11,7 @@ export function FooterSection({ contentData }: FooterSectionProps) {
   return (
     <footer
       id="footer"
-      className="relative z-10 px-6 lg:px-8 py-12 border-t border-slate-700/50 dark:border-gray-700/50"
+      className="relative z-10 px-6 lg:px-8 py-12 border-t border-slate-700/50 dark:border-slate-600/60"
     >
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -69,7 +69,7 @@ export function FooterSection({ contentData }: FooterSectionProps) {
           </div>
         </div>
 
-        <div className="border-t border-slate-700/50 dark:border-gray-700/50 mt-12 pt-8 text-center text-gray-400">
+        <div className="border-t border-slate-700/50 dark:border-slate-600/60 mt-12 pt-8 text-center text-gray-400">
           <p>
             &copy; {new Date().getFullYear()} Fest Vibes. All rights reserved.
           </p>

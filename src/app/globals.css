@@ -61,14 +61,22 @@
     --brand-background-start: var(--festival-slate-900);
     --brand-background-middle: var(--festival-purple-900);
     --brand-background-end: var(--festival-slate-900);
+
+    /* Light mode specific colors for better readability */
+    --text-primary: 222.2 84% 4.9%;
+    --text-secondary: 215.4 16.3% 46.9%;
+    --text-muted: 215.4 16.3% 56.9%;
+    --surface-primary: 0 0% 100%;
+    --surface-secondary: 210 40% 96%;
+    --surface-elevated: 0 0% 98%;
   }
 
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
+    --card: 215 32% 12%;
     --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
+    --popover: 215 32% 12%;
     --popover-foreground: 210 40% 98%;
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
@@ -89,26 +97,36 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
 
-    /* Festival Brand Colors remain the same in dark mode */
-    --festival-slate-900: 220.9 39.3% 11%;
-    --festival-purple-900: 263.4 70% 32.2%;
-    --festival-purple-500: 256 91.9% 67.8%;
-    --festival-pink-500: 330.4 81.2% 60.4%;
-    --festival-purple-400: 269.2 83.3% 76.1%;
-    --festival-pink-400: 327.3 87.1% 71.8%;
-    --festival-gradient-light: 229 81% 71.4%;
-    --festival-gradient-dark: 251 23% 45.5%;
-    --stage-coral: 0 79% 70%;
-    --stage-turquoise: 174 56% 59%;
-    --stage-sky: 202 84% 55%;
-    --stage-mint: 143 30% 72%;
-    --stage-yellow: 50 100% 83%;
+    /* Enhanced Festival Brand Colors for dark mode - brighter and more vibrant */
+    --festival-slate-900: 220.9 39.3% 8%; /* Darker for better contrast */
+    --festival-purple-900: 263.4 70% 25%; /* Darker base */
+    --festival-purple-500: 256 91.9% 75%; /* Brighter for dark backgrounds */
+    --festival-pink-500: 330.4 81.2% 68%; /* Brighter for dark backgrounds */
+    --festival-purple-400: 269.2 83.3% 82%; /* Even brighter accent */
+    --festival-pink-400: 327.3 87.1% 78%; /* Even brighter accent */
+    --festival-gradient-light: 229 81% 78%; /* Brighter gradient */
+    --festival-gradient-dark: 251 23% 52%; /* Adjusted for contrast */
+    --stage-coral: 0 79% 75%; /* Brighter stage colors */
+    --stage-turquoise: 174 56% 65%;
+    --stage-sky: 202 84% 62%;
+    --stage-mint: 143 30% 78%;
+    --stage-yellow: 50 100% 88%;
+
+    /* Updated brand colors for better dark mode contrast */
     --brand-primary: var(--festival-purple-500);
     --brand-secondary: var(--festival-pink-500);
     --brand-accent: var(--festival-purple-400);
     --brand-background-start: var(--festival-slate-900);
     --brand-background-middle: var(--festival-purple-900);
     --brand-background-end: var(--festival-slate-900);
+
+    /* Dark mode specific text colors for better readability */
+    --text-primary: 210 40% 98%;
+    --text-secondary: 215 20.2% 75%;
+    --text-muted: 215 20.2% 55%;
+    --surface-primary: 215 32% 12%;
+    --surface-secondary: 217.2 32.6% 17.5%;
+    --surface-elevated: 215 32% 20%;
   }
 }
 

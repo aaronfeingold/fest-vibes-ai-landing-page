@@ -4,8 +4,12 @@ import { useState, useEffect } from "react";
 
 export function useDarkMode() {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
+    // Mark as hydrated to prevent SSR mismatch
+    setIsHydrated(true);
+
     // Check if user has a saved preference
     const saved = localStorage.getItem("darkMode");
     if (saved !== null) {
@@ -17,6 +21,9 @@ export function useDarkMode() {
   }, []);
 
   useEffect(() => {
+    // Only apply dark mode class after hydration to prevent SSR mismatch
+    if (!isHydrated) return;
+
     // Apply dark mode class to document
     if (isDarkMode) {
       document.documentElement.classList.add("dark");
@@ -26,11 +33,11 @@ export function useDarkMode() {
 
     // Save preference
     localStorage.setItem("darkMode", JSON.stringify(isDarkMode));
-  }, [isDarkMode]);
+  }, [isDarkMode, isHydrated]);
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
   };
 
-  return { isDarkMode, toggleDarkMode };
+  return { isDarkMode, toggleDarkMode, isHydrated };
 }

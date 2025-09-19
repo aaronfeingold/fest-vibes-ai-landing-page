@@ -113,10 +113,10 @@ export function FeaturesSection({ contentData }: FeaturesSectionProps) {
             </div>
 
             {/* Left gradient overlay */}
-            <div className="pointer-events-none absolute top-0 bottom-0 left-0 w-12 bg-gradient-to-r from-slate-900/50 to-transparent"></div>
+            <div className="pointer-events-none absolute top-0 bottom-0 left-0 w-12 bg-gradient-to-r from-slate-900/50 dark:from-slate-950/60 to-transparent"></div>
 
             {/* Right gradient overlay */}
-            <div className="pointer-events-none absolute top-0 right-0 bottom-0 w-12 bg-gradient-to-l from-slate-900/50 to-transparent"></div>
+            <div className="pointer-events-none absolute top-0 right-0 bottom-0 w-12 bg-gradient-to-l from-slate-900/50 dark:from-slate-950/60 to-transparent"></div>
           </div>
 
           {/* Pagination dots */}

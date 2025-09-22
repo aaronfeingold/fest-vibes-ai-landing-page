@@ -27,6 +27,7 @@ export interface MockEvent {
   attendees: number;
 }
 
+// todo - three prices? to the moon
 export interface PricingPlan {
   name: string;
   price: string;
@@ -43,6 +44,7 @@ export interface DemoCapability {
   text: string;
 }
 
+// this should also come from marketing team
 export const FEATURES: Feature[] = [
   {
     icon: Heart,
@@ -88,6 +90,7 @@ export const FEATURES: Feature[] = [
   },
 ];
 
+// this will come from API
 export const MOCK_EVENTS: MockEvent[] = [
   {
     name: "Trombone Shorty",
@@ -119,20 +122,20 @@ export const MOCK_EVENTS: MockEvent[] = [
   },
 ];
 
+// this will come from Marketing Team (markdown maybe)
 export const PRICING_PLANS: PricingPlan[] = [
   {
     name: "Free Plan",
     price: "$0",
     description: "Perfect for getting started with music discovery",
     features: [
-      "Visual heat map discovery",
       "Dynamic data filtering",
-      "Manual timeline builder",
+      "Visual heat map discovery",
       "Drag-and-drop planning",
       "Shareable festival plans",
       "Export to social media",
     ],
-    excludedFeatures: ["No AI chat assistance"],
+    excludedFeatures: ["No Chat assistance"],
     buttonText: "Get Started Free",
     buttonVariant: "secondary",
   },
@@ -141,12 +144,12 @@ export const PRICING_PLANS: PricingPlan[] = [
     price: "$9.99",
     description: "Everything in Free, plus unlimited AI assistance",
     features: [
-      "Everything in Free Plan",
-      "Unlimited AI chat assistance",
+      "Chat assistance",
       "Personalized recommendations",
       "Smart schedule optimization",
       "Venue and artist insights",
       "Priority customer support",
+      "Everything in Free Plan",
     ],
     isPopular: true,
     buttonText: "Start Free Trial",
@@ -154,6 +157,7 @@ export const PRICING_PLANS: PricingPlan[] = [
   },
 ];
 
+// more marketing content
 export const DEMO_CAPABILITIES: DemoCapability[] = [
   {
     icon: MapPin,
@@ -181,9 +185,10 @@ export const DEMO_CAPABILITIES: DemoCapability[] = [
   },
 ];
 
+// custom icons for some local artists
 export const EVENT_ICONS = {
   "Trombone Shorty": "/icons/trumpet-no-bg-2.png",
   "Tank & The Bangas": Mic2,
   "The Iceman Special": "/icons/guitar-no-bg.png",
-  "Boyfriend": "/icons/xo-boyfriend.png",
+  Boyfriend: "/icons/xo-boyfriend.png",
 } as const;

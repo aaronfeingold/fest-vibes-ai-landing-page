@@ -62,26 +62,6 @@ The logos work with all three navbar layouts:
 - **Right**: Nav links on the left, logo on the right
 - **Center**: Logo centered on top, nav links below
 
-## What This Gives You
-
-### **Super Easy Testing**
-
-- Drop new Canva files directly into folders
-- Change one line to test different assets
-- A/B test automatically with PostHog
-
-### **Consistent Branding**
-
-- Same mascot variant shows everywhere for each user
-- Logo type (minimal/standard/full) stays consistent
-- Responsive sizing built-in
-
-### **Data-Driven Decisions**
-
-- A/B test which mascot designs convert better
-- Test if full branding (with tagline) works better than minimal
-- PostHog tracks everything automatically
-
 ## **Complete Brand Palette for Canva:**
 
 ### **Primary Background:**

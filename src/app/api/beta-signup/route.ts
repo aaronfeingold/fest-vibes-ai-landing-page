@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
           ? `${
               request.headers.get("x-forwarded-proto") || "https"
             }://${request.headers.get("host")}`
-          : "https://festvibes.com";
+          : "https://festvibes.xyz";
 
         const emailTemplate = generateBetaWelcomeEmail({
           email,

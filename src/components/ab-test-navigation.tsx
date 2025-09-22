@@ -71,12 +71,33 @@ export function ABTestNavigation({
     setShowMobileMenu(!showMobileMenu);
   };
 
-  // Handle smooth scrolling to sections
+  // Handle smooth scrolling to sections with header offset
   const handleSmoothScroll = (href: string) => {
     if (href.startsWith('#')) {
       const element = document.querySelector(href);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        // Sections that need header offset (analytics doesn't need offset)
+        const needsOffset = ['#features', '#pricing', '#demo'].includes(href);
+
+        if (needsOffset) {
+          // Calculate header height dynamically
+          const header = document.querySelector('.fixed.top-0') as HTMLElement;
+          const headerHeight = header ? header.offsetHeight : 0;
+          const additionalBuffer = 20; // Extra breathing room
+          const totalOffset = headerHeight + additionalBuffer;
+
+          // Get element position and scroll with offset
+          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+          const offsetPosition = elementPosition - totalOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        } else {
+          // Use default scroll for analytics and other sections
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
       }
     }
   };
@@ -235,7 +256,7 @@ export function ABTestNavigation({
       // A/B Test Variant: Hamburger on left, centered logo, mascot on right
       return (
         <nav className="relative z-10 md:hidden w-full">
-          <div className="flex items-center justify-between w-full p-3 sm:p-4">
+          <div className="flex items-center justify-between w-full p-2 sm:p-3">
             <HamburgerButton />
             <div className="absolute left-1/2 transform -translate-x-1/2">
               <MobileLogoComponent />
@@ -250,7 +271,7 @@ export function ABTestNavigation({
     // Default: Mascot on left, centered logo, hamburger on right
     return (
       <nav className="relative z-10 md:hidden w-full">
-        <div className="flex items-center justify-between w-full p-3 sm:p-4">
+        <div className="flex items-center justify-between w-full p-2 sm:p-3">
           <MascotComponent />
           <div className="absolute left-1/2 transform -translate-x-1/2">
             <MobileLogoComponent />
@@ -266,7 +287,7 @@ export function ABTestNavigation({
   const DesktopLayout = () => {
     if (logoPosition === "right") {
       return (
-        <nav className="hidden md:flex items-center justify-between p-3 lg:px-6">
+        <nav className="hidden md:flex items-center justify-between p-2 lg:px-6">
           <NavLinks />
           <LogoComponent />
         </nav>
@@ -275,7 +296,7 @@ export function ABTestNavigation({
 
     if (logoPosition === "center") {
       return (
-        <nav className="hidden md:flex flex-col items-center p-3 lg:px-6 space-y-2">
+        <nav className="hidden md:flex flex-col items-center p-2 lg:px-6 space-y-2">
           <LogoComponent />
           <NavLinks />
         </nav>
@@ -284,7 +305,7 @@ export function ABTestNavigation({
 
     // Default: left position
     return (
-      <nav className="hidden md:flex items-center justify-between p-3 lg:px-6">
+      <nav className="hidden md:flex items-center justify-between p-2 lg:px-6">
         <LogoComponent />
         <NavLinks />
       </nav>

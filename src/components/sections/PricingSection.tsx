@@ -16,8 +16,8 @@ export function PricingSection({ onJoinBetaClick }: PricingSectionProps) {
       return {
         ...plan,
         features: plan.features.map((feature) =>
-          feature.includes("Unlimited AI chat")
-            ? `Unlimited AI chat with ${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)}`
+          feature.includes("Planning assistance")
+            ? `Chat and Plan with ${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)}`
             : feature
         ),
       };

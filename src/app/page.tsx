@@ -47,7 +47,7 @@ export default function HomePage() {
       <PageLoader isLoading={isLoading} />
 
       <div
-        className="min-h-screen bg-brand-gradient-br dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-slate-950"
+        className="scrollbar-hide relative flex h-full w-full flex-col overflow-x-hidden overflow-y-scroll scroll-smooth min-h-screen bg-brand-gradient-br dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-slate-950"
         style={{ display: contentVisible ? 'block' : 'none' }}
       >
         <AnimatedBackground />

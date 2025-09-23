@@ -22,7 +22,7 @@ export function HeroSection({
   return (
     <section
       id="hero"
-      className="relative flex min-h-[100vh] animate-fade-in flex-col items-center justify-center px-6 lg:px-8"
+      className="z-10 relative flex min-h-[100vh] animate-fade-in flex-col items-center justify-center px-6 lg:px-8"
     >
       <div className="mx-auto max-w-4xl text-center">
         <div
@@ -32,7 +32,7 @@ export function HeroSection({
         >
           {/* Left floating mascot - behind header */}
           <div
-            className={`absolute hidden md:block w-40 lg:w-48 -z-10 ${showContent ? "animate-slide-in-left" : "opacity-0"}`}
+            className={`absolute hidden md:block w-40 lg:w-48 -z-20 ${showContent ? "animate-slide-in-left" : "opacity-0"}`}
             style={{
               animationDelay: "0.5s",
               left: "-200px",
@@ -55,7 +55,7 @@ export function HeroSection({
 
           {/* Right floating mascot - behind header */}
           <div
-            className={`absolute hidden md:block w-40 lg:w-48 -z-10 ${showContent ? "animate-slide-in-right" : "opacity-0"}`}
+            className={`absolute hidden md:block w-40 lg:w-48 -z-20 ${showContent ? "animate-slide-in-right" : "opacity-0"}`}
             style={{
               animationDelay: "0.5s",
               right: "-200px",
@@ -81,24 +81,26 @@ export function HeroSection({
             className={`${showContent ? "animate-slide-up" : "opacity-0 translate-y-12"}`}
             style={{ animationDelay: "1.2s" }}
           >
-            <h1 className="text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight relative z-20">
-              <Typewriter
-                messages={
-                  contentData?.hero?.typewriterMessages || [
-                    "Make Your Hometown your own Music Fest",
-                    "Jam pack my weekend with all the funk",
-                    "When can I catch my favorite band this month?",
-                    "Help me bop around downtown.",
-                  ]
-                }
-                className="text-white"
-                typeSpeed={60}
-                deleteSpeed={15}
-                pauseDuration={3000}
-                initialDelay={7000}
-                firstMessagePause={6000}
-              />
-            </h1>
+            <div className="mb-8 mx-auto px-[20px] transition-all duration-300 md:px-0 max-w-[854px] min-h-[160px] lg:h-[216px] flex items-center justify-center">
+              <h1 className="text-center font-sans text-5xl lg:text-7xl font-bold text-white leading-tight">
+                <Typewriter
+                  messages={
+                    contentData?.hero?.typewriterMessages || [
+                      "Make Your Hometown your own Music Fest",
+                      "Jam pack my weekend with all the funk",
+                      "When can I catch my favorite band this month?",
+                      "Help me bop around downtown.",
+                    ]
+                  }
+                  className="text-white"
+                  typeSpeed={60}
+                  deleteSpeed={15}
+                  pauseDuration={3000}
+                  initialDelay={7000}
+                  firstMessagePause={6000}
+                />
+              </h1>
+            </div>
             <p
               id="hero-subtitle"
               className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed"

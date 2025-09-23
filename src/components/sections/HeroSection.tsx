@@ -2,8 +2,7 @@ import type React from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { ContentData } from "@/hooks/use-homepage-state";
-import { Marquee, MarqueeItem } from "@/components/ui/marquee";
-import { BrandLogo, MUSIC_BRANDS } from "@/components/ui/brand-logo";
+import { VenueMarquee } from "@/components/ui/venue-marquee";
 import { Typewriter } from "@/components/ui/typewriter";
 
 interface HeroSectionProps {
@@ -124,18 +123,9 @@ export function HeroSection({
         </div>
       </div>
 
-      {/* Brand Marquee - positioned at bottom like Suno */}
+      {/* Venue Marquee - positioned at bottom like Suno */}
       <div className="relative mt-8 w-full [@media(min-height:550px)]:absolute [@media(min-height:550px)]:bottom-10 [@media(min-height:550px)]:left-0 [@media(min-height:550px)]:-z-10 [@media(min-height:550px)]:mt-0">
-        <Marquee
-          speed="slow"
-          className="group relative w-full overflow-hidden bg-transparent"
-        >
-          {MUSIC_BRANDS.map((brand) => (
-            <MarqueeItem key={brand}>
-              <BrandLogo name={brand} />
-            </MarqueeItem>
-          ))}
-        </Marquee>
+        <VenueMarquee speed="slow" />
       </div>
     </section>
   );

@@ -17,24 +17,24 @@ const CHAT_MESSAGES: ChatMessage[] = [
     id: 1,
     role: "assistant",
     content:
-      "There are some pretty slick shows this weekend in New Orleans. I see you are really into funk and psychedelic. Would you like to try to catch some shows like that Saturday night, or looking for something different?",
+      "There are some pretty siiic shows this weekend in New Orleans. Are you into funk or psychedelic? I've got a pretty good lineup this Saturday night.",
   },
   {
     id: 2,
     role: "user",
     content:
-      "Well TBH im kinda burnt out on horn sections right now. i've been binging the new Bad Bunny though and wanna see something more latin infused and not too late night because i've gotta wake up early to watch the Saints.",
+      "nah fam. i want a chill night out, been binging some DtMF Bad Bunny tho, so find somethings with those vibes. nothing late cause i gotta wake up to watch the Saints.",
   },
   {
     id: 3,
     role: "assistant",
     content:
-      "Yah, a most chill Saturday night with some hints of reggaeton. I've got your Schedule coming...\n\n5:00p - Javier Olando y Su Banda at Bachannal\n7:15p - Ride share to Frenchman street\n7:30P - The Roots of Regae at Cafe Negirl\n...\n\nAt 9:30 I have a good option to hit one more spot or call it an early night?\n\nThink you wanna stay out later?",
+      "Yah, an early Saturday night with some hints of reggaeton. \n\naight hang on one sec...\n\n5:30p - Javier Olondo y Su Banda at Bachannal\n7:15p - Ride share to Frenchman street\n7:30P - Rastafunk at Cafe Negril\n...\n\nSound like a plan?",
   },
   {
     id: 4,
     role: "user",
-    content: "siiic",
+    content: "lit ty",
   },
 ];
 
@@ -46,7 +46,7 @@ const MASCOT_IMAGES = [
 
 export function ChatDemoSection() {
   const assistantName = useAssistantName();
-  const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
+  const [currentMessageIndex, setCurrentMessageIndex] = useState(-1);
   const [isTyping, setIsTyping] = useState(false);
   const [showTypingIndicator, setShowTypingIndicator] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -78,6 +78,7 @@ export function ChatDemoSection() {
     if (!isVisible) return;
 
     const initialDelay = setTimeout(() => {
+      setCurrentMessageIndex(0);
       setIsTyping(true);
     }, 500);
 
@@ -331,6 +332,7 @@ function ChatMessageBubble({
                 if (index === 0) onTypingComplete();
               }}
               startOnVisible={false}
+              reverseMode={false}
             />
           ) : (
             <p className="text-gray-100 text-sm whitespace-pre-wrap">

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { ContentData } from "@/hooks/use-homepage-state";
 import { VenueMarquee } from "@/components/ui/venue-marquee";
-import { Typewriter } from "@/components/ui/typewriter";
+import TypingText from "@/components/ui/shadcn-io/typing-text";
 
 interface HeroSectionProps {
   isVisible: boolean;
@@ -20,6 +20,13 @@ export function HeroSection({
   showContent = true,
   venueNames,
 }: HeroSectionProps) {
+  const messages = contentData?.hero?.typewriterMessages || [
+    "Make Your Hometown your own Music Fest",
+    "Jam pack my weekend with all the funk",
+    "When can I catch my favorite band this month?",
+    "Help me bop around downtown.",
+  ];
+
   return (
     <section
       id="hero"
@@ -82,23 +89,20 @@ export function HeroSection({
             className={`${showContent ? "animate-slide-up" : "opacity-0 translate-y-12"}`}
             style={{ animationDelay: "1.2s" }}
           >
-            <div className="mb-8 mx-auto px-[20px] transition-all duration-300 md:px-0 max-w-[854px] min-h-[160px] lg:h-[216px] flex items-center justify-center">
+            <div className="mb-8 mx-auto px-[20px] transition-all duration-300 md:px-0 max-w-[854px] min-h-[160px] lg:min-h-[216px] flex items-center justify-center">
               <h1 className="text-center font-sans text-5xl lg:text-7xl font-bold text-white leading-tight">
-                <Typewriter
-                  messages={
-                    contentData?.hero?.typewriterMessages || [
-                      "Make Your Hometown your own Music Fest",
-                      "Jam pack my weekend with all the funk",
-                      "When can I catch my favorite band this month?",
-                      "Help me bop around downtown.",
-                    ]
-                  }
+                <TypingText
+                  text={messages}
                   className="text-white"
-                  typeSpeed={60}
-                  deleteSpeed={15}
+                  typingSpeed={50}
+                  deletingSpeed={20}
                   pauseDuration={3000}
-                  initialDelay={7000}
-                  firstMessagePause={6000}
+                  initialDelay={1000}
+                  loop={true}
+                  showCursor={true}
+                  cursorClassName="!bg-white lg:!h-16 !h-12"
+                  variableSpeed={{ min: 40, max: 80 }}
+                  startOnVisible={true}
                 />
               </h1>
             </div>

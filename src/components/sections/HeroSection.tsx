@@ -10,6 +10,7 @@ interface HeroSectionProps {
   contentData: ContentData | null;
   onJoinBetaClick: () => void;
   showContent?: boolean;
+  venueNames: string[];
 }
 
 export function HeroSection({
@@ -17,6 +18,7 @@ export function HeroSection({
   contentData,
   onJoinBetaClick,
   showContent = true,
+  venueNames,
 }: HeroSectionProps) {
   return (
     <section
@@ -125,7 +127,7 @@ export function HeroSection({
 
       {/* Venue Marquee - positioned at bottom like Suno */}
       <div className="relative mt-8 w-full [@media(min-height:550px)]:absolute [@media(min-height:550px)]:bottom-10 [@media(min-height:550px)]:left-0 [@media(min-height:550px)]:-z-10 [@media(min-height:550px)]:mt-0">
-        <VenueMarquee speed="slow" />
+        <VenueMarquee speed="slow" venueNames={venueNames} />
       </div>
     </section>
   );

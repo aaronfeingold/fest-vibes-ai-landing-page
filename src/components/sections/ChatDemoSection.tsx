@@ -4,6 +4,7 @@ import type React from "react";
 import { useState, useEffect, useRef } from "react";
 import { DEMO_CAPABILITIES } from "@/lib/homepage-data";
 import { useAssistantName } from "@/hooks/use-feature-flags";
+import TypingText from "@/components/ui/shadcn-io/typing-text";
 
 interface ChatMessage {
   id: number;
@@ -33,8 +34,7 @@ const CHAT_MESSAGES: ChatMessage[] = [
   {
     id: 4,
     role: "user",
-    content:
-      "Nah that actually that sounds dope. Go ahead and finalize the schedule so I can share it with my fam.",
+    content: "siiic",
   },
 ];
 
@@ -275,51 +275,16 @@ function ChatMessageBubble({
   isTyping,
   onTypingComplete,
 }: ChatMessageBubbleProps) {
-  const [displayedContent, setDisplayedContent] = useState("");
-  const [currentCharIndex, setCurrentCharIndex] = useState(0);
-
+  // User messages: show immediately and trigger completion after pause
   useEffect(() => {
-    // User messages show immediately and advance after a brief pause
-    if (message.role === "user") {
-      setDisplayedContent(message.content);
-
-      // If this is the current message, trigger completion after display
-      if (isCurrentMessage && isTyping) {
-        const timeout = setTimeout(() => {
-          onTypingComplete();
-        }, 800); // Brief pause after user message before continuing
-
-        return () => clearTimeout(timeout);
-      }
-      return;
-    }
-
-    // Assistant messages only type if they're the current message and typing is active
-    if (!isCurrentMessage || !isTyping) {
-      setDisplayedContent(message.content);
-      return;
-    }
-
-    // Typing animation for assistant messages
-    if (currentCharIndex < message.content.length) {
+    if (message.role === "user" && isCurrentMessage && isTyping) {
       const timeout = setTimeout(() => {
-        setDisplayedContent(message.content.slice(0, currentCharIndex + 1));
-        setCurrentCharIndex(currentCharIndex + 1);
-      }, 20); // Typing speed
+        onTypingComplete();
+      }, 800); // Brief pause after user message before continuing
 
       return () => clearTimeout(timeout);
-    } else {
-      // Typing complete
-      onTypingComplete();
     }
-  }, [
-    isTyping,
-    isCurrentMessage,
-    currentCharIndex,
-    message.content,
-    message.role,
-    onTypingComplete,
-  ]);
+  }, [message.role, isCurrentMessage, isTyping, onTypingComplete]);
 
   if (message.role === "user") {
     return (
@@ -340,6 +305,7 @@ function ChatMessageBubble({
     );
   }
 
+  // Assistant messages: use TypingText for GSAP-optimized animation
   return (
     <div className="flex justify-start">
       <div className="flex items-end space-x-2 max-w-[80%]">
@@ -349,14 +315,28 @@ function ChatMessageBubble({
           className="w-8 h-8 rounded-full object-cover flex-shrink-0"
         />
         <div className="bg-gray-800 rounded-2xl rounded-bl-sm px-4 py-2.5">
-          <p className="text-gray-100 text-sm whitespace-pre-wrap">
-            {displayedContent}
-            {isTyping &&
-              isCurrentMessage &&
-              currentCharIndex < message.content.length && (
-                <span className="inline-block w-0.5 h-4 bg-gray-400 ml-0.5 animate-pulse" />
-              )}
-          </p>
+          {isCurrentMessage && isTyping ? (
+            <TypingText
+              text={[message.content, message.content]}
+              as="p"
+              className="text-gray-100 text-sm whitespace-pre-wrap"
+              typingSpeed={10}
+              deletingSpeed={0}
+              pauseDuration={500}
+              loop={false}
+              showCursor={true}
+              cursorClassName="!bg-gray-400 !h-4"
+              hideCursorWhileTyping={false}
+              onSentenceComplete={(_, index) => {
+                if (index === 0) onTypingComplete();
+              }}
+              startOnVisible={false}
+            />
+          ) : (
+            <p className="text-gray-100 text-sm whitespace-pre-wrap">
+              {message.content}
+            </p>
+          )}
         </div>
       </div>
     </div>

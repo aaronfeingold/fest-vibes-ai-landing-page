@@ -10,13 +10,12 @@ export function ChatDemoSection() {
       <div className="mx-auto max-w-6xl">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-white mb-4">
-            Test{" "}
+            Say What's Up To{" "}
             {assistantName.charAt(0).toUpperCase() + assistantName.slice(1)},
-            Your Planning Assistant
           </h2>
           <p className="text-xl text-gray-300">
-            Let {assistantName.charAt(0).toUpperCase() + assistantName.slice(1)}{" "}
-            suggest and organize your perfect music weekend
+            {assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} is
+            your guide the best music shows in town
           </p>
         </div>
 

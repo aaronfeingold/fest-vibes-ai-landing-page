@@ -90,7 +90,10 @@ export function HeroSection({
             style={{ animationDelay: "1.2s" }}
           >
             <div className="mb-8 mx-auto px-[20px] transition-all duration-300 md:px-0 max-w-[854px] min-h-[160px] lg:min-h-[216px] flex items-center justify-center">
-              <h1 className="text-center font-sans text-5xl lg:text-7xl font-bold text-white leading-tight">
+              <h1
+                id="hero-header"
+                className="text-center font-sans text-5xl lg:text-7xl font-bold text-white leading-tight"
+              >
                 <TypingText
                   text={messages}
                   className="text-white"

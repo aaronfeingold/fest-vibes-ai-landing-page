@@ -51,8 +51,8 @@ interface MarqueeItemProps {
 
 export function MarqueeItem({ children, className = "" }: MarqueeItemProps) {
   return (
-    <span className={`inline-block px-3 md:px-6 ${className}`}>
-      <span className="flex h-12 w-24 items-center justify-center grayscale transition-all duration-300 hover:grayscale-0 md:h-16 md:w-32">
+    <span className={`inline-block px-4 md:px-8 ${className}`}>
+      <span className="flex h-12 min-w-fit items-center justify-center grayscale transition-all duration-300 hover:grayscale-0 md:h-16 whitespace-nowrap">
         {children}
       </span>
     </span>

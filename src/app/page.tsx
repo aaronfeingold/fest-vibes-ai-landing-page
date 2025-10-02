@@ -1,72 +1,22 @@
-"use client";
-
 import type React from "react";
-import { useState, useEffect } from "react";
-import { AnimatedBackground } from "@/components/ui/AnimatedBackground";
-import { PageLoader } from "@/components/ui/page-loader";
-import { HeroSection } from "@/components/sections/HeroSection";
-import { FeaturesSection } from "@/components/sections/FeaturesSection";
-import { PricingSection } from "@/components/sections/PricingSection";
-import { ChatDemoSection } from "@/components/sections/ChatDemoSection";
-import { AnalyticsSection } from "@/components/sections/AnalyticsSection";
-import { CTASection } from "@/components/sections/CTASection";
-import { FooterSection } from "@/components/sections/FooterSection";
-import { EmailSignupModal } from "@/components/modals/EmailSignupModal";
-import { MascotVibesOverlay } from "@/components/modals/MascotVibesOverlay";
-import BetaSignupModal from "@/components/BetaSignupModal";
-import { ABTestNavigation } from "@/components/ab-test-navigation";
-import { useHomepageState } from "@/hooks/use-homepage-state";
+import { getVenueNames } from "@/lib/actions/get-venue-names";
+import { MUSIC_BRANDS } from "@/components/ui/brand-logo";
+import { HomePageClient } from "@/components/pages/home-page-client";
 
-export default function HomePage() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [showContent, setShowContent] = useState(false);
-  const [contentVisible, setContentVisible] = useState(false);
-  const state = useHomepageState();
+export default async function HomePage() {
+  let venueNames: string[] = [];
 
-  useEffect(() => {
-    // Step 1: Prepare animations (while content is still hidden)
-    const prepareTimer = setTimeout(() => {
-      setShowContent(true);
+  try {
+    venueNames = await getVenueNames();
+  } catch (error) {
+    console.error("Failed to fetch venue names:", error);
+    venueNames = [...MUSIC_BRANDS];
+  }
 
-      // Step 2: Make content visible AFTER animations are ready
-      setTimeout(() => {
-        setContentVisible(true);
+  // If no venues found, fallback to music brands
+  if (venueNames.length === 0) {
+    venueNames = [...MUSIC_BRANDS];
+  }
 
-        // Step 3: Hide loader AFTER content is visible
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 50);
-      }, 100);
-    }, 2800); // Start preparing 200ms before loader finishes
-
-    return () => clearTimeout(prepareTimer);
-  }, []);
-
-  return (
-    <>
-      <PageLoader isLoading={isLoading} />
-
-      <div
-        className="scrollbar-hide relative flex h-full w-full flex-col overflow-x-hidden overflow-y-scroll scroll-smooth min-h-screen bg-brand-gradient-br dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-slate-950"
-        style={{ display: contentVisible ? 'block' : 'none' }}
-      >
-        <AnimatedBackground />
-
-        <ABTestNavigation {...state.navigationProps} />
-
-        <HeroSection {...state.heroProps} showContent={showContent} />
-        <FeaturesSection contentData={state.contentData} />
-        <PricingSection onJoinBetaClick={state.handleJoinBetaClick} />
-        <ChatDemoSection />
-        <AnalyticsSection />
-        <CTASection onJoinBetaClick={state.handleJoinBetaClick} />
-        <FooterSection {...state.footerProps} />
-
-        {/* Modals */}
-        <BetaSignupModal {...state.betaModalProps} />
-        <EmailSignupModal {...state.emailModalProps} />
-        <MascotVibesOverlay {...state.mascotProps} />
-      </div>
-    </>
-  );
+  return <HomePageClient venueNames={venueNames} />;
 }

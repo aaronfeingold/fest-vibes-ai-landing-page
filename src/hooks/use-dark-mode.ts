@@ -1,49 +1,30 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
 import { useCircularTransition } from "./use-circular-transition";
 
 export function useDarkMode() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [isHydrated, setIsHydrated] = useState(false);
-  const { toggleTheme } = useCircularTransition();
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme, systemTheme } = useTheme();
+  const { toggleTheme: circularToggle } = useCircularTransition();
 
+  // Track mounted state for SSR safety
   useEffect(() => {
-    // Mark as hydrated to prevent SSR mismatch
-    setIsHydrated(true);
-
-    // Check if user has a saved preference
-    const saved = localStorage.getItem("darkMode");
-    if (saved !== null) {
-      setIsDarkMode(JSON.parse(saved));
-    } else {
-      // Default to system preference
-      setIsDarkMode(window.matchMedia("(prefers-color-scheme: dark)").matches);
-    }
+    setMounted(true);
   }, []);
 
-  useEffect(() => {
-    // Only apply dark mode class after hydration to prevent SSR mismatch
-    if (!isHydrated) return;
-
-    // Apply dark mode class to document
-    if (isDarkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-
-    // Save preference
-    localStorage.setItem("darkMode", JSON.stringify(isDarkMode));
-  }, [isDarkMode, isHydrated]);
+  // Determine current theme (resolving "system" to actual theme)
+  const resolvedTheme = theme === "system" ? systemTheme : theme;
+  const isDarkMode = resolvedTheme === "dark";
 
   const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
+    setTheme(isDarkMode ? "light" : "dark");
   };
 
   const toggleDarkModeWithTransition = (event: React.MouseEvent) => {
-    toggleTheme(event, () => {
-      setIsDarkMode(!isDarkMode);
+    circularToggle(event, () => {
+      setTheme(isDarkMode ? "light" : "dark");
     });
   };
 
@@ -51,6 +32,6 @@ export function useDarkMode() {
     isDarkMode,
     toggleDarkMode,
     toggleDarkModeWithTransition,
-    isHydrated,
+    isHydrated: mounted,
   };
 }

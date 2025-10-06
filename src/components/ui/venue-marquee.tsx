@@ -9,15 +9,17 @@ interface VenueMarqueeProps {
 
 export function VenueMarquee({ venueNames, speed = "slow", className }: VenueMarqueeProps) {
   return (
-    <Marquee
-      speed={speed}
-      className={`group relative w-full overflow-hidden bg-transparent ${className || ""}`}
-    >
-      {venueNames.map((name, index) => (
-        <MarqueeItem key={`${name}-${index}`}>
-          <BrandLogo name={name} />
-        </MarqueeItem>
-      ))}
-    </Marquee>
+    <div id="venue-marquee-wrapper">
+      <Marquee
+        speed={speed}
+        className={`group relative w-full overflow-hidden bg-transparent ${className || ""}`}
+      >
+        {venueNames.map((name, index) => (
+          <MarqueeItem key={`${name}-${index}`}>
+            <BrandLogo name={name} />
+          </MarqueeItem>
+        ))}
+      </Marquee>
+    </div>
   );
 }

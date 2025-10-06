@@ -16,28 +16,32 @@ export function Marquee({
   direction = "left"
 }: MarqueeProps) {
   const speedMap = {
-    slow: "40s",
-    normal: "25s",
-    fast: "15s"
+    slow: { desktop: "40s", mobile: "20s" },
+    normal: { desktop: "25s", mobile: "12s" },
+    fast: { desktop: "15s", mobile: "8s" },
   };
 
   const animationDirection = direction === "right" ? "reverse" : "normal";
 
   return (
     <div
+      id="marquee-container"
       className={`relative w-full overflow-hidden bg-transparent ${className}`}
       style={{
-        maskImage: "linear-gradient(to right, transparent 0%, transparent 20%, black 35%, black 65%, transparent 80%, transparent 100%)"
+        maskImage:
+          "linear-gradient(to right, transparent 0%, transparent 20%, black 35%, black 65%, transparent 80%, transparent 100%)",
       }}
     >
       <div
+        id="marquee-content"
         className="flex whitespace-nowrap animate-marquee"
         style={{
-          animationDuration: speedMap[speed],
-          animationDirection: animationDirection
+          animationDuration: speedMap[speed].mobile,
+          animationDirection: animationDirection,
+          // @ts-ignore - CSS custom property
+          "--marquee-duration-desktop": speedMap[speed].desktop,
         }}
       >
-        {children}
         {children}
       </div>
     </div>
@@ -51,7 +55,7 @@ interface MarqueeItemProps {
 
 export function MarqueeItem({ children, className = "" }: MarqueeItemProps) {
   return (
-    <span className={`inline-block px-4 md:px-8 ${className}`}>
+    <span className={`inline-block px-4 md:px-8 marquee-item ${className}`}>
       <span className="flex h-12 min-w-fit items-center justify-center grayscale transition-all duration-300 hover:grayscale-0 md:h-16 whitespace-nowrap">
         {children}
       </span>

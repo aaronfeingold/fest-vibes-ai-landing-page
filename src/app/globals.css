@@ -173,6 +173,13 @@ html {
   animation: marquee linear infinite;
 }
 
+/* Responsive marquee speed - faster on mobile, slower on desktop */
+@media (min-width: 768px) {
+  .animate-marquee {
+    animation-duration: var(--marquee-duration-desktop) !important;
+  }
+}
+
 /* Floating aura animations */
 @keyframes float-slow {
   0%, 100% {

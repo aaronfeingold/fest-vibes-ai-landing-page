@@ -21,7 +21,7 @@ export function ABTestNavigation({
   const assistantName = useAssistantName();
   const mascotAsset = useMascotAsset("nav");
   const logoAsset = useLogoAsset("nav");
-  const { isDarkMode, toggleDarkMode, isHydrated } = useDarkMode();
+  const { isDarkMode, toggleDarkModeWithTransition, isHydrated } = useDarkMode();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [scrollY, setScrollY] = useState(0);
@@ -151,11 +151,11 @@ export function ABTestNavigation({
             </button>
           ))}
           <button
-            onClick={() => {
+            onClick={(e) => {
               setShowMobileMenu(false);
-              toggleDarkMode();
+              toggleDarkModeWithTransition(e);
             }}
-            className={`flex items-center ${mobileLinkClassName} w-full group`}
+            className={`flex items-center ${mobileLinkClassName} w-full group mode-toggle-button`}
           >
             <span className="mr-3">Vibes</span>
             <div className="relative w-4 h-4 flex items-center justify-center">
@@ -200,8 +200,8 @@ export function ABTestNavigation({
           </button>
         ))}
         <button
-          onClick={toggleDarkMode}
-          className={`flex items-center ${linkClassName} group`}
+          onClick={toggleDarkModeWithTransition}
+          className={`flex items-center ${linkClassName} group mode-toggle-button`}
         >
           <span className="mr-3">Vibes</span>
           <div className="relative w-4 h-4 flex items-center justify-center">

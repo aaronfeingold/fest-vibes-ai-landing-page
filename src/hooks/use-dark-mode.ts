@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useCircularTransition } from "./use-circular-transition";
 
 export function useDarkMode() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
+  const { toggleTheme } = useCircularTransition();
 
   useEffect(() => {
     // Mark as hydrated to prevent SSR mismatch
@@ -39,5 +41,16 @@ export function useDarkMode() {
     setIsDarkMode(!isDarkMode);
   };
 
-  return { isDarkMode, toggleDarkMode, isHydrated };
+  const toggleDarkModeWithTransition = (event: React.MouseEvent) => {
+    toggleTheme(event, () => {
+      setIsDarkMode(!isDarkMode);
+    });
+  };
+
+  return {
+    isDarkMode,
+    toggleDarkMode,
+    toggleDarkModeWithTransition,
+    isHydrated,
+  };
 }

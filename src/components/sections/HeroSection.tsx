@@ -32,14 +32,16 @@ export function HeroSection({
       id="hero"
       className="z-10 relative flex min-h-[100vh] animate-fade-in flex-col items-center justify-center px-6 lg:px-8"
     >
-      <div className="mx-auto max-w-4xl text-center">
+      <div id="hero-main-wrapper" className="mx-auto max-w-4xl text-center">
         <div
+          id="hero-animation-container"
           className={`relative transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
           {/* Left floating mascot - behind header */}
           <div
+            id="hero-mascot-left"
             className={`absolute hidden md:block w-40 lg:w-48 -z-20 ${showContent ? "animate-slide-in-left" : "opacity-0"}`}
             style={{
               animationDelay: "0.5s",
@@ -50,6 +52,7 @@ export function HeroSection({
           >
             <div className="animate-float-mascot-left">
               <img
+                id="hero-mascot-left-image"
                 src="/mascots/no-background/mascot-2.png"
                 alt="Festival Mascot"
                 className="w-full h-auto object-contain opacity-40 transition-all duration-500 hover:opacity-60"
@@ -63,6 +66,7 @@ export function HeroSection({
 
           {/* Right floating mascot - behind header */}
           <div
+            id="hero-mascot-right"
             className={`absolute hidden md:block w-40 lg:w-48 -z-20 ${showContent ? "animate-slide-in-right" : "opacity-0"}`}
             style={{
               animationDelay: "0.5s",
@@ -73,6 +77,7 @@ export function HeroSection({
           >
             <div className="animate-float-mascot-right">
               <img
+                id="hero-mascot-right-image"
                 src="/mascots/no-background/mascot-3.png"
                 alt="Festival Mascot"
                 className="w-full h-auto object-contain opacity-40 transition-all duration-500 hover:opacity-60"
@@ -90,7 +95,7 @@ export function HeroSection({
             className={`${showContent ? "animate-slide-up" : "opacity-0 translate-y-12"}`}
             style={{ animationDelay: "1.2s" }}
           >
-            <div className="mb-8 mx-auto px-[20px] transition-all duration-300 md:px-0 w-full max-w-[854px] min-h-[160px] lg:min-h-[216px] flex items-center justify-center">
+            <div id="hero-header-container" className="mb-8 mx-auto px-[20px] transition-all duration-300 md:px-0 w-full max-w-[854px] min-h-[160px] lg:min-h-[216px] flex items-center justify-center">
               <h1
                 id="hero-header"
                 className="text-center font-sans text-5xl lg:text-7xl font-bold text-white leading-tight"
@@ -117,8 +122,9 @@ export function HeroSection({
               {contentData?.hero?.subtitle ||
                 "Transform any day into a personalized music festival. Discover live local music, plan with friends, and experience the ultimate decentralized festival vibes in your pocket."}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div id="hero-cta-container" className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Button
+                id="hero-join-beta-button"
                 size="lg"
                 onClick={onJoinBetaClick}
                 className="bg-brand-gradient hover:from-festival-purple-500 hover:to-festival-pink-500 text-base sm:text-lg px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-center"
@@ -134,7 +140,7 @@ export function HeroSection({
       </div>
 
       {/* Venue Marquee - positioned at bottom like Suno */}
-      <div className="relative mt-8 w-full [@media(min-height:550px)]:absolute [@media(min-height:550px)]:bottom-10 [@media(min-height:550px)]:left-0 [@media(min-height:550px)]:-z-10 [@media(min-height:550px)]:mt-0">
+      <div id="hero-venue-marquee-container" className="relative mt-8 w-full [@media(min-height:550px)]:absolute [@media(min-height:550px)]:bottom-10 [@media(min-height:550px)]:left-0 [@media(min-height:550px)]:-z-10 [@media(min-height:550px)]:mt-0">
         <VenueMarquee speed="slow" venueNames={venueNames} />
       </div>
     </section>

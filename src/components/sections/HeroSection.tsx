@@ -1,9 +1,11 @@
 import type React from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { ContentData } from "@/hooks/use-homepage-state";
 import { VenueMarquee } from "@/components/ui/venue-marquee";
 import TypingText from "@/components/ui/shadcn-io/typing-text";
+import { useNoBackgroundMascots } from "@/hooks/use-brand-assets";
 
 interface HeroSectionProps {
   isVisible: boolean;
@@ -26,6 +28,13 @@ export function HeroSection({
     "When can I catch my favorite band this month?",
     "Help me bop around downtown.",
   ];
+
+  // Centralize mascot asset resolution via mapping to avoid brittle hard-coded paths
+  const availableMascots = useNoBackgroundMascots();
+  const mascotAssetMap = {
+    left: availableMascots[1] ?? availableMascots[0],
+    right: availableMascots[2] ?? availableMascots[0],
+  } as const;
 
   return (
     <section
@@ -51,15 +60,18 @@ export function HeroSection({
             }}
           >
             <div className="animate-float-mascot-left">
-              <img
+              <Image
                 id="hero-mascot-left-image"
-                src="/mascots/no-background/mascot-2.png"
+                src={mascotAssetMap.left}
                 alt="Festival Mascot"
+                width={192}
+                height={192}
                 className="w-full h-auto object-contain opacity-40 transition-all duration-500 hover:opacity-60"
                 style={{
                   filter:
                     "blur(0.5px) brightness(0.7) drop-shadow(rgba(0, 0, 0, 0.3) 0px 15px 30px)",
                 }}
+                priority
               />
             </div>
           </div>
@@ -76,15 +88,18 @@ export function HeroSection({
             }}
           >
             <div className="animate-float-mascot-right">
-              <img
+              <Image
                 id="hero-mascot-right-image"
-                src="/mascots/no-background/mascot-3.png"
+                src={mascotAssetMap.right}
                 alt="Festival Mascot"
+                width={192}
+                height={192}
                 className="w-full h-auto object-contain opacity-40 transition-all duration-500 hover:opacity-60"
                 style={{
                   filter:
                     "blur(0.5px) brightness(0.7) drop-shadow(rgba(0, 0, 0, 0.3) 0px 15px 30px)",
                 }}
+                priority
               />
             </div>
           </div>
@@ -95,7 +110,10 @@ export function HeroSection({
             className={`${showContent ? "animate-slide-up" : "opacity-0 translate-y-12"}`}
             style={{ animationDelay: "1.2s" }}
           >
-            <div id="hero-header-container" className="mb-8 mx-auto px-[20px] transition-all duration-300 md:px-0 w-full max-w-[854px] min-h-[160px] lg:min-h-[216px] flex items-center justify-center">
+            <div
+              id="hero-header-container"
+              className="mb-8 mx-auto px-[20px] transition-all duration-300 md:px-0 w-full max-w-[854px] min-h-[160px] lg:min-h-[216px] flex items-center justify-center"
+            >
               <h1
                 id="hero-header"
                 className="text-center font-sans text-5xl lg:text-7xl font-bold text-white leading-tight"
@@ -122,7 +140,10 @@ export function HeroSection({
               {contentData?.hero?.subtitle ||
                 "Transform any day into a personalized music festival. Discover live local music, plan with friends, and experience the ultimate decentralized festival vibes in your pocket."}
             </p>
-            <div id="hero-cta-container" className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div
+              id="hero-cta-container"
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            >
               <Button
                 id="hero-join-beta-button"
                 size="lg"
@@ -140,7 +161,10 @@ export function HeroSection({
       </div>
 
       {/* Venue Marquee - positioned at bottom like Suno */}
-      <div id="hero-venue-marquee-container" className="relative mt-8 w-full [@media(min-height:550px)]:absolute [@media(min-height:550px)]:bottom-10 [@media(min-height:550px)]:left-0 [@media(min-height:550px)]:-z-10 [@media(min-height:550px)]:mt-0">
+      <div
+        id="hero-venue-marquee-container"
+        className="relative mt-8 w-full [@media(min-height:550px)]:absolute [@media(min-height:550px)]:bottom-10 [@media(min-height:550px)]:left-0 [@media(min-height:550px)]:-z-10 [@media(min-height:550px)]:mt-0"
+      >
         <VenueMarquee speed="slow" venueNames={venueNames} />
       </div>
     </section>

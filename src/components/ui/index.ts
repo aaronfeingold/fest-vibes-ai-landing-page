@@ -12,3 +12,4 @@ export * from "./Nav";
 export * from "./PageLoader";
 export * from "./VenmoDonationLink";
 export * from "./VenueMarquee";
+export * from "./VenmoDonationLink";

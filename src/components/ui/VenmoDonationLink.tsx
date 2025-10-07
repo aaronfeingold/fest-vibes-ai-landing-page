@@ -12,7 +12,7 @@ interface VenmoDonationLinkProps {
   onClick?: () => void;
 }
 
-const VenmoDonationLink: React.FC<VenmoDonationLinkProps> = ({
+export const VenmoDonationLink: React.FC<VenmoDonationLinkProps> = ({
   username,
   amount,
   note,
@@ -67,5 +67,3 @@ const VenmoDonationLink: React.FC<VenmoDonationLinkProps> = ({
     </Button>
   );
 };
-
-export default VenmoDonationLink;

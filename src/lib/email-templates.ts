@@ -1,21 +1,20 @@
 interface BetaWelcomeEmailData {
   email: string;
   domain: string;
+  from: string; // explicit, validated sender address
   assistantName?: string;
 }
 
-export function generateBetaWelcomeEmail({
+export const generateBetaWelcomeEmail = ({
   email,
   domain,
+  from,
   assistantName = "Boomy",
-}: BetaWelcomeEmailData) {
-  const domainName = domain.replace(/^https?:\/\//, "").replace(/^www\./, "");
-
-  return {
-    from: `Fest Vibes Team <noreply@${domainName}>`,
-    to: [email],
-    subject: "Welcome to the Fest Vibes Beta",
-    html: `
+}: BetaWelcomeEmailData) => ({
+  from,
+  to: [email],
+  subject: "Welcome to the Fest Vibes Beta",
+  html: `
       <div style="font-family: system-ui, sans-serif; max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #6b46c1, #ec4899); color: white; border-radius: 16px; overflow: hidden;">
         <div style="padding: 40px 30px; text-align: center;">
 
@@ -42,7 +41,7 @@ export function generateBetaWelcomeEmail({
           <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 25px; margin: 30px 0;">
             <h3 style="color: #ec4899; margin-bottom: 15px; font-size: 1.1rem;">What happens next?</h3>
             <ul style="color: #fdf4ff; text-align: left; line-height: 1.8; padding-left: 20px;">
-              <li>We're launching soon to revolutionize how you discover and experience live music</li>
+              <li>We're launching soon to revolutionize how you discover and experience live local music</li>
               <li>You'll receive exclusive updates about our progress</li>
               <li>Get early access before the public launch</li>
               <li>Chat with ${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} for personalized festival planning</li>
@@ -56,10 +55,9 @@ export function generateBetaWelcomeEmail({
 
           <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); color: #d1d5db; font-size: 0.8rem;">
             Fest Vibes - Your Festival Planning Companion<br>
-            Democratizing music festival experiences for everyone
+            Discover. Curate. Experience.
           </div>
         </div>
       </div>
     `,
-  };
-}
+});

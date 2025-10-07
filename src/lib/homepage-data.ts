@@ -10,6 +10,7 @@ import {
   Clock,
   Mic2,
 } from "lucide-react";
+import { ICONS } from "./icons";
 
 export interface Feature {
   icon: React.ComponentType<{ className?: string }>;
@@ -55,35 +56,35 @@ export const SITE_METADATA = {
 export const FEATURES: Feature[] = [
   {
     icon: Heart,
-    iconImage: "/icons/saints.png",
+    iconImage: ICONS.saints,
     title: "Local Musicians Search",
     description: "Stay up to date with your favorite local musicians.",
     color: "from-festival-pink-500 to-red-500",
   },
   {
     icon: Music,
-    iconImage: "/icons/trumpet.png",
+    iconImage: ICONS.trumpet.standard,
     title: "Discover Live Music",
     description: "Find what you love or step outside the box",
     color: "from-stage-mint to-emerald-500",
   },
   {
     icon: Calendar,
-    iconImage: "/icons/plan.png",
+    iconImage: ICONS.plan,
     title: "Plan Ahead",
     description: "Curate multi-day timelines and jam pack your weekends",
     color: "from-indigo-500 to-brand-primary",
   },
   {
     icon: Users,
-    iconImage: "/icons/krewe.png",
+    iconImage: ICONS.krewe,
     title: "Connect",
     description: "Share your plans with your friends",
     color: "from-stage-sky to-stage-turquoise",
   },
   {
     icon: MessageCircle,
-    iconImage: "/icons/chat.png",
+    iconImage: ICONS.chat,
     title: "Chat",
     description:
       "Create personalized weekend music experiences with assistance",
@@ -91,7 +92,7 @@ export const FEATURES: Feature[] = [
   },
   {
     icon: MapPin,
-    iconImage: "/icons/analytics.png",
+    iconImage: ICONS.analytics,
     title: "Nightlife Analytics",
     description:
       "Stay in the the know on your hometown's music scene with insights and trends",
@@ -196,10 +197,10 @@ export const DEMO_CAPABILITIES: DemoCapability[] = [
 
 // custom icons for some local artists
 export const EVENT_ICONS = {
-  "Trombone Shorty": "/icons/trumpet-no-bg-2.png",
+  "Trombone Shorty": ICONS.trumpet.noBackground2,
   "Tank & The Bangas": Mic2,
-  "The Iceman Special": "/icons/guitar-no-bg.png",
-  Boyfriend: "/icons/xo-boyfriend.png",
+  "The Iceman Special": ICONS.guitar.noBackground,
+  Boyfriend: ICONS.xoBoyfriend,
 } as const;
 
 // Marketing stuff for stat cards -- nobody reads this
@@ -207,7 +208,7 @@ export const STAT_CARDS_DATA = [
   {
     title: "Funk Events This Week",
     value: 127,
-    change: "↗ 23% from last week",
+    change: "↗ 100% more funkier than last week",
     changeColor: "text-green-400",
     icon: TrendingUp,
     iconColors: "bg-gradient-to-r from-stage-mint to-emerald-500",
@@ -223,7 +224,7 @@ export const STAT_CARDS_DATA = [
   {
     title: "Lit Fam",
     value: 16,
-    change: "Your Krewe Vibes",
+    change: "Your Krewe's Vibes Are Growing!",
     changeColor: "text-brand-accent",
     icon: Users,
     iconColors: "bg-brand-gradient",

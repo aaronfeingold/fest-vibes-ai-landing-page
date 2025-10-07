@@ -3,8 +3,8 @@
 import type React from "react";
 import { useState, useEffect, useRef } from "react";
 import { DEMO_CAPABILITIES } from "@/lib/homepage-data";
-import { useAssistantName } from "@/hooks/use-feature-flags";
-import TypingText from "@/components/ui/typing-text";
+import { useAssistantName } from "@/hooks";
+import { TypingText } from "@/ui";
 
 interface ChatMessage {
   id: number;

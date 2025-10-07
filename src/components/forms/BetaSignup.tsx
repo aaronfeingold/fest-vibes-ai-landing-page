@@ -1,17 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { EmailInput } from "./EmailInput";
-import DonationModal from "../modals/DonationModal";
-import { Button } from "../ui/button";
-import { emailSchema } from "../../lib/validation";
+import { EmailInput } from "@/forms";
+import DonationModal from "@/modals/DonationModal";
+import { Button } from "@/ui";
+import { emailSchema } from "@/lib/validation";
 import { z } from "zod";
 
 interface BetaSignupProps {
   onClose: () => void;
 }
 
-export default function BetaSignup({ onClose }: BetaSignupProps) {
+export function BetaSignup({ onClose }: BetaSignupProps) {
   const [email, setEmail] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [emailError, setEmailError] = useState("");

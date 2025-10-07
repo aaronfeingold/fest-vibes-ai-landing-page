@@ -1,6 +1,6 @@
 "use client";
 
-import EnhancedBetaSignup from "../forms/BetaSignup";
+import { BetaSignup } from "@/forms";
 
 interface BetaSignupModalProps {
   isOpen: boolean;
@@ -39,7 +39,7 @@ export function BetaSignupModal({ isOpen, onClose }: BetaSignupModalProps) {
           </p>
         </div>
 
-        <EnhancedBetaSignup onClose={onClose} />
+        <BetaSignup onClose={onClose} />
       </div>
     </div>
   );

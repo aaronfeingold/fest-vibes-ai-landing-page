@@ -36,11 +36,12 @@
       ],
       "@/modals/*": ["./src/components/modals/*"],
       "@/modals": ["./src/components/modals/index"],
-      "@/forms/*": ["./src/components/forms/*"],
       "@/actions/*": ["./src/lib/actions/*"],
       "@/validation/*": ["./src/lib/validation/*"],
       "@/ui/*": ["./src/components/ui/*"],
-      "@/ui": ["./src/components/ui/index"]
+      "@/ui": ["./src/components/ui/index"],
+      "@/forms/*": ["./src/components/forms/*"],
+      "@/forms": ["./src/components/forms/index"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

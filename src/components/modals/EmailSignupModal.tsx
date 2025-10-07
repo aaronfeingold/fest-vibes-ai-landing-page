@@ -5,10 +5,10 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+  Input,
+  Button,
+  Label,
+} from "@/ui";
 import { Mail } from "lucide-react";
 
 interface EmailSignupModalProps {

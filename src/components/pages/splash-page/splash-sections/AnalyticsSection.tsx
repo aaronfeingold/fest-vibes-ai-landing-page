@@ -1,9 +1,8 @@
 import type React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BarChart3, TrendingUp, MapPin, Users } from "lucide-react";
-import { EventCard } from "@/components/pages/splash-page/components/EventCard";
-import { StatCard } from "@/components/pages/splash-page/components/StatCard";
-import { MOCK_EVENTS } from "@/lib/homepage-data";
+import { Card, CardContent, CardHeader, CardTitle } from "@/ui";
+import { BarChart3 } from "lucide-react";
+import { EventCard, StatCard } from "@/splash-components";
+import { MOCK_EVENTS, STAT_CARDS_DATA } from "@/lib/homepage-data";
 
 export function AnalyticsSection() {
   return (
@@ -40,36 +39,23 @@ export function AnalyticsSection() {
           </div>
 
           {/* Stats Cards */}
-          <div className="space-y-6">
-            <StatCard
-              title="Funk Events This Week"
-              value={127}
-              change="↗ 23% from last week"
-              changeColor="text-green-400"
-              icon={TrendingUp}
-              iconColors="bg-gradient-to-r from-stage-mint to-emerald-500"
-            />
-
-            <StatCard
-              title="Weekend Events"
-              value={162}
-              change="5 new added today"
-              changeColor="text-blue-400"
-              icon={MapPin}
-              iconColors="bg-gradient-to-r from-stage-sky to-stage-turquoise"
-            />
-
-            <StatCard
-              title="Lit Fam"
-              value={16}
-              change="Your Krewe Vibes"
-              changeColor="text-brand-accent"
-              icon={Users}
-              iconColors="bg-brand-gradient"
-            />
-          </div>
+          <div className="space-y-6">{generateStatCards(STAT_CARDS_DATA)}</div>
         </div>
       </div>
     </section>
   );
+}
+
+function generateStatCards(data: typeof STAT_CARDS_DATA) {
+  return data.map((stat, index) => (
+    <StatCard
+      key={`${stat.title}-${index}`}
+      title={stat.title}
+      value={stat.value}
+      change={stat.change}
+      changeColor={stat.changeColor}
+      icon={stat.icon}
+      iconColors={stat.iconColors}
+    />
+  ));
 }

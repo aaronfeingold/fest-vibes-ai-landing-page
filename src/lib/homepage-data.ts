@@ -44,7 +44,14 @@ export interface DemoCapability {
   text: string;
 }
 
-// this should also come from marketing team
+export const SITE_METADATA = {
+  title: "Fest-Vibes",
+  description:
+    "Transform any weekend into a personalized music festival. Discover local live music, curate plan with friends, and experience the ultimate decentralized festival in your pocket.",
+  generator: "afdc.dev",
+} as const;
+
+// this should come from marketing team
 export const FEATURES: Feature[] = [
   {
     icon: Heart,
@@ -195,9 +202,30 @@ export const EVENT_ICONS = {
   Boyfriend: "/icons/xo-boyfriend.png",
 } as const;
 
-export const SITE_METADATA = {
-  title: "Fest-Vibes",
-  description:
-    "Transform any weekend into a personalized music festival. Discover local live music, curate plan with friends, and experience the ultimate decentralized festival in your pocket.",
-  generator: "afdc.dev",
-} as const;
+// Marketing stuff for stat cards -- nobody reads this
+export const STAT_CARDS_DATA = [
+  {
+    title: "Funk Events This Week",
+    value: 127,
+    change: "↗ 23% from last week",
+    changeColor: "text-green-400",
+    icon: TrendingUp,
+    iconColors: "bg-gradient-to-r from-stage-mint to-emerald-500",
+  },
+  {
+    title: "Weekend Events",
+    value: 162,
+    change: "5 new added today",
+    changeColor: "text-blue-400",
+    icon: MapPin,
+    iconColors: "bg-gradient-to-r from-stage-sky to-stage-turquoise",
+  },
+  {
+    title: "Lit Fam",
+    value: 16,
+    change: "Your Krewe Vibes",
+    changeColor: "text-brand-accent",
+    icon: Users,
+    iconColors: "bg-brand-gradient",
+  },
+] as const;

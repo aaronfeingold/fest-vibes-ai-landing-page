@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { toast } from "sonner";
 import { EmailInput } from "@/forms";
 import { DonationModal } from "@/modals";
 import { Button } from "@/ui";
 import { emailSchema } from "@/lib/validation";
 import { z } from "zod";
-import { PartyPopper, Music } from "lucide-react";
+import { PartyPopper, Music, Loader2 } from "lucide-react";
 
 interface BetaSignupProps {
   onClose: () => void;
@@ -91,14 +92,18 @@ export function BetaSignup({ onClose }: BetaSignupProps) {
 
       if (response.ok) {
         setIsSubmitted(true);
+        toast.success("You're on the list! We'll email you soon.");
         setTimeout(() => {
           onClose();
         }, 3000);
       } else {
-        setApiError(data.error || "Something went wrong. Please try again.");
+        const msg = data.error || "Something went wrong. Please try again.";
+        setApiError(msg);
+        toast.error(msg);
       }
     } catch (err) {
       setApiError("Network error. Please try again.");
+      toast.error("Network error. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -161,7 +166,14 @@ export function BetaSignup({ onClose }: BetaSignupProps) {
           className="w-full bg-brand-gradient hover:from-festival-purple-500 hover:to-festival-pink-500 disabled:opacity-50 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300"
           data-testid="submit-button"
         >
-          {isSubmitting ? "Processing..." : "Join Beta List"}
+          {isSubmitting ? (
+            <span className="inline-flex items-center justify-center gap-2">
+              <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+              <span>Processing...</span>
+            </span>
+          ) : (
+            "Join Beta List"
+          )}
         </Button>
       </form>
 

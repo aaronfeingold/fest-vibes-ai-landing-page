@@ -1,6 +1,7 @@
 "use client";
 
 import { BetaSignup } from "@/forms";
+import Image from "next/image";
 
 interface BetaSignupModalProps {
   isOpen: boolean;
@@ -22,13 +23,13 @@ export function BetaSignupModal({ isOpen, onClose }: BetaSignupModalProps) {
 
         <div className="text-center mb-6">
           <h3 className="text-2xl font-bold text-white mb-2 flex items-center justify-center gap-3">
-            <img
+            <Image
               src="/icons/trumpet-no-bg.png"
               alt="Trumpet"
               className="w-8 h-8 object-contain"
             />
             Join the Beta!
-            <img
+            <Image
               src="/icons/trumpet-no-bg.png"
               alt="Trumpet"
               className="w-8 h-8 object-contain transform rotate-[270deg]"

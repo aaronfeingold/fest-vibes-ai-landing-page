@@ -6,6 +6,7 @@ import DonationModal from "@/modals/DonationModal";
 import { Button } from "@/ui";
 import { emailSchema } from "@/lib/validation";
 import { z } from "zod";
+import { PartyPopper, Music } from "lucide-react";
 
 interface BetaSignupProps {
   onClose: () => void;
@@ -105,15 +106,25 @@ export function BetaSignup({ onClose }: BetaSignupProps) {
 
   if (isSubmitted) {
     return (
-      <div className="text-center">
-        <div className="text-4xl mb-4">🎉</div>
-        <p className="text-white font-semibold">You're on the list!</p>
-        <p className="text-gray-300 text-sm">
+      <div className="text-center" data-testid="beta-signup-success">
+        <div className="flex justify-center mb-4" data-testid="success-icon">
+          <PartyPopper className="w-12 h-12 text-brand-accent" />
+        </div>
+        <p className="text-white font-semibold" data-testid="success-title">
+          You're on the list!
+        </p>
+        <p className="text-gray-300 text-sm" data-testid="success-message">
           We'll notify you when Fest Vibes launches.
         </p>
         {showDonationModal && (
-          <p className="text-brand-accent text-sm mt-2">
-            Thanks for supporting Fest Vibes! You'll get 2 free months. 🎵
+          <p
+            className="text-brand-accent text-sm mt-2"
+            data-testid="donation-thanks"
+          >
+            <span className="flex items-center gap-1">
+              Thanks for supporting Fest Vibes! You'll get 2 free months.
+              <Music className="w-4 h-4 text-brand-accent" />
+            </span>
           </p>
         )}
       </div>
@@ -122,8 +133,12 @@ export function BetaSignup({ onClose }: BetaSignupProps) {
 
   return (
     <>
-      <form onSubmit={handleInitialSubmit} className="space-y-4">
-        <div>
+      <form
+        onSubmit={handleInitialSubmit}
+        className="space-y-4"
+        data-testid="beta-signup-form"
+      >
+        <div data-testid="email-input-container">
           <EmailInput
             value={email}
             onChange={handleEmailChange}
@@ -134,12 +149,17 @@ export function BetaSignup({ onClose }: BetaSignupProps) {
           />
         </div>
 
-        {apiError && <p className="text-red-300 text-sm">{apiError}</p>}
+        {apiError && (
+          <p className="text-red-300 text-sm" data-testid="api-error">
+            {apiError}
+          </p>
+        )}
 
         <Button
           type="submit"
           disabled={!isValidEmail || isSubmitting}
           className="w-full bg-brand-gradient hover:from-festival-purple-500 hover:to-festival-pink-500 disabled:opacity-50 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300"
+          data-testid="submit-button"
         >
           {isSubmitting ? "Processing..." : "Join Beta List"}
         </Button>
@@ -151,6 +171,7 @@ export function BetaSignup({ onClose }: BetaSignupProps) {
         onAccept={handleDonationAccept}
         onDecline={handleDonationDecline}
         email={email}
+        data-testid="donation-modal"
       />
     </>
   );

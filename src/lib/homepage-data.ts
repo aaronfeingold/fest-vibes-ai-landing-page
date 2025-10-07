@@ -47,7 +47,7 @@ export interface DemoCapability {
 export const SITE_METADATA = {
   title: "Fest-Vibes",
   description:
-    "Transform any weekend into a personalized music festival. Discover local live music, curate plan with friends, and experience the ultimate decentralized festival in your pocket.",
+    "Transform any weekend into a personalized music festival. Discover local live music, curate plan with friends, and experience the vibes.",
   generator: "afdc.dev",
 } as const;
 
@@ -56,8 +56,8 @@ export const FEATURES: Feature[] = [
   {
     icon: Heart,
     iconImage: "/icons/saints.png",
-    title: "Local Musician Search",
-    description: "Be the first to know where they be at",
+    title: "Local Musicians Search",
+    description: "Stay up to date with your favorite local musicians.",
     color: "from-festival-pink-500 to-red-500",
   },
   {
@@ -77,16 +77,16 @@ export const FEATURES: Feature[] = [
   {
     icon: Users,
     iconImage: "/icons/krewe.png",
-    title: "Build-a-Krewe",
-    description: "Connect your fam and share your plans",
+    title: "Connect",
+    description: "Share your plans with your friends",
     color: "from-stage-sky to-stage-turquoise",
   },
   {
     icon: MessageCircle,
     iconImage: "/icons/chat.png",
-    title: "Chat Assistance",
+    title: "Chat",
     description:
-      "Vibe with your AI assistant to craft personalized weekend music experiences",
+      "Create personalized weekend music experiences with assistance",
     color: "from-brand-primary to-brand-secondary",
   },
   {
@@ -94,7 +94,7 @@ export const FEATURES: Feature[] = [
     iconImage: "/icons/analytics.png",
     title: "Nightlife Analytics",
     description:
-      "Understand the landscape of your own nightlife with insights and trends",
+      "Stay in the the know on your hometown's music scene with insights and trends",
     color: "from-stage-sky to-indigo-500",
   },
 ];
@@ -106,32 +106,32 @@ export const MOCK_EVENTS: MockEvent[] = [
     venue: "Tipitina's",
     time: "9:00 PM",
     genre: "Funk",
-    attendees: 234,
+    attendees: 200,
   },
   {
     name: "Tank & The Bangas",
     venue: "Blue Nile",
     time: "6:00 PM",
     genre: "Jazz",
-    attendees: 156,
+    attendees: 150,
   },
   {
     name: "The Iceman Special",
     venue: "Maple Leaf",
     time: "10:00 PM",
     genre: "Psychedelic",
-    attendees: 133,
+    attendees: 100,
   },
   {
     name: "Boyfriend",
     venue: "Saturn Bar",
     time: "7:30 PM",
     genre: "Hip-Hop",
-    attendees: 89,
+    attendees: 50,
   },
 ];
 
-// this will come from Marketing Team (markdown maybe)
+// this will come from Marketing Team (markdown maybe?)
 export const PRICING_PLANS: PricingPlan[] = [
   {
     name: "Free Plan",
@@ -173,6 +173,10 @@ export const DEMO_CAPABILITIES: DemoCapability[] = [
     text: "Discover local venues and hidden gems",
   },
   {
+    icon: Star,
+    text: "Track your favorite artists and venues",
+  },
+  {
     icon: Users,
     text: "Coordinate plans with your friend group",
   },
@@ -187,10 +191,6 @@ export const DEMO_CAPABILITIES: DemoCapability[] = [
   {
     icon: Clock,
     text: "Optimize timing for multiple events",
-  },
-  {
-    icon: Star,
-    text: "Track your favorite artists and venues",
   },
 ];
 

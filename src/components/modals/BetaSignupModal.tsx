@@ -2,7 +2,7 @@
 
 import { BetaSignup } from "@/forms";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/ui";
 import { X } from "lucide-react";
 
 interface BetaSignupModalProps {

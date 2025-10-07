@@ -1,6 +1,6 @@
 "use client";
 
-import { useMascotVariant, useLogoType, useNavMascotVariant, useNoBackgroundMascotVariant } from "./use-feature-flags";
+import { useLogoType, useNoBackgroundMascotVariant } from "./use-feature-flags";
 
 interface BrandAssets {
   mascot: {

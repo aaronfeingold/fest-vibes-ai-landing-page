@@ -1,9 +1,9 @@
 import type React from "react";
 import { getVenueNames } from "@/lib/actions/get-venue-names";
-import { MUSIC_BRANDS } from "@/components/ui/brand-logo";
-import { HomePageClient } from "@/components/pages/home-page-client";
+import { MUSIC_BRANDS } from "@/components/ui/BrandLogo";
+import { SplashPage } from "@/components/pages/splash-page/SplashPage";
 
-export default async function HomePage() {
+export default async function RootPage() {
   let venueNames: string[] = [];
 
   try {
@@ -18,5 +18,5 @@ export default async function HomePage() {
     venueNames = [...MUSIC_BRANDS];
   }
 
-  return <HomePageClient venueNames={venueNames} />;
+  return <SplashPage venueNames={venueNames} />;
 }

@@ -7,20 +7,18 @@ import { useLogoPosition, useAssistantName } from "@/hooks/use-feature-flags";
 import { useMascotAsset, useLogoAsset } from "@/hooks/use-brand-assets";
 import { useDarkMode } from "@/hooks/use-dark-mode";
 
-interface ABTestNavigationProps {
+interface NavProps {
   onMascotClick: () => void;
   onJoinBetaClick: () => void;
 }
 
-export function ABTestNavigation({
-  onMascotClick,
-  onJoinBetaClick,
-}: ABTestNavigationProps) {
+export function Nav({ onMascotClick, onJoinBetaClick }: NavProps) {
   const logoPosition = useLogoPosition();
   const assistantName = useAssistantName();
   const mascotAsset = useMascotAsset("nav");
   const logoAsset = useLogoAsset("nav");
-  const { isDarkMode, toggleDarkModeWithTransition, isHydrated } = useDarkMode();
+  const { isDarkMode, toggleDarkModeWithTransition, isHydrated } =
+    useDarkMode();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [scrollY, setScrollY] = useState(0);
@@ -72,30 +70,31 @@ export function ABTestNavigation({
 
   // Handle smooth scrolling to sections with header offset
   const handleSmoothScroll = (href: string) => {
-    if (href.startsWith('#')) {
+    if (href.startsWith("#")) {
       const element = document.querySelector(href);
       if (element) {
         // Sections that need header offset (analytics doesn't need offset)
-        const needsOffset = ['#features', '#pricing', '#demo'].includes(href);
+        const needsOffset = ["#features", "#pricing", "#demo"].includes(href);
 
         if (needsOffset) {
           // Calculate header height dynamically
-          const header = document.querySelector('.fixed.top-0') as HTMLElement;
+          const header = document.querySelector(".fixed.top-0") as HTMLElement;
           const headerHeight = header ? header.offsetHeight : 0;
           const additionalBuffer = 20; // Extra breathing room
           const totalOffset = headerHeight + additionalBuffer;
 
           // Get element position and scroll with offset
-          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+          const elementPosition =
+            element.getBoundingClientRect().top + window.pageYOffset;
           const offsetPosition = elementPosition - totalOffset;
 
           window.scrollTo({
             top: offsetPosition,
-            behavior: 'smooth'
+            behavior: "smooth",
           });
         } else {
           // Use default scroll for analytics and other sections
-          element.scrollIntoView({ behavior: 'smooth' });
+          element.scrollIntoView({ behavior: "smooth" });
         }
       }
     }
@@ -317,7 +316,9 @@ export function ABTestNavigation({
   const borderOpacity = Math.min(scrollY / 200, 0.3); // Max border opacity of 0.3
 
   return (
-    <div className={`fixed top-0 left-0 right-0 z-50 ${backgroundClass} backdrop-blur-md transition-all duration-300`}>
+    <div
+      className={`fixed top-0 left-0 right-0 z-50 ${backgroundClass} backdrop-blur-md transition-all duration-300`}
+    >
       <MobileLayout />
       <DesktopLayout />
     </div>

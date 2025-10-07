@@ -1,5 +1,5 @@
 import { Marquee, MarqueeItem } from "@/components/ui/marquee";
-import { BrandLogo } from "@/components/ui/brand-logo";
+import { BrandLogo } from "@/components/ui/BrandLogo";
 
 interface VenueMarqueeProps {
   venueNames: string[];
@@ -7,7 +7,11 @@ interface VenueMarqueeProps {
   className?: string;
 }
 
-export function VenueMarquee({ venueNames, speed = "slow", className }: VenueMarqueeProps) {
+export function VenueMarquee({
+  venueNames,
+  speed = "slow",
+  className,
+}: VenueMarqueeProps) {
   return (
     <div id="venue-marquee-wrapper">
       <Marquee

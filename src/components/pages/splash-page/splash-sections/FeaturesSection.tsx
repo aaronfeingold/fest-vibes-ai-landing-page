@@ -1,6 +1,6 @@
 import type React from "react";
 import { useState, useEffect, useRef } from "react";
-import { FeatureCard } from "@/components/ui/FeatureCard";
+import { FeatureCard } from "@/components/pages/splash-page/components/FeatureCard";
 import { FEATURES } from "@/lib/homepage-data";
 import { ContentData } from "@/hooks/use-homepage-state";
 import { useAssistantName } from "@/hooks/use-feature-flags";
@@ -41,15 +41,19 @@ export function FeaturesSection({ contentData }: FeaturesSectionProps) {
 
   // Track scroll position for pagination dots
   useEffect(() => {
-    const createScrollHandler = (carousel: HTMLDivElement, rowKey: 'row1' | 'row2', maxItems: number) => {
+    const createScrollHandler = (
+      carousel: HTMLDivElement,
+      rowKey: "row1" | "row2",
+      maxItems: number
+    ) => {
       return () => {
         const scrollLeft = carousel.scrollLeft;
         const cardWidth = carousel.children[0]?.clientWidth || 376;
         const gap = 16; // 4 * 4 (gap-4 in Tailwind)
         const activeIndex = Math.round(scrollLeft / (cardWidth + gap));
-        setActiveCardIndex(prev => ({
+        setActiveCardIndex((prev) => ({
           ...prev,
-          [rowKey]: Math.min(activeIndex, maxItems - 1)
+          [rowKey]: Math.min(activeIndex, maxItems - 1),
         }));
       };
     };
@@ -58,21 +62,27 @@ export function FeaturesSection({ contentData }: FeaturesSectionProps) {
     const carousel2 = carousel2Ref.current;
 
     if (carousel1) {
-      const handleScroll1 = createScrollHandler(carousel1, 'row1', 3);
-      carousel1.addEventListener('scroll', handleScroll1);
+      const handleScroll1 = createScrollHandler(carousel1, "row1", 3);
+      carousel1.addEventListener("scroll", handleScroll1);
     }
 
     if (carousel2) {
-      const handleScroll2 = createScrollHandler(carousel2, 'row2', 3);
-      carousel2.addEventListener('scroll', handleScroll2);
+      const handleScroll2 = createScrollHandler(carousel2, "row2", 3);
+      carousel2.addEventListener("scroll", handleScroll2);
     }
 
     return () => {
       if (carousel1) {
-        carousel1.removeEventListener('scroll', createScrollHandler(carousel1, 'row1', 3));
+        carousel1.removeEventListener(
+          "scroll",
+          createScrollHandler(carousel1, "row1", 3)
+        );
       }
       if (carousel2) {
-        carousel2.removeEventListener('scroll', createScrollHandler(carousel2, 'row2', 3));
+        carousel2.removeEventListener(
+          "scroll",
+          createScrollHandler(carousel2, "row2", 3)
+        );
       }
     };
   }, []);
@@ -171,7 +181,9 @@ export function FeaturesSection({ contentData }: FeaturesSectionProps) {
                   <div
                     key={index}
                     className={`h-2 w-2 rounded-full transition-colors duration-200 ${
-                      index === activeCardIndex.row1 ? "bg-white/80" : "bg-white/30"
+                      index === activeCardIndex.row1
+                        ? "bg-white/80"
+                        : "bg-white/30"
                     }`}
                   ></div>
                 ))}
@@ -203,7 +215,9 @@ export function FeaturesSection({ contentData }: FeaturesSectionProps) {
                   <div
                     key={index}
                     className={`h-2 w-2 rounded-full transition-colors duration-200 ${
-                      index === activeCardIndex.row2 ? "bg-white/80" : "bg-white/30"
+                      index === activeCardIndex.row2
+                        ? "bg-white/80"
+                        : "bg-white/30"
                     }`}
                   ></div>
                 ))}

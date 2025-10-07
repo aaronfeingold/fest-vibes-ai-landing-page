@@ -1,19 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { EnhancedEmailInput } from "./ui/enhanced-email-input";
-import DonationModal from "./ui/donation-modal";
-import { Button } from "./ui/button";
-import { emailSchema } from "../lib/validation";
+import { EmailInput } from "./EmailInput";
+import DonationModal from "../modals/DonationModal";
+import { Button } from "../ui/button";
+import { emailSchema } from "../../lib/validation";
 import { z } from "zod";
 
-interface EnhancedBetaSignupProps {
+interface BetaSignupProps {
   onClose: () => void;
 }
 
-export default function EnhancedBetaSignup({
-  onClose,
-}: EnhancedBetaSignupProps) {
+export default function BetaSignup({ onClose }: BetaSignupProps) {
   const [email, setEmail] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [emailError, setEmailError] = useState("");
@@ -70,7 +68,7 @@ export default function EnhancedBetaSignup({
 
   const submitSignup = async (
     wantsDonation: boolean,
-    hasSeenDonationModal: boolean,
+    hasSeenDonationModal: boolean
   ) => {
     setIsSubmitting(true);
     setApiError("");
@@ -126,7 +124,7 @@ export default function EnhancedBetaSignup({
     <>
       <form onSubmit={handleInitialSubmit} className="space-y-4">
         <div>
-          <EnhancedEmailInput
+          <EmailInput
             value={email}
             onChange={handleEmailChange}
             onValidChange={setIsValidEmail}

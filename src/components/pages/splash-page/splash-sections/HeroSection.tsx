@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { ContentData } from "@/hooks/use-homepage-state";
-import { VenueMarquee } from "@/components/ui/venue-marquee";
+import { VenueMarquee } from "@/components/ui/VenueMarquee";
 import TypingText from "@/components/ui/shadcn-io/typing-text";
 import { useNoBackgroundMascots } from "@/hooks/use-brand-assets";
 

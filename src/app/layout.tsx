@@ -2,8 +2,8 @@ import type React from "react";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import { PHProvider } from "@/components/posthog-provider";
-import { ThemeProvider } from "@/components/theme-provider";
+import { PHProvider } from "@/components/PHProvider";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const poppins = Poppins({
   subsets: ["latin"],

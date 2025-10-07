@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, forwardRef } from "react";
-import { Input } from "./input";
-import { Button } from "./button";
+import { forwardRef } from "react";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 import { Mail } from "lucide-react";
 
-interface EnhancedEmailInputProps {
+interface EmailInputProps {
   value: string;
   onChange: (value: string) => void;
   onValidChange?: (isValid: boolean) => void;
@@ -14,10 +14,7 @@ interface EnhancedEmailInputProps {
   error?: string;
 }
 
-export const EnhancedEmailInput = forwardRef<
-  HTMLInputElement,
-  EnhancedEmailInputProps
->(
+export const EmailInput = forwardRef<HTMLInputElement, EmailInputProps>(
   (
     {
       value,
@@ -27,7 +24,7 @@ export const EnhancedEmailInput = forwardRef<
       disabled,
       error,
     },
-    ref,
+    ref
   ) => {
     const handleGmailClick = () => {
       if (!value.includes("@") && value.trim()) {
@@ -84,7 +81,7 @@ export const EnhancedEmailInput = forwardRef<
         {error && <p className="text-red-300 text-sm mt-1">{error}</p>}
       </div>
     );
-  },
+  }
 );
 
-EnhancedEmailInput.displayName = "EnhancedEmailInput";
+EmailInput.displayName = "EmailInput";

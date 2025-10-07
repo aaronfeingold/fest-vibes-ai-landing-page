@@ -1,16 +1,16 @@
 import type React from "react";
 
-interface MascotVibesOverlayProps {
+interface MascotOverlayProps {
   show: boolean;
   assistantName: string;
   mascotNoBackground: string;
 }
 
-export function MascotVibesOverlay({
+export function MascotOverlay({
   show,
   assistantName,
   mascotNoBackground,
-}: MascotVibesOverlayProps) {
+}: MascotOverlayProps) {
   if (!show) return null;
 
   return (

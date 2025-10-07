@@ -1,5 +1,5 @@
 import type React from "react";
-import { PricingCard } from "@/components/ui/PricingCard";
+import { PricingCard } from "@/components/pages/splash-page/components/PricingCard";
 import { PRICING_PLANS } from "@/lib/homepage-data";
 import { useAssistantName } from "@/hooks/use-feature-flags";
 

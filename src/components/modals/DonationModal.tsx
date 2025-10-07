@@ -1,8 +1,8 @@
 "use client";
 
-import { Button } from "./button";
+import { Button } from "../ui/button";
 import { X, Heart, Gift, DollarSign } from "lucide-react";
-import VenmoDonationLink from "./venmo-donation-link";
+import VenmoDonationLink from "../ui/VenmoDonationLink";
 
 interface DonationModalProps {
   isOpen: boolean;

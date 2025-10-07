@@ -1,13 +1,8 @@
 import type React from "react";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BarChart3, TrendingUp, MapPin, Users } from "lucide-react";
-import { EventCard } from "@/components/ui/EventCard";
-import { StatCard } from "@/components/ui/StatCard";
+import { EventCard } from "@/components/pages/splash-page/components/EventCard";
+import { StatCard } from "@/components/pages/splash-page/components/StatCard";
 import { MOCK_EVENTS } from "@/lib/homepage-data";
 
 export function AnalyticsSection() {

@@ -2,26 +2,26 @@
 
 import type React from "react";
 import { useState, useEffect } from "react";
-import { AnimatedBackground } from "@/components/ui/AnimatedBackground";
-import { PageLoader } from "@/components/ui/page-loader";
-import { HeroSection } from "@/components/splash-sections/HeroSection";
-import { FeaturesSection } from "@/components/splash-sections/FeaturesSection";
-import { PricingSection } from "@/components/splash-sections/PricingSection";
-import { ChatDemoSection } from "@/components/splash-sections/ChatDemoSection";
-import { AnalyticsSection } from "@/components/splash-sections/AnalyticsSection";
-import { CTASection } from "@/components/splash-sections/CTASection";
-import { FooterSection } from "@/components/splash-sections/FooterSection";
+import { AnimatedBackground } from "@/components/pages/splash-page/components/AnimatedBackground";
+import { PageLoader } from "@/components/ui/PageLoader";
+import { HeroSection } from "@/components/pages/splash-page/splash-sections/HeroSection";
+import { FeaturesSection } from "@/components/pages/splash-page/splash-sections/FeaturesSection";
+import { PricingSection } from "@/components/pages/splash-page/splash-sections/PricingSection";
+import { ChatDemoSection } from "@/components/pages/splash-page/splash-sections/ChatDemoSection";
+import { AnalyticsSection } from "@/components/pages/splash-page/splash-sections/AnalyticsSection";
+import { CTASection } from "@/components/pages/splash-page/splash-sections/CTASection";
+import { FooterSection } from "@/components/pages/splash-page/splash-sections/FooterSection";
 import { EmailSignupModal } from "@/components/modals/EmailSignupModal";
-import { MascotVibesOverlay } from "@/components/modals/MascotVibesOverlay";
-import BetaSignupModal from "@/components/BetaSignupModal";
-import { ABTestNavigation } from "@/components/ab-test-navigation";
+import { MascotOverlay } from "@/components/modals/MascotOverlay";
+import BetaSignupModal from "@/components/modals/BetaSignupModal";
+import { Nav } from "@/components/Nav";
 import { useHomepageState } from "@/hooks/use-homepage-state";
 
-interface HomePageClientProps {
+interface SplashPageProps {
   venueNames: string[];
 }
 
-export function HomePageClient({ venueNames }: HomePageClientProps) {
+export function SplashPage({ venueNames }: SplashPageProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [showContent, setShowContent] = useState(false);
   const [contentVisible, setContentVisible] = useState(false);
@@ -53,13 +53,17 @@ export function HomePageClient({ venueNames }: HomePageClientProps) {
       <div
         id="home-page-container"
         className="scrollbar-hide relative flex h-full w-full flex-col overflow-x-hidden overflow-y-scroll scroll-smooth min-h-screen bg-brand-gradient-br dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-slate-950"
-        style={{ display: contentVisible ? 'block' : 'none' }}
+        style={{ display: contentVisible ? "block" : "none" }}
       >
         <AnimatedBackground />
 
-        <ABTestNavigation {...state.navigationProps} />
+        <Nav {...state.navigationProps} />
 
-        <HeroSection {...state.heroProps} showContent={showContent} venueNames={venueNames} />
+        <HeroSection
+          {...state.heroProps}
+          showContent={showContent}
+          venueNames={venueNames}
+        />
         <FeaturesSection contentData={state.contentData} />
         <PricingSection onJoinBetaClick={state.handleJoinBetaClick} />
         <ChatDemoSection />
@@ -70,7 +74,7 @@ export function HomePageClient({ venueNames }: HomePageClientProps) {
         {/* Modals */}
         <BetaSignupModal {...state.betaModalProps} />
         <EmailSignupModal {...state.emailModalProps} />
-        <MascotVibesOverlay {...state.mascotProps} />
+        <MascotOverlay {...state.mascotProps} />
       </div>
     </>
   );

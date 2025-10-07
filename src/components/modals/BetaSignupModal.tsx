@@ -1,6 +1,6 @@
 "use client";
 
-import EnhancedBetaSignup from "./EnhancedBetaSignup";
+import EnhancedBetaSignup from "../forms/BetaSignup";
 
 interface BetaSignupModalProps {
   isOpen: boolean;

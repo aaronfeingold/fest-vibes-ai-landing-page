@@ -30,12 +30,16 @@ export function BetaSignupModal({ isOpen, onClose }: BetaSignupModalProps) {
             <Image
               src="/icons/trumpet-no-bg.png"
               alt="Trumpet"
+              width={32}
+              height={32}
               className="w-8 h-8 object-contain"
             />
             Join the Beta!
             <Image
               src="/icons/trumpet-no-bg.png"
               alt="Trumpet"
+              width={32}
+              height={32}
               className="w-8 h-8 object-contain transform rotate-[270deg]"
             />
           </h3>

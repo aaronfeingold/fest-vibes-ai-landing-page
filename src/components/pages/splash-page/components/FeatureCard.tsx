@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Feature } from "@/lib/homepage-data";
-
+import Image from "next/image";
 interface FeatureCardProps {
   feature: Feature;
   index?: number;
@@ -25,7 +25,7 @@ export function FeatureCard({ feature, index }: FeatureCardProps) {
           }`}
         >
           {feature.iconImage ? (
-            <img
+            <Image
               src={feature.iconImage}
               alt={`${feature.title} icon`}
               className="w-full h-full object-cover rounded-lg"

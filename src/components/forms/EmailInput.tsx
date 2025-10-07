@@ -1,8 +1,7 @@
 "use client";
 
 import { forwardRef } from "react";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
+import { Input, Button } from "@/ui";
 import { Mail } from "lucide-react";
 
 interface EmailInputProps {

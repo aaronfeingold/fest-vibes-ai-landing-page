@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "../../../../lib/db";
-import { emailAnalytics } from "../../../../lib/db/schema";
+import { db } from "@/lib/db";
+import { emailAnalytics } from "@/lib/db/schema";
 
 // Resend webhook handler for email events
 export async function POST(request: NextRequest) {

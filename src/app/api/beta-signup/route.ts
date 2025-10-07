@@ -38,18 +38,32 @@ export async function POST(request: NextRequest) {
     // Send welcome email
     if (process.env.RESEND_API_KEY) {
       try {
-        const domain = request.headers.get("host")
-          ? `${
-              request.headers.get("x-forwarded-proto") || "https"
-            }://${request.headers.get("host")}`
-          : "https://festvibes.xyz";
+        // Determine domain only for links/assets in the email
+        const headerHost = request.headers.get("host") || "";
+        const headerProto = request.headers.get("x-forwarded-proto") || "https";
+        const inferredDomain = headerHost
+          ? `${headerProto}://${headerHost}`
+          : process.env.NEXT_PUBLIC_APP_DOMAIN || "https://festvibes.xyz";
 
-        const emailTemplate = generateBetaWelcomeEmail({
-          email,
-          domain,
-        });
+        // Always use a fixed, validated sender from env
+        const fromEnv = process.env.RESEND_FROM;
 
-        await resend.emails.send(emailTemplate);
+        // Basic validation: must contain <...@...> and no localhost/port
+        const looksInvalid =
+          !fromEnv || /localhost|127\.0\.0\.1|:\d+/.test(fromEnv);
+        if (looksInvalid) {
+          console.warn(
+            "RESEND_FROM is missing or invalid; skipping email send to avoid 422."
+          );
+        } else {
+          const emailTemplate = generateBetaWelcomeEmail({
+            email,
+            domain: inferredDomain,
+            from: fromEnv,
+          });
+
+          await resend.emails.send(emailTemplate);
+        }
       } catch (emailError) {
         console.error("Failed to send welcome email:", emailError);
         // Don't fail the signup if email fails

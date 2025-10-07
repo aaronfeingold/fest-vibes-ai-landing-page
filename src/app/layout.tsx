@@ -4,6 +4,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { PHProvider, ThemeProvider } from "@/providers";
 import { SITE_METADATA } from "@/lib/homepage-data";
+import { Toaster } from "sonner";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -35,7 +36,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <PHProvider>{children}</PHProvider>
+          <PHProvider>
+            {children}
+            <Toaster richColors closeButton />
+          </PHProvider>
         </ThemeProvider>
       </body>
     </html>

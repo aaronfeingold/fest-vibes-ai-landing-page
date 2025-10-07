@@ -49,7 +49,7 @@ export function useHomepageState() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
-  const [showBoomyVibes, setShowBoomyVibes] = useState(false);
+  const [showMascot, setShowMascot] = useState(false);
   const [contentData, setContentData] = useState<ContentData | null>(null);
 
   // Effects
@@ -83,9 +83,9 @@ export function useHomepageState() {
 
   const handleBoomyClick = () => {
     posthog?.capture("boomy_mascot_clicked");
-    setShowBoomyVibes(true);
+    setShowMascot(true);
     setTimeout(() => {
-      setShowBoomyVibes(false);
+      setShowMascot(false);
     }, 4500);
   };
 
@@ -158,7 +158,7 @@ export function useHomepageState() {
     isSubmitted,
     isSubmitting,
     submitError,
-    showBoomyVibes,
+    showMascot,
 
     // State setters (for components that need them)
     setEmail,
@@ -202,7 +202,7 @@ export function useHomepageState() {
     },
 
     mascotProps: {
-      show: showBoomyVibes,
+      show: showMascot,
       assistantName,
       mascotNoBackground,
     },

@@ -12,11 +12,9 @@ import {
   CTASection,
   FooterSection,
 } from "@/splash-sections";
-import { PageLoader } from "@/ui/PageLoader";
-import { Nav } from "@/ui/Nav";
+import { Nav, PageLoader, MascotOverlay } from "@/ui";
 import { useHomepageState } from "@/hooks/use-homepage-state";
 import { EmailSignupModal, BetaSignupModal } from "@/modals";
-import { MascotOverlay } from "@/ui/MascotOverlay";
 
 interface SplashPageProps {
   venueNames: string[];

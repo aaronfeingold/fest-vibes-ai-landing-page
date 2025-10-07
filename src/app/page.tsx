@@ -1,7 +1,7 @@
 import type React from "react";
 import { getVenueNames } from "@/lib/actions/get-venue-names";
-import { MUSIC_BRANDS } from "@/components/ui/BrandLogo";
-import { SplashPage } from "@/components/pages/splash-page/SplashPage";
+import { MUSIC_BRANDS } from "@/ui";
+import { SplashPage } from "@/splash/SplashPage";
 
 export default async function RootPage() {
   let venueNames: string[] = [];

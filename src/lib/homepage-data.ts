@@ -78,14 +78,16 @@ export const FEATURES: Feature[] = [
     icon: MessageCircle,
     iconImage: "/icons/chat.png",
     title: "Chat Assistance",
-    description: "Vibe with your AI assistant to craft personalized weekend music experiences",
+    description:
+      "Vibe with your AI assistant to craft personalized weekend music experiences",
     color: "from-brand-primary to-brand-secondary",
   },
   {
     icon: MapPin,
     iconImage: "/icons/analytics.png",
     title: "Nightlife Analytics",
-    description: "Understand the landscape of your own nightlife with insights and trends",
+    description:
+      "Understand the landscape of your own nightlife with insights and trends",
     color: "from-stage-sky to-indigo-500",
   },
 ];
@@ -191,4 +193,11 @@ export const EVENT_ICONS = {
   "Tank & The Bangas": Mic2,
   "The Iceman Special": "/icons/guitar-no-bg.png",
   Boyfriend: "/icons/xo-boyfriend.png",
+} as const;
+
+export const SITE_METADATA = {
+  title: "Fest-Vibes",
+  description:
+    "Transform any weekend into a personalized music festival. Discover local live music, curate plan with friends, and experience the ultimate decentralized festival in your pocket.",
+  generator: "afdc.dev",
 } as const;

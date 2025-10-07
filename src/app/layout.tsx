@@ -2,8 +2,8 @@ import type React from "react";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import { PHProvider } from "@/components/PHProvider";
-import { ThemeProvider } from "@/components/ThemeProvider";
+import { PHProvider, ThemeProvider } from "@/providers";
+import { SITE_METADATA } from "@/lib/homepage-data";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -11,10 +11,9 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Fest-Vibes",
-  description:
-    "Transform any weekend into a personalized music festival. Discover local live music, curate plan with friends, and experience the ultimate decentralized festival in your pocket.",
-  generator: "afdc.dev",
+  title: SITE_METADATA.title,
+  description: SITE_METADATA.description,
+  generator: SITE_METADATA.generator,
   icons: {
     icon: "/favicon.png",
     shortcut: "/favicon.png",

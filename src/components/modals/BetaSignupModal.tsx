@@ -7,10 +7,7 @@ interface BetaSignupModalProps {
   onClose: () => void;
 }
 
-export default function BetaSignupModal({
-  isOpen,
-  onClose,
-}: BetaSignupModalProps) {
+export function BetaSignupModal({ isOpen, onClose }: BetaSignupModalProps) {
   if (!isOpen) return null;
 
   return (

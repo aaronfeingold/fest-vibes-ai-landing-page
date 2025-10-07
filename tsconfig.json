@@ -19,7 +19,25 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/hooks/*": ["./src/hooks/*"],
+      "@/lib/*": ["./src/lib/*"],
+      "@/providers/*": ["./src/components/providers/*"],
+      "@/providers": ["./src/components/providers/index"],
+      "@/pages/*": ["./src/components/pages/*"],
+      "@/pages": ["./src/components/pages/index"],
+      "@/splash/*": ["./src/components/pages/splash-page/*"],
+      "@/splash-sections": [
+        "./src/components/pages/splash-page/splash-sections/index"
+      ],
+      "@/modals/*": ["./src/components/modals/*"],
+      "@/modals": ["./src/components/modals/index"],
+      "@/forms/*": ["./src/components/forms/*"],
+      "@/actions/*": ["./src/lib/actions/*"],
+      "@/validation/*": ["./src/lib/validation/*"],
+      "@/ui/*": ["./src/components/ui/*"],
+      "@/ui": ["./src/components/ui/index"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

@@ -2,20 +2,21 @@
 
 import type React from "react";
 import { useState, useEffect } from "react";
-import { AnimatedBackground } from "@/components/pages/splash-page/components/AnimatedBackground";
-import { PageLoader } from "@/components/ui/PageLoader";
-import { HeroSection } from "@/components/pages/splash-page/splash-sections/HeroSection";
-import { FeaturesSection } from "@/components/pages/splash-page/splash-sections/FeaturesSection";
-import { PricingSection } from "@/components/pages/splash-page/splash-sections/PricingSection";
-import { ChatDemoSection } from "@/components/pages/splash-page/splash-sections/ChatDemoSection";
-import { AnalyticsSection } from "@/components/pages/splash-page/splash-sections/AnalyticsSection";
-import { CTASection } from "@/components/pages/splash-page/splash-sections/CTASection";
-import { FooterSection } from "@/components/pages/splash-page/splash-sections/FooterSection";
-import { EmailSignupModal } from "@/components/modals/EmailSignupModal";
-import { MascotOverlay } from "@/components/modals/MascotOverlay";
-import BetaSignupModal from "@/components/modals/BetaSignupModal";
-import { Nav } from "@/components/Nav";
+import { AnimatedBackground } from "@/splash/components/AnimatedBackground";
+import {
+  HeroSection,
+  FeaturesSection,
+  PricingSection,
+  ChatDemoSection,
+  AnalyticsSection,
+  CTASection,
+  FooterSection,
+} from "@/splash-sections";
+import { PageLoader } from "@/ui/PageLoader";
+import { Nav } from "@/ui/Nav";
 import { useHomepageState } from "@/hooks/use-homepage-state";
+import { EmailSignupModal, BetaSignupModal } from "@/modals";
+import { MascotOverlay } from "@/ui/MascotOverlay";
 
 interface SplashPageProps {
   venueNames: string[];

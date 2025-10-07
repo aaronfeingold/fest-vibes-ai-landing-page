@@ -313,7 +313,6 @@ export function Nav({ onMascotClick, onJoinBetaClick }: NavProps) {
   // Calculate dynamic transparency based on scroll
   const scrollOpacity = Math.min(scrollY / 100, 0.9); // Max opacity of 0.9
   const backgroundClass = `bg-black/${Math.round(20 + scrollOpacity * 60)}`; // 20% to 80% opacity
-  const borderOpacity = Math.min(scrollY / 200, 0.3); // Max border opacity of 0.3
 
   return (
     <div

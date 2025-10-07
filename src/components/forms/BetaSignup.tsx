@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { EmailInput } from "@/forms";
-import DonationModal from "@/modals/DonationModal";
+import { DonationModal } from "@/modals";
 import { Button } from "@/ui";
 import { emailSchema } from "@/lib/validation";
 import { z } from "zod";

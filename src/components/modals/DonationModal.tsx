@@ -12,7 +12,7 @@ interface DonationModalProps {
   email: string;
 }
 
-export default function DonationModal({
+export function DonationModal({
   isOpen,
   onClose,
   onAccept,

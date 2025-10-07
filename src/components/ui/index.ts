@@ -1,4 +1,4 @@
-export * from "./shadcn-io/typing-text";
+export * from "./typing-text";
 export * from "./button";
 export * from "./BrandLogo";
 export * from "./badge";

@@ -4,7 +4,7 @@ import type React from "react";
 import { useState, useEffect, useRef } from "react";
 import { DEMO_CAPABILITIES } from "@/lib/homepage-data";
 import { useAssistantName } from "@/hooks/use-feature-flags";
-import TypingText from "@/components/ui/shadcn-io/typing-text";
+import TypingText from "@/components/ui/typing-text";
 
 interface ChatMessage {
   id: number;

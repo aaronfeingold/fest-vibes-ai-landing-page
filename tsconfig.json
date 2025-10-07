@@ -31,6 +31,9 @@
       "@/splash-sections": [
         "./src/components/pages/splash-page/splash-sections/index"
       ],
+      "@/splash-components": [
+        "./src/components/pages/splash-page/components/index"
+      ],
       "@/modals/*": ["./src/components/modals/*"],
       "@/modals": ["./src/components/modals/index"],
       "@/forms/*": ["./src/components/forms/*"],

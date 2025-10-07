@@ -1,11 +1,8 @@
 import type React from "react";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { ContentData } from "@/hooks/use-homepage-state";
-import { VenueMarquee } from "@/components/ui/VenueMarquee";
-import TypingText from "@/components/ui/shadcn-io/typing-text";
-import { useNoBackgroundMascots } from "@/hooks/use-brand-assets";
+import { Button, TypingText, VenueMarquee } from "@/ui";
+import { ContentData, useNoBackgroundMascots } from "@/hooks";
 
 interface HeroSectionProps {
   isVisible: boolean;
@@ -160,7 +157,7 @@ export function HeroSection({
         </div>
       </div>
 
-      {/* Venue Marquee - positioned at bottom like Suno */}
+      {/* Venue Marquee - positioned at bottom of hero right above the fold */}
       <div
         id="hero-venue-marquee-container"
         className="relative mt-8 w-full [@media(min-height:550px)]:absolute [@media(min-height:550px)]:bottom-10 [@media(min-height:550px)]:left-0 [@media(min-height:550px)]:-z-10 [@media(min-height:550px)]:mt-0"

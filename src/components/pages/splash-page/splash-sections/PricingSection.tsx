@@ -1,7 +1,7 @@
 import type React from "react";
-import { PricingCard } from "@/components/pages/splash-page/components/PricingCard";
+import { PricingCard } from "@/splash-components";
 import { PRICING_PLANS } from "@/lib/homepage-data";
-import { useAssistantName } from "@/hooks/use-feature-flags";
+import { useAssistantName } from "@/hooks";
 
 interface PricingSectionProps {
   onJoinBetaClick: () => void;

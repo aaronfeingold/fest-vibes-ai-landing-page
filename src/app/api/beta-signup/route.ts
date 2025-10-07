@@ -77,7 +77,7 @@ export async function POST(request: NextRequest) {
       console.error("Beta signup validation error:", error.errors);
       return NextResponse.json(
         { error: "Invalid request data" },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
@@ -87,7 +87,7 @@ export async function POST(request: NextRequest) {
       error.cause?.code === "23505" ||
       error.constraint === "beta_signups_normalized_email_unique" ||
       error.message?.includes(
-        "duplicate key value violates unique constraint",
+        "duplicate key value violates unique constraint"
       ) ||
       error.message?.includes("beta_signups_normalized_email_unique")
     ) {
@@ -100,7 +100,7 @@ export async function POST(request: NextRequest) {
           error:
             "This email has already been registered for the beta. Thanks for your interest!",
         },
-        { status: 409 },
+        { status: 409 }
       );
     }
 
@@ -115,7 +115,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

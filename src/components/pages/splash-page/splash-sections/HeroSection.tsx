@@ -118,9 +118,9 @@ export function HeroSection({
                 <TypingText
                   text={messages}
                   className="text-white"
-                  typingSpeed={50}
-                  deletingSpeed={20}
-                  pauseDuration={3000}
+                  typingSpeed={30}
+                  deletingSpeed={10}
+                  pauseDuration={3500}
                   initialDelay={1000}
                   loop={true}
                   showCursor={true}

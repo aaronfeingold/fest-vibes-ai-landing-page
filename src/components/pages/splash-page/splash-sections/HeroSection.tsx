@@ -2,7 +2,8 @@ import type React from "react";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Button, TypingText, VenueMarquee } from "@/ui";
-import { ContentData, useNoBackgroundMascots } from "@/hooks";
+import { useNoBackgroundMascots } from "@/hooks";
+import { ContentData } from "@/lib/content-loader";
 
 interface HeroSectionProps {
   isVisible: boolean;

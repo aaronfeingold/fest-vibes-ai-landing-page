@@ -11,12 +11,21 @@ import {
   Mic2,
 } from "lucide-react";
 import { ICONS } from "./icons";
+import { ContentData } from "./content-loader";
 
 export interface Feature {
+  id: string;
   icon: React.ComponentType<{ className?: string }>;
   iconImage: string;
   title: string;
   description: string;
+  color: string;
+}
+
+export interface FeatureSkeleton {
+  id: string;
+  icon: React.ComponentType<{ className?: string }>;
+  iconImage: string;
   color: string;
 }
 
@@ -30,6 +39,7 @@ export interface MockEvent {
 
 // todo - three prices? to the moon
 export interface PricingPlan {
+  id: string;
   name: string;
   price: string;
   description: string;
@@ -40,10 +50,32 @@ export interface PricingPlan {
   buttonVariant?: "default" | "secondary";
 }
 
+export interface PricingSkeleton {
+  id: string;
+  buttonVariant: "default" | "secondary";
+  isPopular: boolean;
+}
+
 export interface DemoCapability {
   icon: React.ComponentType<{ className?: string }>;
   text: string;
 }
+
+// Content IDs for mapping
+export const CONTENT_IDS = {
+  FEATURES: {
+    LOCAL_MUSICIANS: "local-musicians",
+    DISCOVER_MUSIC: "discover-music",
+    PLAN_AHEAD: "plan-ahead",
+    CONNECT: "connect",
+    CHAT: "chat",
+    ANALYTICS: "analytics",
+  },
+  PRICING: {
+    FREE: "free",
+    VIBES: "vibes",
+  },
+} as const;
 
 export const SITE_METADATA = {
   title: "Fest-Vibes",
@@ -52,55 +84,47 @@ export const SITE_METADATA = {
   generator: "afdc.dev",
 } as const;
 
-// this should come from marketing team
-export const FEATURES: Feature[] = [
+// Skeleton with structure only - content comes from CMS
+export const FEATURES_SKELETON: FeatureSkeleton[] = [
   {
+    id: CONTENT_IDS.FEATURES.LOCAL_MUSICIANS,
     icon: Heart,
     iconImage: ICONS.saints,
-    title: "Local Musicians Search",
-    description: "Stay up to date with your favorite local musicians.",
     color: "from-festival-pink-500 to-red-500",
   },
   {
+    id: CONTENT_IDS.FEATURES.DISCOVER_MUSIC,
     icon: Music,
     iconImage: ICONS.trumpet.standard,
-    title: "Discover Live Music",
-    description: "Find what you love or step outside the box",
     color: "from-stage-mint to-emerald-500",
   },
   {
+    id: CONTENT_IDS.FEATURES.PLAN_AHEAD,
     icon: Calendar,
     iconImage: ICONS.plan,
-    title: "Plan Ahead",
-    description: "Curate multi-day timelines and jam pack your weekends",
     color: "from-indigo-500 to-brand-primary",
   },
   {
+    id: CONTENT_IDS.FEATURES.CONNECT,
     icon: Users,
     iconImage: ICONS.krewe,
-    title: "Connect",
-    description: "Share your plans with your friends",
     color: "from-stage-sky to-stage-turquoise",
   },
   {
+    id: CONTENT_IDS.FEATURES.CHAT,
     icon: MessageCircle,
     iconImage: ICONS.chat,
-    title: "Chat",
-    description:
-      "Create personalized weekend music experiences with assistance",
     color: "from-brand-primary to-brand-secondary",
   },
   {
+    id: CONTENT_IDS.FEATURES.ANALYTICS,
     icon: MapPin,
     iconImage: ICONS.analytics,
-    title: "Nightlife Analytics",
-    description:
-      "Stay in the the know on your hometown's music scene with insights and trends",
     color: "from-stage-sky to-indigo-500",
   },
 ];
 
-// this will come from API
+// Mock events - will come from API in future
 export const MOCK_EVENTS: MockEvent[] = [
   {
     name: "Trombone Shorty",
@@ -132,68 +156,29 @@ export const MOCK_EVENTS: MockEvent[] = [
   },
 ];
 
-// this will come from Marketing Team (markdown maybe?)
-export const PRICING_PLANS: PricingPlan[] = [
+// Skeleton with structure only - content comes from CMS
+export const PRICING_SKELETON: PricingSkeleton[] = [
   {
-    name: "Free Plan",
-    price: "$0",
-    description: "Perfect for getting started with music discovery",
-    features: [
-      "Dynamic data filtering",
-      "Visual heat map discovery",
-      "Drag-and-drop planning",
-      "Shareable festival plans",
-      "Export to social media",
-    ],
-    excludedFeatures: ["No Chat assistance"],
-    buttonText: "Get Started Free",
+    id: CONTENT_IDS.PRICING.FREE,
     buttonVariant: "secondary",
+    isPopular: false,
   },
   {
-    name: "Vibes Plan",
-    price: "$9.99",
-    description: "Everything in Free, plus unlimited AI assistance",
-    features: [
-      "Chat assistance",
-      "Personalized recommendations",
-      "Smart schedule optimization",
-      "Venue and artist insights",
-      "Priority customer support",
-      "Everything in Free Plan",
-    ],
-    isPopular: true,
-    buttonText: "Start Free Trial",
+    id: CONTENT_IDS.PRICING.VIBES,
     buttonVariant: "default",
+    isPopular: true,
   },
 ];
 
-// more marketing content
-export const DEMO_CAPABILITIES: DemoCapability[] = [
-  {
-    icon: MapPin,
-    text: "Discover local venues and hidden gems",
-  },
-  {
-    icon: Star,
-    text: "Track your favorite artists and venues",
-  },
-  {
-    icon: Users,
-    text: "Coordinate plans with your friend group",
-  },
-  {
-    icon: Calendar,
-    text: "Create multi-day festival itineraries",
-  },
-  {
-    icon: TrendingUp,
-    text: "Get personalized music recommendations",
-  },
-  {
-    icon: Clock,
-    text: "Optimize timing for multiple events",
-  },
-];
+// Demo capabilities - icons stay in code, text comes from CMS
+export const DEMO_CAPABILITIES_ICONS = [
+  MapPin,
+  Star,
+  Users,
+  Calendar,
+  TrendingUp,
+  Clock,
+] as const;
 
 // custom icons for some local artists
 export const EVENT_ICONS = {
@@ -203,30 +188,100 @@ export const EVENT_ICONS = {
   Boyfriend: ICONS.xoBoyfriend,
 } as const;
 
-// Marketing stuff for stat cards -- nobody reads this
-export const STAT_CARDS_DATA = [
+// Stat cards - icons and colors stay in code, content comes from CMS
+export const STAT_CARDS_SKELETON = [
   {
-    title: "Funk Events This Week",
-    value: 127,
-    change: "↗ 100% more funkier than last week",
-    changeColor: "text-green-400",
     icon: TrendingUp,
     iconColors: "bg-gradient-to-r from-stage-mint to-emerald-500",
   },
   {
-    title: "Weekend Events",
-    value: 162,
-    change: "5 new added today",
-    changeColor: "text-blue-400",
     icon: MapPin,
     iconColors: "bg-gradient-to-r from-stage-sky to-stage-turquoise",
   },
   {
-    title: "Lit Fam",
-    value: 16,
-    change: "Your Krewe's Vibes Are Growing!",
-    changeColor: "text-brand-accent",
     icon: Users,
     iconColors: "bg-brand-gradient",
   },
 ] as const;
+
+// Merge functions to combine skeleton with content
+export function mergeFeaturesWithContent(
+  contentData: ContentData | null
+): Feature[] {
+  return FEATURES_SKELETON.map((feature) => {
+    const content = contentData?.features?.items?.[feature.id];
+    return {
+      ...feature,
+      title: content?.title || "Feature Title",
+      description: content?.description || "Feature description",
+    };
+  });
+}
+
+export function mergePricingWithContent(
+  contentData: ContentData | null
+): PricingPlan[] {
+  return PRICING_SKELETON.map((plan) => {
+    const content = contentData?.pricing?.plans?.[plan.id];
+    return {
+      ...plan,
+      name: content?.name || "Plan Name",
+      price: content?.price || "$0",
+      description: content?.description || "Plan description",
+      features: content?.features || [],
+      excludedFeatures: content?.excludedFeatures,
+      buttonText: content?.buttonText || "Get Started",
+    };
+  });
+}
+
+export function mergeDemoCapabilitiesWithContent(
+  contentData: ContentData | null
+): DemoCapability[] {
+  return DEMO_CAPABILITIES_ICONS.map((icon, index) => {
+    const content = contentData?.chatDemo?.capabilities?.[index];
+    return {
+      icon,
+      text: content?.text || "Capability description",
+    };
+  });
+}
+
+export function mergeStatCardsWithContent(contentData: ContentData | null) {
+  return STAT_CARDS_SKELETON.map((skeleton, index) => {
+    const content = contentData?.analytics?.statCards?.[index];
+    return {
+      ...skeleton,
+      title: content?.title || "Stat Title",
+      value: content?.value || 0,
+      change: content?.change || "No change",
+      changeColor: content?.changeColor || "text-gray-400",
+    };
+  });
+}
+
+// Legacy exports for backward compatibility during transition
+export const FEATURES = FEATURES_SKELETON.map((f) => ({
+  ...f,
+  title: "",
+  description: "",
+})) as Feature[];
+export const PRICING_PLANS = PRICING_SKELETON.map((p) => ({
+  ...p,
+  name: "",
+  price: "",
+  description: "",
+  features: [],
+  buttonText: "",
+})) as PricingPlan[];
+export const DEMO_CAPABILITIES = DEMO_CAPABILITIES_ICONS.map((icon) => ({
+  icon,
+  text: "",
+})) as DemoCapability[];
+export const STAT_CARDS_DATA = STAT_CARDS_SKELETON.map((s) => ({
+  ...s,
+  title: "",
+  value: 0,
+  change: "",
+  changeColor: "",
+}));

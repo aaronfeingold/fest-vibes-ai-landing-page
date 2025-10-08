@@ -1,22 +1,30 @@
 import type React from "react";
 import { PricingCard } from "@/splash-components";
-import { PRICING_PLANS } from "@/lib/homepage-data";
+import { mergePricingWithContent } from "@/lib/homepage-data";
 import { useAssistantName } from "@/hooks";
+import { ContentData } from "@/lib/content-loader";
 
 interface PricingSectionProps {
   onJoinBetaClick: () => void;
+  contentData: ContentData | null;
 }
 
-export function PricingSection({ onJoinBetaClick }: PricingSectionProps) {
+export function PricingSection({
+  onJoinBetaClick,
+  contentData,
+}: PricingSectionProps) {
   const assistantName = useAssistantName();
 
+  // Get merged pricing plans with content from CMS
+  const pricingPlans = mergePricingWithContent(contentData);
+
   // Update the Vibes Plan with assistant name
-  const plansWithAssistantName = PRICING_PLANS.map((plan) => {
+  const plansWithAssistantName = pricingPlans.map((plan) => {
     if (plan.name === "Vibes Plan") {
       return {
         ...plan,
         features: plan.features.map((feature) =>
-          feature.includes("Planning assistance")
+          feature.includes("Chat assistance")
             ? `Chat and Plan with ${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)}`
             : feature
         ),

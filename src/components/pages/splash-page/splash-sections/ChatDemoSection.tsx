@@ -2,9 +2,14 @@
 
 import type React from "react";
 import { useState, useEffect, useRef } from "react";
-import { DEMO_CAPABILITIES } from "@/lib/homepage-data";
+import { mergeDemoCapabilitiesWithContent } from "@/lib/homepage-data";
 import { useAssistantName } from "@/hooks";
 import { TypingText } from "@/ui";
+import { ContentData } from "@/lib/content-loader";
+
+interface ChatDemoSectionProps {
+  contentData: ContentData | null;
+}
 
 interface ChatMessage {
   id: number;
@@ -44,13 +49,16 @@ const MASCOT_IMAGES = [
   "/mascots/no-background/mascot-3.png",
 ];
 
-export function ChatDemoSection() {
+export function ChatDemoSection({ contentData }: ChatDemoSectionProps) {
   const assistantName = useAssistantName();
   const [currentMessageIndex, setCurrentMessageIndex] = useState(-1);
   const [isTyping, setIsTyping] = useState(false);
   const [showTypingIndicator, setShowTypingIndicator] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
+
+  // Get merged capabilities with content from CMS
+  const capabilities = mergeDemoCapabilitiesWithContent(contentData);
 
   // Intersection Observer to detect when component is visible
   useEffect(() => {
@@ -116,12 +124,12 @@ export function ChatDemoSection() {
       <div className="mx-auto max-w-6xl">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-white mb-4">
-            Say What's Up To{" "}
-            {assistantName.charAt(0).toUpperCase() + assistantName.slice(1)},
+            {contentData?.chatDemo?.sectionTitle ||
+              `Say What's Up To ${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)}`}
           </h2>
           <p className="text-xl text-gray-300">
-            {assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} is
-            your guide the best music shows in town
+            {contentData?.chatDemo?.sectionSubtitle ||
+              `${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} is your guide the best music shows in town`}
           </p>
         </div>
 
@@ -218,7 +226,7 @@ export function ChatDemoSection() {
               Can Help You:
             </h3>
             <div className="space-y-4">
-              {DEMO_CAPABILITIES.map((item, index) => (
+              {capabilities.map((item, index) => (
                 <div
                   key={index}
                   className="flex items-center space-x-3 text-gray-300"

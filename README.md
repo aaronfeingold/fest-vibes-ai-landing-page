@@ -13,6 +13,27 @@ Fest-Vibes is a personal planner connecting users to live music events in their 
 - **Event Analytics Dashboard** - Interactive insights into music events and trends
 - **AI Planning Assistant** - Chat with Boomy/Bumi for personalized music experiences (A/B tested)
 
+## Content Management
+
+### Architecture
+
+This project uses a hybrid content management approach:
+
+- **Marketing Content** (`data/content.json`): All text, titles, descriptions, and copy
+- **Technical Structure** (`src/lib/homepage-data.ts`): Icons, colors, layouts, and styling
+
+This separation allows marketing teams to update content without code changes or redeployment.
+
+### Updating Content
+
+To update marketing copy, edit `data/content.json`. Changes take effect on next deployment.
+
+### Future: Headless CMS Integration
+
+> NOTE: This content architecture is designed to migrate to a headless CMS (like Sanity) in the future. The current `data/content.json` file will be replaced with API calls to the CMS, enabling real-time content updates without redeployment.
+
+To prepare for CMS migration, maintain the current JSON structure when adding new content fields.
+
 ## Deployment
 
 This project is optimized for Vercel deployment with Next.js App Router.

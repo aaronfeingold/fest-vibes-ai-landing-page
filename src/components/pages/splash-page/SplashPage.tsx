@@ -16,15 +16,18 @@ import { Nav, PageLoader, MascotOverlay } from "@/ui";
 import { useHomepageState } from "@/hooks/use-homepage-state";
 import { EmailSignupModal, BetaSignupModal } from "@/modals";
 
+import { ContentData } from "@/lib/content-loader";
+
 interface SplashPageProps {
   venueNames: string[];
+  contentData: ContentData | null;
 }
 
-export function SplashPage({ venueNames }: SplashPageProps) {
+export function SplashPage({ venueNames, contentData }: SplashPageProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [showContent, setShowContent] = useState(false);
   const [contentVisible, setContentVisible] = useState(false);
-  const state = useHomepageState();
+  const state = useHomepageState(contentData);
 
   useEffect(() => {
     // Step 1: Prepare animations (while content is still hidden)
@@ -64,10 +67,16 @@ export function SplashPage({ venueNames }: SplashPageProps) {
           venueNames={venueNames}
         />
         <FeaturesSection contentData={state.contentData} />
-        <PricingSection onJoinBetaClick={state.handleJoinBetaClick} />
-        <ChatDemoSection />
-        <AnalyticsSection />
-        <CTASection onJoinBetaClick={state.handleJoinBetaClick} />
+        <PricingSection
+          onJoinBetaClick={state.handleJoinBetaClick}
+          contentData={contentData}
+        />
+        <ChatDemoSection contentData={contentData} />
+        <AnalyticsSection contentData={contentData} />
+        <CTASection
+          onJoinBetaClick={state.handleJoinBetaClick}
+          contentData={contentData}
+        />
         <FooterSection {...state.footerProps} />
 
         {/* Modals */}

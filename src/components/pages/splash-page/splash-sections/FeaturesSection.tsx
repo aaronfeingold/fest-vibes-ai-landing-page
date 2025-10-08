@@ -1,7 +1,7 @@
 import type React from "react";
 import { useState, useEffect, useRef } from "react";
 import { FeatureCard } from "@/splash/components/FeatureCard";
-import { FEATURES } from "@/lib/homepage-data";
+import { mergeFeaturesWithContent } from "@/lib/homepage-data";
 import { ContentData, useAssistantName } from "@/hooks";
 
 interface FeaturesSectionProps {
@@ -86,9 +86,12 @@ export function FeaturesSection({ contentData }: FeaturesSectionProps) {
     };
   }, []);
 
+  // Get merged features with content from CMS
+  const features = mergeFeaturesWithContent(contentData);
+
   // Update the chat assistance feature description with the assistant name
-  const featuresWithAssistantName = FEATURES.map((feature) => {
-    if (feature.title === "Chat Assistance") {
+  const featuresWithAssistantName = features.map((feature) => {
+    if (feature.title === "Chat") {
       return {
         ...feature,
         description: `Vibe with ${assistantName.charAt(0).toUpperCase() + assistantName.slice(1)} to craft personalized weekend music experiences`,
@@ -112,15 +115,15 @@ export function FeaturesSection({ contentData }: FeaturesSectionProps) {
           className={`text-center mb-16 ${isVisible ? "animate-slide-up" : ""}`}
         >
           <h2 className="text-4xl font-bold text-white mb-4">
-            {contentData?.featuresIntro?.title ||
+            {contentData?.features?.introTitle ||
               "Everything You Need for the Perfect"}
             <span className="text-white">
               {" "}
-              {contentData?.featuresIntro?.titleHighlight}
+              {contentData?.features?.introTitleHighlight}
             </span>
           </h2>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            {contentData?.featuresIntro?.subtitle ||
+            {contentData?.features?.introSubtitle ||
               "From smart planning to social collaboration, we're covering every aspect of your music experience."}
           </p>
         </div>

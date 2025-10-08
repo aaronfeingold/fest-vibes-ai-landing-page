@@ -5,38 +5,9 @@ import { usePostHog } from "posthog-js/react";
 import { useAssistantName } from "@/hooks/use-feature-flags";
 import { useMascotAsset } from "@/hooks/use-brand-assets";
 
-export interface ContentData {
-  hero: {
-    subtitle: string;
-    typewriterMessages: string[];
-  };
-  features: {
-    title: string;
-    subtitle: string;
-  };
-  social: {
-    title: string;
-    subtitle: string;
-  };
-  cta: {
-    title: string;
-    subtitle: string;
-  };
-  featuresIntro: {
-    title: string;
-    titleHighlight: string;
-    subtitle: string;
-  };
-  brand: {
-    motto: string;
-  };
-  socialMedia: {
-    twitter: string;
-    instagram: string;
-  };
-}
+import { ContentData } from "@/lib/content-loader";
 
-export function useHomepageState() {
+export function useHomepageState(initialContentData: ContentData | null) {
   const posthog = usePostHog();
   const assistantName = useAssistantName();
   const mascotNoBackground = useMascotAsset("noBackground");
@@ -50,27 +21,11 @@ export function useHomepageState() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [showMascot, setShowMascot] = useState(false);
-  const [contentData, setContentData] = useState<ContentData | null>(null);
+  const [contentData] = useState<ContentData | null>(initialContentData);
 
   // Effects
   useEffect(() => {
     setIsVisible(true);
-  }, []);
-
-  useEffect(() => {
-    const loadContentData = async () => {
-      try {
-        const response = await fetch("/data.json");
-        if (response.ok) {
-          const data = await response.json();
-          setContentData(data);
-        }
-      } catch (error) {
-        console.error("Failed to load content data:", error);
-      }
-    };
-
-    loadContentData();
   }, []);
 
   // Handlers

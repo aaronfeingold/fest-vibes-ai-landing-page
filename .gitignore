@@ -27,7 +27,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-data/
+data/projects/
+data/sessions/
 AI-Product-Development-Toolkit/
 .claude
 plans/

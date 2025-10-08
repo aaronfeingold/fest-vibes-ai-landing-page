@@ -1,12 +1,14 @@
 import type React from "react";
 import { Button } from "@/ui";
 import { MessageCircle, ArrowRight } from "lucide-react";
+import { ContentData } from "@/lib/content-loader";
 
 interface CTASectionProps {
   onJoinBetaClick: () => void;
+  contentData: ContentData | null;
 }
 
-export function CTASection({ onJoinBetaClick }: CTASectionProps) {
+export function CTASection({ onJoinBetaClick, contentData }: CTASectionProps) {
   return (
     <section
       id="cta"
@@ -22,15 +24,14 @@ export function CTASection({ onJoinBetaClick }: CTASectionProps) {
             data-testid="cta-title"
             className="text-4xl font-bold text-white mb-6"
           >
-            Ready to Transform Your Weekends?
+            {contentData?.cta?.title || "Ready to Transform Your Weekends?"}
           </h2>
           <p
             data-testid="cta-description"
             className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto"
           >
-            Join thousands of music lovers in New Orleans who've discovered
-            their perfect festival experience. Start planning your next music
-            adventure today.
+            {contentData?.cta?.subtitle ||
+              "Join thousands of music lovers in New Orleans who've discovered their perfect festival experience. Start planning your next music adventure today."}
           </p>
           <div className="flex justify-center">
             <Button

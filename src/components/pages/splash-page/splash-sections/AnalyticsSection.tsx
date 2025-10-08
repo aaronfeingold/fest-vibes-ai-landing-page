@@ -2,19 +2,31 @@ import type React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/ui";
 import { BarChart3 } from "lucide-react";
 import { EventCard, StatCard } from "@/splash-components";
-import { MOCK_EVENTS, STAT_CARDS_DATA } from "@/lib/homepage-data";
+import { MOCK_EVENTS, mergeStatCardsWithContent } from "@/lib/homepage-data";
+import { ContentData } from "@/lib/content-loader";
 
-export function AnalyticsSection() {
+interface AnalyticsSectionProps {
+  contentData: ContentData | null;
+}
+
+export function AnalyticsSection({ contentData }: AnalyticsSectionProps) {
+  // Get mock events from contentData or fallback to static data
+  const mockEvents = contentData?.analytics?.mockEvents || MOCK_EVENTS;
+
+  // Get merged stat cards with content from CMS
+  const statCards = mergeStatCardsWithContent(contentData);
+
   return (
     <section id="analytics" className="relative z-10 px-6 lg:px-8 py-20">
       <div className="mx-auto max-w-7xl">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-white mb-4">
-            Smart Analytics for Smarter Planning
+            {contentData?.analytics?.sectionTitle ||
+              "Smart Analytics for Smarter Planning"}
           </h2>
           <p className="text-xl text-gray-300">
-            Get insights into music trends, event popularity, and discover
-            what's hot in your area
+            {contentData?.analytics?.sectionSubtitle ||
+              "Get insights into music trends, event popularity, and discover what's hot in your area"}
           </p>
         </div>
 
@@ -30,7 +42,7 @@ export function AnalyticsSection() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {MOCK_EVENTS.map((event, index) => (
+                  {mockEvents.map((event, index) => (
                     <EventCard key={index} event={event} index={index} />
                   ))}
                 </div>
@@ -39,14 +51,14 @@ export function AnalyticsSection() {
           </div>
 
           {/* Stats Cards */}
-          <div className="space-y-6">{generateStatCards(STAT_CARDS_DATA)}</div>
+          <div className="space-y-6">{generateStatCards(statCards)}</div>
         </div>
       </div>
     </section>
   );
 }
 
-function generateStatCards(data: typeof STAT_CARDS_DATA) {
+function generateStatCards(data: ReturnType<typeof mergeStatCardsWithContent>) {
   return data.map((stat, index) => (
     <StatCard
       key={`${stat.title}-${index}`}

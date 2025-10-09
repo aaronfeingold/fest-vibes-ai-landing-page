@@ -30,6 +30,7 @@ interface TypingTextProps {
   onSentenceComplete?: (sentence: string, index: number) => void;
   startOnVisible?: boolean;
   reverseMode?: boolean;
+  showFirstTextImmediately?: boolean;
 }
 
 export const TypingText = ({
@@ -51,20 +52,43 @@ export const TypingText = ({
   onSentenceComplete,
   startOnVisible = false,
   reverseMode = false,
+  showFirstTextImmediately = false,
   ...props
 }: TypingTextProps & React.HTMLAttributes<HTMLElement>) => {
-  const [displayedText, setDisplayedText] = useState("");
-  const [currentCharIndex, setCurrentCharIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [currentTextIndex, setCurrentTextIndex] = useState(0);
-  const [isVisible, setIsVisible] = useState(!startOnVisible);
-  const cursorRef = useRef<HTMLSpanElement>(null);
-  const containerRef = useRef<HTMLElement>(null);
-
   const textArray = useMemo(
     () => (Array.isArray(text) ? text : [text]),
     [text]
   );
+
+  // Initialize displayed text if showFirstTextImmediately is enabled
+  const initialDisplayedText = useMemo(() => {
+    if (showFirstTextImmediately && textArray.length > 0) {
+      return textArray[0];
+    }
+    return "";
+  }, [showFirstTextImmediately, textArray]);
+
+  const initialCharIndex = useMemo(() => {
+    if (showFirstTextImmediately && textArray.length > 0) {
+      return textArray[0].length;
+    }
+    return 0;
+  }, [showFirstTextImmediately, textArray]);
+
+  const initialTextIndex = useMemo(() => {
+    if (showFirstTextImmediately && textArray.length > 0) {
+      return 1; // Start at second text since first is already shown
+    }
+    return 0;
+  }, [showFirstTextImmediately, textArray]);
+
+  const [displayedText, setDisplayedText] = useState(initialDisplayedText);
+  const [currentCharIndex, setCurrentCharIndex] = useState(initialCharIndex);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [currentTextIndex, setCurrentTextIndex] = useState(initialTextIndex);
+  const [isVisible, setIsVisible] = useState(!startOnVisible);
+  const cursorRef = useRef<HTMLSpanElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
 
   const getRandomSpeed = useCallback(() => {
     if (!variableSpeed) return typingSpeed;

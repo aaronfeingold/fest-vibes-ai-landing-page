@@ -1,7 +1,7 @@
 import type React from "react";
 import { useState, useEffect, useRef } from "react";
 import { FeatureCard } from "@/splash/components/FeatureCard";
-import { mergeFeaturesWithContent } from "@/lib/homepage-data";
+import { mergeFeaturesWithContent } from "@/lib/splash-page-data";
 import { useAssistantName } from "@/hooks";
 import { ContentData } from "@/lib/content-loader";
 

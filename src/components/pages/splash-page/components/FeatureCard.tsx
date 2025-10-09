@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Feature } from "@/lib/homepage-data";
+import { Feature } from "@/lib/splash-page-data";
 import Image from "next/image";
 
 interface FeatureCardProps {

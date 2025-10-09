@@ -259,29 +259,3 @@ export function mergeStatCardsWithContent(contentData: ContentData | null) {
     };
   });
 }
-
-// Legacy exports for backward compatibility during transition
-export const FEATURES = FEATURES_SKELETON.map((f) => ({
-  ...f,
-  title: "",
-  description: "",
-})) as Feature[];
-export const PRICING_PLANS = PRICING_SKELETON.map((p) => ({
-  ...p,
-  name: "",
-  price: "",
-  description: "",
-  features: [],
-  buttonText: "",
-})) as PricingPlan[];
-export const DEMO_CAPABILITIES = DEMO_CAPABILITIES_ICONS.map((icon) => ({
-  icon,
-  text: "",
-})) as DemoCapability[];
-export const STAT_CARDS_DATA = STAT_CARDS_SKELETON.map((s) => ({
-  ...s,
-  title: "",
-  value: 0,
-  change: "",
-  changeColor: "",
-}));

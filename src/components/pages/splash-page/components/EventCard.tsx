@@ -1,7 +1,7 @@
 import type React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Mic2 } from "lucide-react";
-import { MockEvent, EVENT_ICONS } from "@/lib/homepage-data";
+import { MockEvent, EVENT_ICONS } from "@/lib/splash-page-data";
 
 interface EventCardProps {
   event: MockEvent;

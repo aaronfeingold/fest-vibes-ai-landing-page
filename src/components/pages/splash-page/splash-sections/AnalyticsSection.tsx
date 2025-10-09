@@ -2,7 +2,7 @@ import type React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/ui";
 import { BarChart3 } from "lucide-react";
 import { EventCard, StatCard } from "@/splash-components";
-import { MOCK_EVENTS, mergeStatCardsWithContent } from "@/lib/homepage-data";
+import { MOCK_EVENTS, mergeStatCardsWithContent } from "@/lib/splash-page-data";
 import { ContentData } from "@/lib/content-loader";
 
 interface AnalyticsSectionProps {

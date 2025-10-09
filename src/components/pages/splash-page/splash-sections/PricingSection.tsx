@@ -1,6 +1,6 @@
 import type React from "react";
 import { PricingCard } from "@/splash-components";
-import { mergePricingWithContent } from "@/lib/homepage-data";
+import { mergePricingWithContent } from "@/lib/splash-page-data";
 import { useAssistantName } from "@/hooks";
 import { ContentData } from "@/lib/content-loader";
 

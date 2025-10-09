@@ -2,7 +2,7 @@
 
 import type React from "react";
 import { useState, useEffect, useRef } from "react";
-import { mergeDemoCapabilitiesWithContent } from "@/lib/homepage-data";
+import { mergeDemoCapabilitiesWithContent } from "@/lib/splash-page-data";
 import { useAssistantName } from "@/hooks";
 import { TypingText } from "@/ui";
 import { ContentData } from "@/lib/content-loader";

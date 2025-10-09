@@ -8,7 +8,7 @@ import {
   Badge,
   Button,
 } from "@/ui";
-import { PricingPlan } from "@/lib/homepage-data";
+import { PricingPlan } from "@/lib/splash-page-data";
 
 interface PricingCardProps {
   plan: PricingPlan;

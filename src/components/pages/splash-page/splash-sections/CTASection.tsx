@@ -1,6 +1,6 @@
 import type React from "react";
 import { Button } from "@/ui";
-import { MessageCircle, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { ContentData } from "@/lib/content-loader";
 
 interface CTASectionProps {

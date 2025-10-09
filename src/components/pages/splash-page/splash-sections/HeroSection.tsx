@@ -120,16 +120,17 @@ export function HeroSection({
                 <TypingText
                   text={messages}
                   className="text-white"
-                  typingSpeed={30}
-                  deletingSpeed={10}
+                  typingSpeed={15}
+                  deletingSpeed={7}
                   pauseDuration={3500}
                   initialDelay={0}
                   loop={true}
                   showCursor={true}
                   cursorClassName="!bg-white lg:!h-16 !h-12"
-                  variableSpeed={{ min: 40, max: 80 }}
+                  variableSpeed={{ min: 10, max: 25 }}
                   startOnVisible={true}
                   showFirstTextImmediately={true}
+                  firstTextDelay={5000}
                 />
               </h1>
             </div>
@@ -170,3 +171,6 @@ export function HeroSection({
     </section>
   );
 }
+
+
+

@@ -123,12 +123,13 @@ export function HeroSection({
                   typingSpeed={30}
                   deletingSpeed={10}
                   pauseDuration={3500}
-                  initialDelay={1000}
+                  initialDelay={0}
                   loop={true}
                   showCursor={true}
                   cursorClassName="!bg-white lg:!h-16 !h-12"
                   variableSpeed={{ min: 40, max: 80 }}
                   startOnVisible={true}
+                  showFirstTextImmediately={true}
                 />
               </h1>
             </div>

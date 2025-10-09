@@ -9,16 +9,20 @@ interface PostHogFlags {
   [key: string]: boolean | string;
 }
 
+// Default feature flags used across all fallback scenarios
+const DEFAULT_FEATURE_FLAGS: PostHogFlags = {
+  "logo-position": "left",
+  "mascot-variant": "1",
+  "logo-type": "standard",
+  "copy-variant": "original",
+  "hero-layout": "default",
+  "nav-mascot-variant": "1",
+};
+
 async function getFeatureFlags(distinctId: string): Promise<PostHogFlags> {
   if (!POSTHOG_API_KEY) {
     console.warn("PostHog API key not found, returning default flags");
-    return {
-      "logo-position": "left",
-      "mascot-variant": "1",
-      "logo-type": "standard",
-      "copy-variant": "original",
-      "hero-layout": "default",
-    };
+    return DEFAULT_FEATURE_FLAGS;
   }
 
   try {
@@ -37,32 +41,14 @@ async function getFeatureFlags(distinctId: string): Promise<PostHogFlags> {
 
     if (!response.ok) {
       console.error("Failed to fetch feature flags:", response.status);
-      return {
-        "logo-position": "left",
-        "mascot-variant": "1",
-        "logo-type": "standard",
-        "copy-variant": "original",
-        "hero-layout": "default",
-      };
+      return DEFAULT_FEATURE_FLAGS;
     }
 
     const data = await response.json();
-    return (
-      data.featureFlags || {
-        "logo-position": "left",
-        "copy-variant": "original",
-        "hero-layout": "default",
-      }
-    );
+    return data.featureFlags || DEFAULT_FEATURE_FLAGS;
   } catch (error) {
     console.error("Error fetching feature flags:", error);
-    return {
-      "logo-position": "left",
-      "mascot-variant": "1",
-      "logo-type": "standard",
-      "copy-variant": "original",
-      "hero-layout": "default",
-    };
+    return DEFAULT_FEATURE_FLAGS;
   }
 }
 

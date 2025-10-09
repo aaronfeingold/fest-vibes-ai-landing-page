@@ -1,6 +1,11 @@
 "use client";
 
-import { useLogoType, useNoBackgroundMascotVariant } from "./use-feature-flags";
+import {
+  useLogoType,
+  useNoBackgroundMascotVariant,
+  useNavMascotVariant,
+  useMascotVariant,
+} from "./use-feature-flags";
 
 interface BrandAssets {
   mascot: {
@@ -20,10 +25,16 @@ interface BrandAssets {
  */
 export function useBrandAssets(): BrandAssets {
   const noBackgroundMascotVariant = useNoBackgroundMascotVariant();
+  const navMascotVariant = useNavMascotVariant();
+  const mascotVariant = useMascotVariant();
   const logoType = useLogoType();
 
   // Helper function to build mascot path with fallback
-  const getMascotPath = (context: "nav" | "no-background", variant: string, navVariant?: string) => {
+  const getMascotPath = (
+    context: "nav" | "no-background",
+    variant: string,
+    navVariant?: string
+  ) => {
     if (context === "nav" && navVariant) {
       // Use A/B directory structure for nav mascots: /mascots/nav/A/mascot-1.png
       return `/mascots/${context}/${navVariant}/mascot-${variant}.png`;
@@ -43,7 +54,7 @@ export function useBrandAssets(): BrandAssets {
 
   return {
     mascot: {
-      nav: getMascotPath("no-background", noBackgroundMascotVariant),
+      nav: getMascotPath("nav", mascotVariant, navMascotVariant),
       noBackground: getMascotPath("no-background", noBackgroundMascotVariant),
     },
     logo: {

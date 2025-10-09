@@ -73,29 +73,23 @@ export function Nav({ onMascotClick, onJoinBetaClick }: NavProps) {
     if (href.startsWith("#")) {
       const element = document.querySelector(href);
       if (element) {
-        // Sections that need header offset (analytics doesn't need offset)
-        const needsOffset = ["#features", "#pricing", "#demo"].includes(href);
+        // Calculate header height dynamically - use more reliable selector
+        const header = document
+          .querySelector("nav")
+          ?.closest(".fixed") as HTMLElement;
+        const headerHeight = header ? header.offsetHeight : 80; // Fallback to reasonable default
+        const additionalBuffer = 24; // Extra breathing room for better UX
+        const totalOffset = headerHeight + additionalBuffer;
 
-        if (needsOffset) {
-          // Calculate header height dynamically
-          const header = document.querySelector(".fixed.top-0") as HTMLElement;
-          const headerHeight = header ? header.offsetHeight : 0;
-          const additionalBuffer = 20; // Extra breathing room
-          const totalOffset = headerHeight + additionalBuffer;
+        // Get element position and scroll with offset for all sections
+        const elementPosition =
+          element.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = elementPosition - totalOffset;
 
-          // Get element position and scroll with offset
-          const elementPosition =
-            element.getBoundingClientRect().top + window.pageYOffset;
-          const offsetPosition = elementPosition - totalOffset;
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: "smooth",
-          });
-        } else {
-          // Use default scroll for analytics and other sections
-          element.scrollIntoView({ behavior: "smooth" });
-        }
+        window.scrollTo({
+          top: Math.max(0, offsetPosition), // Ensure we don't scroll to negative position
+          behavior: "smooth",
+        });
       }
     }
   };

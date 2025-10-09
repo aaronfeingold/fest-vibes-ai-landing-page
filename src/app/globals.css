@@ -29,14 +29,54 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
+
+    /* Festival Brand Colors */
+    /* Main Background Gradient Colors */
+    --festival-slate-900: 220.9 39.3% 11%; /* #0F172A */
+    --festival-purple-900: 263.4 70% 32.2%; /* #581C87 */
+
+    /* Primary CTA Gradient Colors */
+    --festival-purple-500: 256 91.9% 67.8%; /* #A855F7 */
+    --festival-pink-500: 330.4 81.2% 60.4%; /* #EC4899 */
+
+    /* Text Accent Gradient Colors */
+    --festival-purple-400: 269.2 83.3% 76.1%; /* #C084FC */
+    --festival-pink-400: 327.3 87.1% 71.8%; /* #F472B6 */
+
+    /* Custom Festival Gradient Colors */
+    --festival-gradient-light: 229 81% 71.4%; /* #667EEA */
+    --festival-gradient-dark: 251 23% 45.5%; /* #764BA2 */
+
+    /* Stage Lights Colors */
+    --stage-coral: 0 79% 70%; /* #FF6B6B */
+    --stage-turquoise: 174 56% 59%; /* #4ECDC4 */
+    --stage-sky: 202 84% 55%; /* #45B7D1 */
+    --stage-mint: 143 30% 72%; /* #96CEB4 */
+    --stage-yellow: 50 100% 83%; /* #FFEAA7 */
+
+    /* Semantic Brand Colors */
+    --brand-primary: var(--festival-purple-500);
+    --brand-secondary: var(--festival-pink-500);
+    --brand-accent: var(--festival-purple-400);
+    --brand-background-start: var(--festival-slate-900);
+    --brand-background-middle: var(--festival-purple-900);
+    --brand-background-end: var(--festival-slate-900);
+
+    /* Light mode specific colors for better readability */
+    --text-primary: 222.2 84% 4.9%;
+    --text-secondary: 215.4 16.3% 46.9%;
+    --text-muted: 215.4 16.3% 56.9%;
+    --surface-primary: 0 0% 100%;
+    --surface-secondary: 210 40% 96%;
+    --surface-elevated: 0 0% 98%;
   }
 
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
+    --card: 215 32% 12%;
     --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
+    --popover: 215 32% 12%;
     --popover-foreground: 210 40% 98%;
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
@@ -56,6 +96,37 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+
+    /* Enhanced Festival Brand Colors for dark mode - brighter and more vibrant */
+    --festival-slate-900: 220.9 39.3% 8%; /* Darker for better contrast */
+    --festival-purple-900: 263.4 70% 25%; /* Darker base */
+    --festival-purple-500: 256 91.9% 75%; /* Brighter for dark backgrounds */
+    --festival-pink-500: 330.4 81.2% 68%; /* Brighter for dark backgrounds */
+    --festival-purple-400: 269.2 83.3% 82%; /* Even brighter accent */
+    --festival-pink-400: 327.3 87.1% 78%; /* Even brighter accent */
+    --festival-gradient-light: 229 81% 78%; /* Brighter gradient */
+    --festival-gradient-dark: 251 23% 52%; /* Adjusted for contrast */
+    --stage-coral: 0 79% 75%; /* Brighter stage colors */
+    --stage-turquoise: 174 56% 65%;
+    --stage-sky: 202 84% 62%;
+    --stage-mint: 143 30% 78%;
+    --stage-yellow: 50 100% 88%;
+
+    /* Updated brand colors for better dark mode contrast */
+    --brand-primary: var(--festival-purple-500);
+    --brand-secondary: var(--festival-pink-500);
+    --brand-accent: var(--festival-purple-400);
+    --brand-background-start: var(--festival-slate-900);
+    --brand-background-middle: var(--festival-purple-900);
+    --brand-background-end: var(--festival-slate-900);
+
+    /* Dark mode specific text colors for better readability */
+    --text-primary: 210 40% 98%;
+    --text-secondary: 215 20.2% 75%;
+    --text-muted: 215 20.2% 55%;
+    --surface-primary: 215 32% 12%;
+    --surface-secondary: 217.2 32.6% 17.5%;
+    --surface-elevated: 215 32% 20%;
   }
 }
 
@@ -88,10 +159,304 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Custom gradient text */
-.gradient-text {
-  background: linear-gradient(135deg, #a855f7, #ec4899);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* Marquee animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }
+
+.animate-marquee {
+  animation: marquee linear infinite;
+}
+
+/* Responsive marquee speed - faster on mobile, slower on desktop */
+@media (min-width: 768px) {
+  .animate-marquee {
+    animation-duration: var(--marquee-duration-desktop) !important;
+  }
+}
+
+/* Floating aura animations */
+@keyframes float-slow {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.6;
+  }
+  33% {
+    transform: translate(10px, -15px) scale(1.05);
+    opacity: 0.8;
+  }
+  66% {
+    transform: translate(-8px, 10px) scale(0.95);
+    opacity: 0.7;
+  }
+}
+
+@keyframes float-medium {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(-12px, -20px) scale(1.1);
+    opacity: 0.9;
+  }
+}
+
+@keyframes float-fast {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.4;
+  }
+  25% {
+    transform: translate(15px, 8px) scale(1.15);
+    opacity: 0.8;
+  }
+  75% {
+    transform: translate(-10px, -12px) scale(0.9);
+    opacity: 0.6;
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 12s ease-in-out infinite;
+}
+
+.animate-float-medium {
+  animation: float-medium 8s ease-in-out infinite;
+}
+
+.animate-float-fast {
+  animation: float-fast 6s ease-in-out infinite;
+}
+
+/* Floating mascot animations with 3D transforms */
+@keyframes float-mascot-left {
+  0%, 100% {
+    transform: translateX(0px) translateY(0px) translateZ(50px) scale(1.15) rotateZ(-8deg);
+    opacity: 0.6;
+  }
+  25% {
+    transform: translateX(2px) translateY(-3px) translateZ(60px) scale(1.18) rotateZ(-10deg);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateX(-1px) translateY(2px) translateZ(45px) scale(1.12) rotateZ(-7deg);
+    opacity: 0.5;
+  }
+  75% {
+    transform: translateX(1px) translateY(-1px) translateZ(55px) scale(1.16) rotateZ(-9deg);
+    opacity: 0.6;
+  }
+}
+
+@keyframes float-mascot-right {
+  0%, 100% {
+    transform: translateX(0px) translateY(0px) translateZ(50px) scale(1.15) rotateZ(8deg);
+    opacity: 0.6;
+  }
+  25% {
+    transform: translateX(-2px) translateY(3px) translateZ(60px) scale(1.18) rotateZ(10deg);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateX(1px) translateY(-2px) translateZ(45px) scale(1.12) rotateZ(7deg);
+    opacity: 0.5;
+  }
+  75% {
+    transform: translateX(-1px) translateY(1px) translateZ(55px) scale(1.16) rotateZ(9deg);
+    opacity: 0.6;
+  }
+}
+
+.animate-float-mascot-left {
+  animation: float-mascot-left 8s ease-in-out infinite;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.animate-float-mascot-right {
+  animation: float-mascot-right 10s ease-in-out infinite;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+/* Hero entrance animations */
+@keyframes slide-in-from-left {
+  0% {
+    transform: translateX(-100vw) translateY(-50%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) translateY(-50%);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-from-right {
+  0% {
+    transform: translateX(100vw) translateY(-50%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) translateY(-50%);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up-fade-in {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-left {
+  animation: slide-in-from-left 1s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-from-right 1s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slide-up-fade-in 1s ease-out forwards;
+}
+
+/* Initial states for animations */
+.animate-slide-in-left,
+.animate-slide-in-right {
+  opacity: 0;
+}
+
+.animate-slide-up {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+/* Feature cards slide in from right */
+@keyframes slide-in-from-right-cards {
+  0% {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-right-cards {
+  animation: slide-in-from-right-cards 0.8s ease-out forwards;
+  opacity: 0;
+  transform: translateX(100px);
+}
+
+/* Hide scrollbar */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* View Transition Circular Effect for Dark Mode Toggle */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  /* Ensure the outgoing view (old theme) is beneath */
+  z-index: 0;
+}
+
+::view-transition-new(root) {
+  /* Ensure the incoming view (new theme) is always on top */
+  z-index: 1;
+}
+
+@keyframes reveal {
+  from {
+    /* Use CSS variables for the origin, defaulting to center if not set */
+    clip-path: circle(0% at var(--x, 50%) var(--y, 50%));
+    opacity: 0.7;
+  }
+  to {
+    /* Use CSS variables for the origin, defaulting to center if not set */
+    clip-path: circle(150% at var(--x, 50%) var(--y, 50%));
+    opacity: 1;
+  }
+}
+
+::view-transition-new(root) {
+  /* Apply the reveal animation */
+  animation: reveal 0.4s ease-in-out forwards;
+}
+
+/* Fallback for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
+
+/* Mode toggle button styling with ripple effect */
+.mode-toggle-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.mode-toggle-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.1;
+  transform: translate(-50%, -50%);
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.mode-toggle-button.animating::before {
+  width: 200px;
+  height: 200px;
+  opacity: 0;
+}
+
+.mode-toggle-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.mode-toggle-button svg {
+  transition: transform 0.3s ease-in-out;
+}
+
+.mode-toggle-button:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* Support for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .mode-toggle-button::before {
+    transition: none;
+  }
+}
+

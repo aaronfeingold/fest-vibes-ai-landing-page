@@ -1,0 +1,190 @@
+"use client";
+
+import { useState } from "react";
+import { toast } from "sonner";
+import { EmailInput } from "@/forms";
+import { DonationModal } from "@/modals";
+import { Button } from "@/ui";
+import { emailSchema } from "@/lib/validation";
+import { z } from "zod";
+import { PartyPopper, Music, Loader2 } from "lucide-react";
+
+interface BetaSignupProps {
+  onClose: () => void;
+}
+
+export function BetaSignup({ onClose }: BetaSignupProps) {
+  const [email, setEmail] = useState("");
+  const [isValidEmail, setIsValidEmail] = useState(false);
+  const [emailError, setEmailError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [showDonationModal, setShowDonationModal] = useState(false);
+  const [apiError, setApiError] = useState("");
+
+  const validateEmail = (emailValue: string) => {
+    try {
+      emailSchema.parse(emailValue);
+      setEmailError("");
+      setIsValidEmail(true);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        setEmailError(error.errors[0]?.message || "Invalid email");
+      }
+      setIsValidEmail(false);
+    }
+  };
+
+  const handleEmailChange = (value: string) => {
+    setEmail(value);
+    setApiError("");
+    if (value.trim()) {
+      validateEmail(value);
+    } else {
+      setEmailError("");
+      setIsValidEmail(false);
+    }
+  };
+
+  const handleInitialSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!isValidEmail || !email.trim()) {
+      setEmailError("Please enter a valid email address");
+      return;
+    }
+
+    // Show donation modal after email validation
+    setShowDonationModal(true);
+  };
+
+  const handleDonationAccept = async () => {
+    setShowDonationModal(false);
+    await submitSignup(true, true);
+  };
+
+  const handleDonationDecline = async () => {
+    setShowDonationModal(false);
+    await submitSignup(false, true);
+  };
+
+  const submitSignup = async (
+    wantsDonation: boolean,
+    hasSeenDonationModal: boolean
+  ) => {
+    setIsSubmitting(true);
+    setApiError("");
+
+    try {
+      const response = await fetch("/api/beta-signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          wantsDonation,
+          hasSeenDonationModal,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        toast.success("You're on the list! We'll email you soon.");
+        setTimeout(() => {
+          onClose();
+        }, 3000);
+      } else {
+        const msg = data.error || "Something went wrong. Please try again.";
+        setApiError(msg);
+        toast.error(msg);
+      }
+    } catch (err) {
+      setApiError("Network error. Please try again.");
+      toast.error("Network error. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  if (isSubmitted) {
+    return (
+      <div className="text-center" data-testid="beta-signup-success">
+        <div className="flex justify-center mb-4" data-testid="success-icon">
+          <PartyPopper className="w-12 h-12 text-brand-accent" />
+        </div>
+        <p className="text-white font-semibold" data-testid="success-title">
+          You're on the list!
+        </p>
+        <p className="text-gray-300 text-sm" data-testid="success-message">
+          We'll notify you when Fest Vibes launches.
+        </p>
+        {showDonationModal && (
+          <p
+            className="text-brand-accent text-sm mt-2"
+            data-testid="donation-thanks"
+          >
+            <span className="flex items-center gap-1">
+              Thanks for supporting Fest Vibes! You'll get 2 free months.
+              <Music className="w-4 h-4 text-brand-accent" />
+            </span>
+          </p>
+        )}
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <form
+        onSubmit={handleInitialSubmit}
+        className="space-y-4"
+        data-testid="beta-signup-form"
+      >
+        <div data-testid="email-input-container">
+          <EmailInput
+            value={email}
+            onChange={handleEmailChange}
+            onValidChange={setIsValidEmail}
+            placeholder="Enter your email"
+            disabled={isSubmitting}
+            error={emailError}
+          />
+        </div>
+
+        {apiError && (
+          <p className="text-red-300 text-sm" data-testid="api-error">
+            {apiError}
+          </p>
+        )}
+
+        <Button
+          type="submit"
+          disabled={!isValidEmail || isSubmitting}
+          className="w-full bg-brand-gradient hover:from-festival-purple-500 hover:to-festival-pink-500 disabled:opacity-50 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300"
+          data-testid="submit-button"
+        >
+          {isSubmitting ? (
+            <span className="inline-flex items-center justify-center gap-2">
+              <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+              <span>Processing...</span>
+            </span>
+          ) : (
+            "Join Beta List"
+          )}
+        </Button>
+      </form>
+
+      <DonationModal
+        isOpen={showDonationModal}
+        onClose={() => setShowDonationModal(false)}
+        onAccept={handleDonationAccept}
+        onDecline={handleDonationDecline}
+        email={email}
+        data-testid="donation-modal"
+      />
+    </>
+  );
+}

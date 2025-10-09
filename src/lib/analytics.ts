@@ -22,7 +22,7 @@ export const trackEvent = (
   action: string,
   category: string,
   label?: string,
-  value?: number
+  value?: number,
 ) => {
   if (typeof window !== "undefined" && window.gtag) {
     window.gtag("event", action, {
@@ -51,7 +51,7 @@ export const analytics = {
       trackEvent(
         "form_submitted",
         "beta_signup",
-        hasError ? "error" : "success"
+        hasError ? "error" : "success",
       ),
     completed: () =>
       trackEvent("signup_completed", "conversion", "beta_signup"),
@@ -107,7 +107,7 @@ export const initScrollTracking = () => {
     const scrollPercent = Math.round(
       (window.scrollY /
         (document.documentElement.scrollHeight - window.innerHeight)) *
-        100
+        100,
     );
 
     scrollDepths.forEach((depth) => {

@@ -1,0 +1,167 @@
+{
+  "hero": {
+    "subtitle": "Discover live local music, plan with friends, and experience whachu wanna.",
+    "typewriterMessages": [
+      "Make Your Hometown your own Music Fest",
+      "Jam pack my weekend with all the funk",
+      "When can I catch my favorite band this month?",
+      "Help me bop around downtown."
+    ]
+  },
+  "features": {
+    "sectionTitle": "Why Festival Enthusiasts Choose Our Platform",
+    "sectionSubtitle": "Everything you need to discover, plan, and experience music like never before",
+    "introTitle": "Everything You Need to Enjoy Local Music",
+    "introTitleHighlight": "",
+    "introSubtitle": "From smart planning to social collaboration, we're covering every aspect of your music experience.",
+    "items": {
+      "local-musicians": {
+        "title": "Local Musicians Search",
+        "description": "Stay up to date with your favorite local musicians."
+      },
+      "discover-music": {
+        "title": "Discover Live Music",
+        "description": "Find what you love or step outside the box"
+      },
+      "plan-ahead": {
+        "title": "Plan Ahead",
+        "description": "Curate multi-day timelines and jam pack your weekends"
+      },
+      "connect": {
+        "title": "Connect",
+        "description": "Share your plans with your friends"
+      },
+      "chat": {
+        "title": "Chat",
+        "description": "Create personalized weekend music experiences with assistance"
+      },
+      "analytics": {
+        "title": "Nightlife Analytics",
+        "description": "Stay in the the know on your hometown's music scene with insights and trends"
+      }
+    }
+  },
+  "pricing": {
+    "sectionTitle": "Choose Your Plan",
+    "sectionSubtitle": "Start free and upgrade as you grow",
+    "plans": {
+      "free": {
+        "name": "Free Plan",
+        "price": "$0",
+        "description": "Perfect for getting started with music discovery",
+        "features": [
+          "Dynamic data filtering",
+          "Visual heat map discovery",
+          "Drag-and-drop planning",
+          "Shareable festival plans",
+          "Export to social media"
+        ],
+        "excludedFeatures": ["No Chat assistance"],
+        "buttonText": "Get Started Free"
+      },
+      "vibes": {
+        "name": "Vibes Plan",
+        "price": "$9.99",
+        "description": "Everything in Free, plus unlimited AI assistance",
+        "features": [
+          "Chat assistance",
+          "Personalized recommendations",
+          "Smart schedule optimization",
+          "Venue and artist insights",
+          "Priority customer support",
+          "Everything in Free Plan"
+        ],
+        "buttonText": "Start Free Trial"
+      }
+    }
+  },
+  "analytics": {
+    "sectionTitle": "Smart Analytics for Smarter Planning",
+    "sectionSubtitle": "Get insights into music trends, event popularity, and discover what's hot in your area",
+    "mockEvents": [
+      {
+        "name": "Trombone Shorty",
+        "venue": "Tipitina's",
+        "time": "9:00 PM",
+        "genre": "Funk",
+        "attendees": 200
+      },
+      {
+        "name": "Tank & The Bangas",
+        "venue": "Blue Nile",
+        "time": "6:00 PM",
+        "genre": "Jazz",
+        "attendees": 150
+      },
+      {
+        "name": "The Iceman Special",
+        "venue": "Maple Leaf",
+        "time": "10:00 PM",
+        "genre": "Psychedelic",
+        "attendees": 100
+      },
+      {
+        "name": "Boyfriend",
+        "venue": "Saturn Bar",
+        "time": "7:30 PM",
+        "genre": "Hip-Hop",
+        "attendees": 50
+      }
+    ],
+    "statCards": [
+      {
+        "title": "Funk Events This Week",
+        "value": 127,
+        "change": "↗ 100% funkier than last week",
+        "changeColor": "text-green-400"
+      },
+      {
+        "title": "Weekend Events",
+        "value": 162,
+        "change": "5 new added today",
+        "changeColor": "text-blue-400"
+      },
+      {
+        "title": "Lit Fam",
+        "value": 16,
+        "change": "Your Krewe's Vibes Are Growing!",
+        "changeColor": "text-brand-accent"
+      }
+    ]
+  },
+  "chatDemo": {
+    "sectionTitle": "Plan with AI Assistance",
+    "sectionSubtitle": "Get personalized recommendations and optimize your music experience",
+    "capabilities": [
+      {
+        "text": "Discover local venues and hidden gems"
+      },
+      {
+        "text": "Track your favorite artists and venues"
+      },
+      {
+        "text": "Coordinate plans with your friend group"
+      },
+      {
+        "text": "Create multi-day festival itineraries"
+      },
+      {
+        "text": "Get personalized music recommendations"
+      },
+      {
+        "text": "Optimize timing for multiple events"
+      }
+    ]
+  },
+  "cta": {
+    "title": "Ready to Start Your Musical Journey?",
+    "subtitle": "Join thousands of music lovers already using our platform to discover amazing live experiences."
+  },
+  "brand": {
+    "motto": "Discover. Curate. Experience."
+  },
+  "socialMedia": {
+    "twitter": "https://twitter.com/festvibes",
+    "instagram": "https://www.instagram.com/fest_vibes_nola/"
+  }
+}

@@ -19,7 +19,29 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/hooks/*": ["./src/hooks/*"],
+      "@/lib/*": ["./src/lib/*"],
+      "@/providers/*": ["./src/components/providers/*"],
+      "@/providers": ["./src/components/providers/index"],
+      "@/pages/*": ["./src/components/pages/*"],
+      "@/pages": ["./src/components/pages/index"],
+      "@/splash/*": ["./src/components/pages/splash-page/*"],
+      "@/splash-sections": [
+        "./src/components/pages/splash-page/splash-sections/index"
+      ],
+      "@/splash-components": [
+        "./src/components/pages/splash-page/components/index"
+      ],
+      "@/modals/*": ["./src/components/modals/*"],
+      "@/modals": ["./src/components/modals/index"],
+      "@/actions/*": ["./src/lib/actions/*"],
+      "@/validation/*": ["./src/lib/validation/*"],
+      "@/ui/*": ["./src/components/ui/*"],
+      "@/ui": ["./src/components/ui/index"],
+      "@/forms/*": ["./src/components/forms/*"],
+      "@/forms": ["./src/components/forms/index"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

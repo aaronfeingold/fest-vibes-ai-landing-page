@@ -53,7 +53,6 @@ export function ChatDemoSection({ contentData }: ChatDemoSectionProps) {
   const assistantName = useAssistantName();
   const [currentMessageIndex, setCurrentMessageIndex] = useState(-1);
   const [isTyping, setIsTyping] = useState(false);
-  const [showTypingIndicator, setShowTypingIndicator] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
@@ -96,24 +95,17 @@ export function ChatDemoSection({ contentData }: ChatDemoSectionProps) {
   const handleTypingComplete = () => {
     setIsTyping(false);
 
-    // Show typing indicator before next message
+    // Move to next message after a brief pause
     setTimeout(() => {
-      setShowTypingIndicator(true);
-
-      // Then show next message
-      setTimeout(() => {
-        setShowTypingIndicator(false);
-        setCurrentMessageIndex((prev) => {
-          const nextIndex = prev + 1;
-          if (nextIndex < CHAT_MESSAGES.length) {
-            // Start typing next message
-            setIsTyping(true);
-            return nextIndex;
-          }
-          return prev;
-        });
-      }, 800); // Duration of typing indicator
-    }, 500); // Pause before showing typing indicator
+      setCurrentMessageIndex((prev) => {
+        const nextIndex = prev + 1;
+        if (nextIndex < CHAT_MESSAGES.length) {
+          setIsTyping(true);
+          return nextIndex;
+        }
+        return prev;
+      });
+    }, 500); // Pause before next message
   };
 
   // Get all messages up to current index
@@ -181,9 +173,6 @@ export function ChatDemoSection({ contentData }: ChatDemoSectionProps) {
                       />
                     );
                   })}
-
-                  {/* Typing Indicator */}
-                  {showTypingIndicator && <TypingIndicator />}
                 </div>
 
                 {/* Chat Input (Disabled/Demo) */}
@@ -242,30 +231,6 @@ export function ChatDemoSection({ contentData }: ChatDemoSectionProps) {
         </div>
       </div>
     </section>
-  );
-}
-
-// Typing Indicator Component
-function TypingIndicator() {
-  return (
-    <div className="flex justify-start">
-      <div className="flex items-end space-x-2">
-        <div className="w-8 h-8 rounded-full bg-gradient-to-r from-brand-primary to-brand-secondary flex items-center justify-center flex-shrink-0">
-          <img
-            src={MASCOT_IMAGES[0]}
-            alt="Typing..."
-            className="w-full h-full rounded-full object-cover"
-          />
-        </div>
-        <div className="bg-gray-800 rounded-2xl rounded-bl-sm px-4 py-3">
-          <div className="flex items-center space-x-1">
-            <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-            <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-100"></div>
-            <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-200"></div>
-          </div>
-        </div>
-      </div>
-    </div>
   );
 }
 

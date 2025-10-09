@@ -1,7 +1,7 @@
 import type React from "react";
 import Link from "next/link";
 import { Twitter, Instagram } from "lucide-react";
-import { ContentData } from "@/hooks";
+import { ContentData } from "@/lib/content-loader";
 
 interface FooterSectionProps {
   contentData: ContentData | null;

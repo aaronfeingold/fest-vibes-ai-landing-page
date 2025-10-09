@@ -41,48 +41,52 @@ export function FeaturesSection({ contentData }: FeaturesSectionProps) {
 
   // Track scroll position for pagination dots
   useEffect(() => {
-    const createScrollHandler = (
-      carousel: HTMLDivElement,
-      rowKey: "row1" | "row2",
-      maxItems: number
-    ) => {
-      return () => {
-        const scrollLeft = carousel.scrollLeft;
-        const cardWidth = carousel.children[0]?.clientWidth || 376;
-        const gap = 16; // 4 * 4 (gap-4 in Tailwind)
-        const activeIndex = Math.round(scrollLeft / (cardWidth + gap));
-        setActiveCardIndex((prev) => ({
-          ...prev,
-          [rowKey]: Math.min(activeIndex, maxItems - 1),
-        }));
-      };
-    };
-
     const carousel1 = carousel1Ref.current;
     const carousel2 = carousel2Ref.current;
 
-    if (carousel1) {
-      const handleScroll1 = createScrollHandler(carousel1, "row1", 3);
+    // Create scroll handlers and store references for proper cleanup
+    const handleScroll1 = carousel1
+      ? () => {
+          const scrollLeft = carousel1.scrollLeft;
+          const cardWidth = carousel1.children[0]?.clientWidth || 376;
+          const gap = 16; // 4 * 4 (gap-4 in Tailwind)
+          const activeIndex = Math.round(scrollLeft / (cardWidth + gap));
+          setActiveCardIndex((prev) => ({
+            ...prev,
+            row1: Math.min(activeIndex, 2),
+          }));
+        }
+      : null;
+
+    const handleScroll2 = carousel2
+      ? () => {
+          const scrollLeft = carousel2.scrollLeft;
+          const cardWidth = carousel2.children[0]?.clientWidth || 376;
+          const gap = 16; // 4 * 4 (gap-4 in Tailwind)
+          const activeIndex = Math.round(scrollLeft / (cardWidth + gap));
+          setActiveCardIndex((prev) => ({
+            ...prev,
+            row2: Math.min(activeIndex, 2),
+          }));
+        }
+      : null;
+
+    // Add event listeners
+    if (carousel1 && handleScroll1) {
       carousel1.addEventListener("scroll", handleScroll1);
     }
 
-    if (carousel2) {
-      const handleScroll2 = createScrollHandler(carousel2, "row2", 3);
+    if (carousel2 && handleScroll2) {
       carousel2.addEventListener("scroll", handleScroll2);
     }
 
+    // Cleanup function with proper handler references
     return () => {
-      if (carousel1) {
-        carousel1.removeEventListener(
-          "scroll",
-          createScrollHandler(carousel1, "row1", 3)
-        );
+      if (carousel1 && handleScroll1) {
+        carousel1.removeEventListener("scroll", handleScroll1);
       }
-      if (carousel2) {
-        carousel2.removeEventListener(
-          "scroll",
-          createScrollHandler(carousel2, "row2", 3)
-        );
+      if (carousel2 && handleScroll2) {
+        carousel2.removeEventListener("scroll", handleScroll2);
       }
     };
   }, []);

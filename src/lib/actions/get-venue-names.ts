@@ -1,18 +1,18 @@
 "use server";
 
 import { eq } from "drizzle-orm";
-import { venuesDb } from "@/lib/db/venues-db";
-import { venues } from "@/lib/db/venues-schema";
+import { db } from "@/lib/db/v0-db";
+import { venues } from "@/lib/db/v0-schema";
 import { unstable_cache } from "next/cache";
 
 async function fetchVenueNames(): Promise<string[]> {
   try {
-    const venueList = await venuesDb
+    const venueList = await db
       .select({ name: venues.name })
       .from(venues)
       .where(eq(venues.isActive, true));
 
-    const venueNames = venueList.map(venue => venue.name);
+    const venueNames = venueList.map((venue) => venue.name);
 
     // Randomize the order
     for (let i = venueNames.length - 1; i > 0; i--) {

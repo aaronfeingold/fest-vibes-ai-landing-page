@@ -2,7 +2,8 @@ import type React from "react";
 import { useState, useEffect, useRef } from "react";
 import { FeatureCard } from "@/splash/components/FeatureCard";
 import { mergeFeaturesWithContent } from "@/lib/homepage-data";
-import { ContentData, useAssistantName } from "@/hooks";
+import { useAssistantName } from "@/hooks";
+import { ContentData } from "@/lib/content-loader";
 
 interface FeaturesSectionProps {
   contentData: ContentData | null;

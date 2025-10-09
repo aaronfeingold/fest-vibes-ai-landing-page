@@ -31,6 +31,7 @@ interface TypingTextProps {
   startOnVisible?: boolean;
   reverseMode?: boolean;
   showFirstTextImmediately?: boolean;
+  firstTextDelay?: number;
 }
 
 export const TypingText = ({
@@ -53,6 +54,7 @@ export const TypingText = ({
   startOnVisible = false,
   reverseMode = false,
   showFirstTextImmediately = false,
+  firstTextDelay = 0,
   ...props
 }: TypingTextProps & React.HTMLAttributes<HTMLElement>) => {
   const textArray = useMemo(
@@ -174,9 +176,16 @@ export const TypingText = ({
             variableSpeed ? getRandomSpeed() : typingSpeed
           );
         } else if (textArray.length > 1) {
+          // Use firstTextDelay when transitioning from first message to second message
+          const shouldUseFirstDelay =
+            showFirstTextImmediately && currentTextIndex === 0;
+          const delayDuration = shouldUseFirstDelay
+            ? firstTextDelay
+            : pauseDuration;
+
           timeout = setTimeout(() => {
             setIsDeleting(true);
-          }, pauseDuration);
+          }, delayDuration);
         }
       }
     };
@@ -204,6 +213,8 @@ export const TypingText = ({
     variableSpeed,
     onSentenceComplete,
     getRandomSpeed,
+    showFirstTextImmediately,
+    firstTextDelay,
   ]);
 
   const shouldHideCursor =

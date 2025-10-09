@@ -49,10 +49,10 @@ export function HeroSection({
           {/* Left floating mascot - behind header */}
           <div
             id="hero-mascot-left"
-            className={`absolute hidden md:block w-40 lg:w-48 -z-20 ${showContent ? "animate-slide-in-left" : "opacity-0"}`}
+            className={`fixed hidden md:block w-40 lg:w-48 -z-20 ${showContent ? "animate-slide-in-left" : "opacity-0"}`}
             style={{
               animationDelay: "0.5s",
-              left: "-200px",
+              left: "calc(50% - 500px)",
               top: "50%",
               transform: "translateY(-50%)",
             }}
@@ -77,10 +77,10 @@ export function HeroSection({
           {/* Right floating mascot - behind header */}
           <div
             id="hero-mascot-right"
-            className={`absolute hidden md:block w-40 lg:w-48 -z-20 ${showContent ? "animate-slide-in-right" : "opacity-0"}`}
+            className={`fixed hidden md:block w-40 lg:w-48 -z-20 ${showContent ? "animate-slide-in-right" : "opacity-0"}`}
             style={{
               animationDelay: "0.5s",
-              right: "-200px",
+              right: "calc(50% - 500px)",
               top: "50%",
               transform: "translateY(-50%)",
             }}
@@ -111,6 +111,7 @@ export function HeroSection({
             <div
               id="hero-header-container"
               className="mb-8 mx-auto px-[20px] transition-all duration-300 md:px-0 w-full max-w-[854px] min-h-[160px] lg:min-h-[216px] flex items-center justify-center"
+              style={{ width: "854px", maxWidth: "854px" }}
             >
               <h1
                 id="hero-header"

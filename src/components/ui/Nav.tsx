@@ -20,7 +20,6 @@ export function Nav({ onMascotClick, onJoinBetaClick }: NavProps) {
   const { isDarkMode, toggleDarkModeWithTransition, isHydrated } =
     useDarkMode();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const [scrollY, setScrollY] = useState(0);
 
   // Shared navigation items
@@ -31,22 +30,15 @@ export function Nav({ onMascotClick, onJoinBetaClick }: NavProps) {
     { href: "#analytics", label: "Analytics" },
   ];
 
-  // Check if we're on mobile and track scroll position
+  // Track scroll position for dynamic nav transparency
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768); // md breakpoint
-    };
-
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
 
-    checkMobile();
     handleScroll();
-    window.addEventListener("resize", checkMobile);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
-      window.removeEventListener("resize", checkMobile);
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);

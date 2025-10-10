@@ -15,7 +15,7 @@ interface NavProps {
 export function Nav({ onMascotClick, onJoinBetaClick }: NavProps) {
   const logoPosition = useLogoPosition();
   const assistantName = useAssistantName();
-  const mascotAsset = useMascotAsset("nav");
+  const mascotAsset = useMascotAsset("noBackground");
   const logoAsset = useLogoAsset("nav");
   const { isDarkMode, toggleDarkModeWithTransition, isHydrated } =
     useDarkMode();

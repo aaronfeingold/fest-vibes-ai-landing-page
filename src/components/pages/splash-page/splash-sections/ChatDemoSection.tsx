@@ -175,7 +175,7 @@ export function ChatDemoSection({ contentData }: ChatDemoSectionProps) {
                   })}
                 </div>
 
-                {/* Chat Input (Disabled/Demo) */}
+                {/* Chat Input (Disabled/Demo ie purely presentational) */}
                 <div className="bg-gray-800 px-4 py-3 border-t border-gray-700">
                   <div className="flex items-center space-x-2">
                     <input

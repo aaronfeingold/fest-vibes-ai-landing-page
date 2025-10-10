@@ -111,7 +111,6 @@ export function HeroSection({
             <div
               id="hero-header-container"
               className="mb-8 mx-auto px-[20px] transition-all duration-300 md:px-0 w-full max-w-[854px] min-h-[160px] lg:min-h-[216px] flex items-center justify-center"
-              style={{ width: "854px", maxWidth: "854px" }}
             >
               <h1
                 id="hero-header"
@@ -171,6 +170,3 @@ export function HeroSection({
     </section>
   );
 }
-
-
-

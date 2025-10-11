@@ -17,27 +17,27 @@
     "items": {
       "local-musicians": {
         "title": "Local Musicians Search",
-        "description": "Stay up to date with your favorite local musicians."
+        "description": "Stay up to date with your favorite local musicians. Find where you favorite artist is playing today. Follow them to be notified when their next show is listed."
       },
       "discover-music": {
         "title": "Discover Live Music",
-        "description": "Find what you love or step outside the box"
+        "description": "Find what you love or step outside the box. From Uptown to Downtown, there are myriad different scenes to explore."
       },
       "plan-ahead": {
         "title": "Plan Ahead",
-        "description": "Curate multi-day timelines and jam pack your weekends"
+        "description": "Curate multi-day timelines and jam pack your weekends. Build your perfect weekend with the click of a button."
       },
       "connect": {
-        "title": "Connect",
-        "description": "Share your plans with your friends"
+        "title": "Connect Your Krewe",
+        "description": "No more dozens of text chains or trying to get everyone on the same page. Share your plans with your friends."
       },
       "chat": {
-        "title": "Chat",
+        "title": "Chat with a Cool Cat",
         "description": "Create personalized weekend music experiences with assistance"
       },
       "analytics": {
         "title": "Nightlife Analytics",
-        "description": "Stay in the the know on your hometown's music scene with insights and trends"
+        "description": "Stay in the the know on your hometown's music scene with insights and trends. Feel out the vibes before you go out."
       }
     }
   },

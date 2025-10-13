@@ -23,7 +23,8 @@ export function HeroSection({
   const [speed, setSpeed] = useState<"slow" | "normal" | "fast">("slow");
 
   useEffect(() => {
-    if (window.innerWidth < 768) {
+    if (typeof window !== "undefined" && window.innerWidth < 768) {
+      console.log("setting speed to fast");
       setSpeed("fast");
     }
   }, []);

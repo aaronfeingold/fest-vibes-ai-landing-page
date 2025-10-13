@@ -1,4 +1,4 @@
-import type React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Button, TypingText, VenueMarquee } from "@/ui";
@@ -20,6 +20,14 @@ export function HeroSection({
   showContent = true,
   venueNames,
 }: HeroSectionProps) {
+  const [speed, setSpeed] = useState<"slow" | "normal" | "fast">("slow");
+
+  useEffect(() => {
+    if (window.innerWidth < 768) {
+      setSpeed("fast");
+    }
+  }, []);
+
   const messages = contentData?.hero?.typewriterMessages || [
     "Make Your Hometown your own Music Fest",
     "Jam pack my weekend with all the funk",
@@ -119,9 +127,9 @@ export function HeroSection({
                 <TypingText
                   text={messages}
                   className="text-white"
-                  typingSpeed={15}
+                  typingSpeed={40}
                   deletingSpeed={7}
-                  pauseDuration={3500}
+                  pauseDuration={4000}
                   initialDelay={0}
                   loop={true}
                   showCursor={true}
@@ -165,7 +173,7 @@ export function HeroSection({
         id="hero-venue-marquee-container"
         className="relative mt-8 w-full [@media(min-height:550px)]:absolute [@media(min-height:550px)]:bottom-10 [@media(min-height:550px)]:left-0 [@media(min-height:550px)]:-z-10 [@media(min-height:550px)]:mt-0"
       >
-        <VenueMarquee speed="slow" venueNames={venueNames} />
+        <VenueMarquee speed={speed} venueNames={venueNames} />
       </div>
     </section>
   );

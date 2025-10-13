@@ -1,4 +1,11 @@
-import { Marquee, MarqueeItem } from "@/components/ui/marquee";
+"use client";
+
+import {
+  Marquee,
+  MarqueeContent,
+  MarqueeFade,
+  MarqueeItem,
+} from "@/components/ui/marquee";
 import { BrandLogo } from "@/components/ui/BrandLogo";
 
 interface VenueMarqueeProps {
@@ -12,18 +19,26 @@ export function VenueMarquee({
   speed = "slow",
   className,
 }: VenueMarqueeProps) {
+  const speedMap = {
+    slow: 40,
+    normal: 25,
+    fast: 15,
+  };
+
   return (
-    <div id="venue-marquee-wrapper">
-      <Marquee
-        speed={speed}
-        className={`group relative w-full overflow-hidden bg-transparent ${className || ""}`}
-      >
+    <Marquee className={className}>
+      <MarqueeFade side="left" />
+      <MarqueeFade side="right" />
+      <MarqueeContent speed={speedMap[speed]}>
         {venueNames.map((name, index) => (
-          <MarqueeItem key={`${name}-${index}`}>
+          <MarqueeItem
+            key={`${name}-${index}`}
+            className="h-12 md:h-16 grayscale transition-all duration-300 hover:grayscale-0"
+          >
             <BrandLogo name={name} />
           </MarqueeItem>
         ))}
-      </Marquee>
-    </div>
+      </MarqueeContent>
+    </Marquee>
   );
 }

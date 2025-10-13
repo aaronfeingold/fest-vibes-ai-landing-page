@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  Marquee,
-  MarqueeContent,
-  MarqueeFade,
-  MarqueeItem,
-} from "@/components/ui/marquee";
+import { Marquee, MarqueeContent, MarqueeItem } from "@/components/ui/marquee";
 import { BrandLogo } from "@/components/ui/BrandLogo";
 
 interface VenueMarqueeProps {
@@ -27,8 +22,6 @@ export function VenueMarquee({
 
   return (
     <Marquee className={className}>
-      <MarqueeFade side="left" />
-      <MarqueeFade side="right" />
       <MarqueeContent speed={speedMap[speed]}>
         {venueNames.map((name, index) => (
           <MarqueeItem

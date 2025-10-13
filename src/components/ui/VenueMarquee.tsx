@@ -15,9 +15,9 @@ export function VenueMarquee({
   className,
 }: VenueMarqueeProps) {
   const speedMap = {
-    slow: 40,
-    normal: 25,
-    fast: 15,
+    slow: 30,
+    normal: 40,
+    fast: 50,
   };
 
   return (

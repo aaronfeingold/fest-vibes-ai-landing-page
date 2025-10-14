@@ -5,22 +5,39 @@ import { db } from "@/lib/db/v0-db";
 import { venues } from "@/lib/db/v0-schema";
 import { unstable_cache } from "next/cache";
 
+function normalizeVenueName(name: string): string {
+  // Handle cases like "restaurant, the" -> "the restaurant"
+  const commaPattern = /^(.+),\s*(the|a|an)$/i;
+  const match = name.match(commaPattern);
+
+  if (match) {
+    const [, mainPart, article] = match;
+    return `${article.toLowerCase()} ${mainPart.trim()}`;
+  }
+
+  return name;
+}
+
 async function fetchVenueNames(): Promise<string[]> {
   try {
-    const venueList = await db
+    // Get venue names and normalize them in one chain
+    const normalizedNames = await db
       .select({ name: venues.name })
       .from(venues)
-      .where(eq(venues.isActive, true));
-
-    const venueNames = venueList.map((venue) => venue.name);
+      .where(eq(venues.isActive, true))
+      .limit(100)
+      .then((rows) => rows.map((row) => normalizeVenueName(row.name)));
 
     // Randomize the order
-    for (let i = venueNames.length - 1; i > 0; i--) {
+    for (let i = normalizedNames.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [venueNames[i], venueNames[j]] = [venueNames[j], venueNames[i]];
+      [normalizedNames[i], normalizedNames[j]] = [
+        normalizedNames[j],
+        normalizedNames[i],
+      ];
     }
 
-    return venueNames;
+    return normalizedNames;
   } catch (error) {
     console.error("Failed to fetch venue names:", error);
     return [];

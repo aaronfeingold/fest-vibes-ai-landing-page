@@ -105,16 +105,16 @@ export const FEATURES_SKELETON: FeatureSkeleton[] = [
     color: "from-indigo-500 to-brand-primary",
   },
   {
-    id: CONTENT_IDS.FEATURES.CONNECT,
-    icon: Users,
-    iconImage: ICONS.krewe,
-    color: "from-stage-sky to-stage-turquoise",
-  },
-  {
     id: CONTENT_IDS.FEATURES.CHAT,
     icon: MessageCircle,
     iconImage: ICONS.chat,
     color: "from-brand-primary to-brand-secondary",
+  },
+  {
+    id: CONTENT_IDS.FEATURES.CONNECT,
+    icon: Users,
+    iconImage: ICONS.krewe,
+    color: "from-stage-sky to-stage-turquoise",
   },
   {
     id: CONTENT_IDS.FEATURES.ANALYTICS,
@@ -180,7 +180,6 @@ export const DEMO_CAPABILITIES_ICONS = [
   TrendingUp,
   Clock,
 ] as const;
-
 
 export interface ChatMessage {
   id: number;

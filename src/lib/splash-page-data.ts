@@ -157,16 +157,17 @@ export const MOCK_EVENTS: MockEvent[] = [
 ];
 
 // Skeleton with structure only - content comes from CMS
+// Vibes plan first for better conversion on mobile carousel
 export const PRICING_SKELETON: PricingSkeleton[] = [
-  {
-    id: CONTENT_IDS.PRICING.FREE,
-    buttonVariant: "secondary",
-    isPopular: false,
-  },
   {
     id: CONTENT_IDS.PRICING.VIBES,
     buttonVariant: "default",
     isPopular: true,
+  },
+  {
+    id: CONTENT_IDS.PRICING.FREE,
+    buttonVariant: "secondary",
+    isPopular: false,
   },
 ];
 

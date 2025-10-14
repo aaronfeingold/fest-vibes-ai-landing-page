@@ -27,13 +27,13 @@
         "title": "Plan Ahead",
         "description": "Curate multi-day timelines and jam pack your weekends. Build your perfect weekend with the click of a button."
       },
+      "chat": {
+        "title": "Chat with a Cool Cat",
+        "description": "This AI Kitty knows all about your city! Create personalized weekend music experiences with assistance"
+      },
       "connect": {
         "title": "Connect Your Krewe",
         "description": "No more dozens of text chains or trying to get everyone on the same page. Share your plans with your friends."
-      },
-      "chat": {
-        "title": "Chat with a Cool Cat",
-        "description": "Create personalized weekend music experiences with assistance"
       },
       "analytics": {
         "title": "Nightlife Analytics",
@@ -56,7 +56,6 @@
           "Shareable festival plans",
           "Export to social media"
         ],
-        "excludedFeatures": ["No Chat assistance"],
         "buttonText": "Get Started Free"
       },
       "vibes": {
@@ -68,8 +67,7 @@
           "Personalized recommendations",
           "Smart schedule optimization",
           "Venue and artist insights",
-          "Priority customer support",
-          "Everything in Free Plan"
+          "Priority customer support"
         ],
         "buttonText": "Start Free Trial"
       }

@@ -180,6 +180,44 @@ export const DEMO_CAPABILITIES_ICONS = [
   Clock,
 ] as const;
 
+
+export interface ChatMessage {
+  id: number;
+  role: "user" | "assistant";
+  content: string;
+}
+
+export const CHAT_MESSAGES: ChatMessage[] = [
+  {
+    id: 1,
+    role: "assistant",
+    content:
+      "There are plenty of great shows this weekend in New Orleans. I can make your a lineup to match your vibes. Are you into funk or psychedelic?",
+  },
+  {
+    id: 2,
+    role: "user",
+    content:
+      "nah fam. i want a chill night out, been binging some DtMF Bad Bunny tho, so find somethings with those vibes. nothing late cause i gotta wake up to watch the Saints.",
+  },
+  {
+    id: 3,
+    role: "assistant",
+    content:
+      "Yah, an early Saturday night with some hints of reggaeton. \n\naight hang on one sec...\n\n5:30p - Javier Olondo y Su Banda at Bachannal\n7:15p - Ride share to Frenchman street\n7:30P - Rastafunk at Cafe Negril\n...\n\nSound like a plan?",
+  },
+  {
+    id: 4,
+    role: "user",
+    content: "lit ty",
+  },
+  {
+    id: 5,
+    role: "assistant",
+    content: "siiic",
+  },
+];
+
 // custom icons for some local artists
 export const EVENT_ICONS = {
   "Trombone Shorty": ICONS.trumpet.noBackground2,

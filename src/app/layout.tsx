@@ -5,6 +5,7 @@ import "./globals.css";
 import { PHProvider, ThemeProvider } from "@/providers";
 import { SITE_METADATA } from "@/lib/splash-page-data";
 import { Toaster } from "@/ui";
+import { Analytics } from "@vercel/analytics/next";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -30,6 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className={poppins.className}>
+        <Analytics />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

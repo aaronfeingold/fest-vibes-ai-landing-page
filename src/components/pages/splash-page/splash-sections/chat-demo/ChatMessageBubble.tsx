@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect } from "react";
+import Image from "next/image";
 import { ChatMessage } from "@/lib/splash-page-data";
 import { TypingText } from "@/ui";
+import { ICONS } from "@/lib/icons";
 
 export interface ChatMessageBubbleProps {
   message: ChatMessage;
@@ -53,10 +55,12 @@ export function ChatMessageBubble({
               {message.content}
             </p>
           </div>
-          <img
-            src="/icons/saints.png"
+          <Image
+            src={ICONS.saints}
             alt="User"
-            className="w-8 h-8 rounded-full object-cover flex-shrink-0"
+            width={32}
+            height={32}
+            className="rounded-full object-cover flex-shrink-0"
           />
         </div>
       </div>
@@ -67,10 +71,12 @@ export function ChatMessageBubble({
   return (
     <div className="flex justify-start">
       <div className="flex items-end space-x-2 max-w-[80%]">
-        <img
+        <Image
           src={mascotImage}
           alt="Assistant"
-          className="w-8 h-8 rounded-full object-cover flex-shrink-0"
+          width={32}
+          height={32}
+          className="rounded-full object-cover flex-shrink-0"
         />
         <div className="bg-gray-800 rounded-2xl rounded-bl-sm px-4 py-2.5">
           {isCurrentMessage && isTyping ? (

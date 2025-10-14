@@ -4,7 +4,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { PHProvider, ThemeProvider } from "@/providers";
 import { SITE_METADATA } from "@/lib/splash-page-data";
-import { Toaster } from "sonner";
+import { Toaster } from "@/ui";
 
 const poppins = Poppins({
   subsets: ["latin"],

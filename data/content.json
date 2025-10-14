@@ -17,7 +17,7 @@
     "items": {
       "local-musicians": {
         "title": "Local Musicians Search",
-        "description": "Stay up to date with your favorite local musicians. Find where you favorite artist is playing today. Follow them to be notified when their next show is listed."
+        "description": "Stay up to date with your favorite local musicians. Find where to catch them next. Follow to be notified when a new show is announced."
       },
       "discover-music": {
         "title": "Discover Live Music",
@@ -29,7 +29,7 @@
       },
       "chat": {
         "title": "Chat with a Cool Cat",
-        "description": "This AI Kitty knows all about your city! Create personalized weekend music experiences with assistance"
+        "description": "This AI Kitty knows all about your city! Create personalized weekend music experiences with assistance."
       },
       "connect": {
         "title": "Connect Your Krewe",
@@ -37,7 +37,7 @@
       },
       "analytics": {
         "title": "Nightlife Analytics",
-        "description": "Stay in the the know on your hometown's music scene with insights and trends. Feel out the vibes before you go out."
+        "description": "Stay in the the loop on your hometown's music scene with insights and trends. Feel out the vibes before you go out."
       }
     }
   },

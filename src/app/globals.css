@@ -159,27 +159,6 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Marquee animation */
-@keyframes marquee {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
-
-.animate-marquee {
-  animation: marquee linear infinite;
-}
-
-/* Responsive marquee speed - faster on mobile, slower on desktop */
-@media (min-width: 768px) {
-  .animate-marquee {
-    animation-duration: var(--marquee-duration-desktop) !important;
-  }
-}
-
 /* Floating aura animations */
 @keyframes float-slow {
   0%, 100% {

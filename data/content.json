@@ -1,6 +1,6 @@
 {
   "hero": {
-    "subtitle": "Discover live local music, plan with friends, and experience whachu wanna.",
+    "subtitle": "Discover live local music, plan with friends, and experience whatchu wanna.",
     "typewriterMessages": [
       "Make Your Hometown your own Music Fest",
       "Jam pack my weekend with all the funk",
@@ -17,27 +17,27 @@
     "items": {
       "local-musicians": {
         "title": "Local Musicians Search",
-        "description": "Stay up to date with your favorite local musicians."
+        "description": "Stay up to date with your favorite local musicians. Find where to catch them next. Follow to be notified when a new show is announced."
       },
       "discover-music": {
         "title": "Discover Live Music",
-        "description": "Find what you love or step outside the box"
+        "description": "Find what you love or step outside the box. From Uptown to Downtown, there are myriad different scenes to explore."
       },
       "plan-ahead": {
         "title": "Plan Ahead",
-        "description": "Curate multi-day timelines and jam pack your weekends"
-      },
-      "connect": {
-        "title": "Connect",
-        "description": "Share your plans with your friends"
+        "description": "Curate multi-day timelines and jam pack your weekends. Build your perfect weekend with the click of a button."
       },
       "chat": {
-        "title": "Chat",
-        "description": "Create personalized weekend music experiences with assistance"
+        "title": "Chat with a Cool Cat",
+        "description": "This AI Kitty knows all about your city! Create personalized weekend music experiences with assistance."
+      },
+      "connect": {
+        "title": "Connect Your Krewe",
+        "description": "No more dozens of text chains or trying to get everyone on the same page. Share your plans with your friends."
       },
       "analytics": {
         "title": "Nightlife Analytics",
-        "description": "Stay in the the know on your hometown's music scene with insights and trends"
+        "description": "Stay in the the loop on your hometown's music scene with insights and trends. Feel out the vibes before you go out."
       }
     }
   },
@@ -56,7 +56,6 @@
           "Shareable festival plans",
           "Export to social media"
         ],
-        "excludedFeatures": ["No Chat assistance"],
         "buttonText": "Get Started Free"
       },
       "vibes": {
@@ -68,8 +67,7 @@
           "Personalized recommendations",
           "Smart schedule optimization",
           "Venue and artist insights",
-          "Priority customer support",
-          "Everything in Free Plan"
+          "Priority customer support"
         ],
         "buttonText": "Start Free Trial"
       }

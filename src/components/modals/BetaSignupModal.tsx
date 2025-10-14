@@ -53,7 +53,7 @@ export function BetaSignupModal({ isOpen, onClose }: BetaSignupModalProps) {
               alt="Trumpet"
               width={32}
               height={32}
-              className="w-8 h-8 object-contain transform rotate-[270deg]"
+              className="w-8 h-8 object-contain transform scale-x-[-1]"
             />
           </h3>
           <p

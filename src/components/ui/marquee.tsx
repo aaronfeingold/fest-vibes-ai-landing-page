@@ -1,64 +1,84 @@
 "use client";
 
-import React from "react";
+import type { HTMLAttributes } from "react";
+import type { MarqueeProps as FastMarqueeProps } from "react-fast-marquee";
+import FastMarquee from "react-fast-marquee";
+import { cn } from "@/lib/utils";
 
-interface MarqueeProps {
-  children: React.ReactNode;
-  className?: string;
-  speed?: "slow" | "normal" | "fast";
-  direction?: "left" | "right";
-}
+export type MarqueeProps = HTMLAttributes<HTMLDivElement>;
 
-export function Marquee({
-  children,
-  className = "",
-  speed = "normal",
-  direction = "left"
-}: MarqueeProps) {
-  const speedMap = {
-    slow: { desktop: "40s", mobile: "20s" },
-    normal: { desktop: "25s", mobile: "12s" },
-    fast: { desktop: "15s", mobile: "8s" },
-  };
-
-  const animationDirection = direction === "right" ? "reverse" : "normal";
-
+export const Marquee = ({ className, ...props }: MarqueeProps) => {
   return (
-    <div
-      id="marquee-container"
-      className={`relative w-full overflow-hidden bg-transparent ${className}`}
-      style={{
-        maskImage:
-          "linear-gradient(to right, transparent 0%, transparent 20%, black 35%, black 65%, transparent 80%, transparent 100%)",
-      }}
-    >
+    <>
+      <style>{`
+        .marquee-container {
+          mask-image: linear-gradient(to right, transparent 0%, transparent 5%, black 15%, black 85%, transparent 95%, transparent 100%);
+          -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 5%, black 15%, black 85%, transparent 95%, transparent 100%);
+        }
+        @media (min-width: 768px) {
+          .marquee-container {
+            mask-image: linear-gradient(to right, transparent 0%, transparent 20%, black 35%, black 65%, transparent 80%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 20%, black 35%, black 65%, transparent 80%, transparent 100%);
+          }
+        }
+      `}</style>
       <div
-        id="marquee-content"
-        className="flex whitespace-nowrap animate-marquee"
-        style={{
-          animationDuration: speedMap[speed].mobile,
-          animationDirection: animationDirection,
-          // @ts-ignore - CSS custom property
-          "--marquee-duration-desktop": speedMap[speed].desktop,
-        }}
-      >
-        {children}
-      </div>
-    </div>
+        className={cn(
+          "relative w-full overflow-hidden marquee-container",
+          className
+        )}
+        {...props}
+      />
+    </>
   );
-}
+};
 
-interface MarqueeItemProps {
-  children: React.ReactNode;
-  className?: string;
-}
+export type MarqueeContentProps = FastMarqueeProps;
 
-export function MarqueeItem({ children, className = "" }: MarqueeItemProps) {
-  return (
-    <span className={`inline-block px-4 md:px-8 marquee-item ${className}`}>
-      <span className="flex h-12 min-w-fit items-center justify-center grayscale transition-all duration-300 hover:grayscale-0 md:h-16 whitespace-nowrap">
-        {children}
-      </span>
-    </span>
-  );
-}
+export const MarqueeContent = ({
+  loop = 0,
+  autoFill = true,
+  pauseOnHover = true,
+  ...props
+}: MarqueeContentProps) => (
+  <FastMarquee
+    autoFill={autoFill}
+    loop={loop}
+    pauseOnHover={pauseOnHover}
+    {...props}
+  />
+);
+
+export type MarqueeFadeProps = HTMLAttributes<HTMLDivElement> & {
+  side: "left" | "right";
+};
+
+export const MarqueeFade = ({
+  className,
+  side,
+  ...props
+}: MarqueeFadeProps) => (
+  <div
+    className={cn(
+      "absolute top-0 bottom-0 z-10 h-full pointer-events-none",
+      side === "left" ? "left-0 w-[20%]" : "right-0 w-[20%]",
+      className
+    )}
+    style={{
+      background:
+        side === "left"
+          ? "linear-gradient(to right, hsl(var(--background)) 0%, transparent 100%)"
+          : "linear-gradient(to left, hsl(var(--background)) 0%, transparent 100%)",
+    }}
+    {...props}
+  />
+);
+
+export type MarqueeItemProps = HTMLAttributes<HTMLDivElement>;
+
+export const MarqueeItem = ({ className, ...props }: MarqueeItemProps) => (
+  <div
+    className={cn("mx-2 flex-shrink-0 object-contain", className)}
+    {...props}
+  />
+);

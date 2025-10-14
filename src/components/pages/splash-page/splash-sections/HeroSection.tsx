@@ -1,9 +1,10 @@
-import type React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Button, TypingText, VenueMarquee } from "@/ui";
 import { useNoBackgroundMascots } from "@/hooks";
 import { ContentData } from "@/lib/content-loader";
+import type { Speed } from "@/ui";
 
 interface HeroSectionProps {
   isVisible: boolean;
@@ -20,6 +21,14 @@ export function HeroSection({
   showContent = true,
   venueNames,
 }: HeroSectionProps) {
+  const [speed, setSpeed] = useState<Speed>("slow");
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.innerWidth < 768) {
+      setSpeed("fast");
+    }
+  }, []);
+
   const messages = contentData?.hero?.typewriterMessages || [
     "Make Your Hometown your own Music Fest",
     "Jam pack my weekend with all the funk",
@@ -110,7 +119,7 @@ export function HeroSection({
           >
             <div
               id="hero-header-container"
-              className="mb-8 mx-auto px-[20px] transition-all duration-300 md:px-0 w-full max-w-[854px] min-h-[160px] lg:min-h-[216px] flex items-center justify-center"
+              className="mb-8 mx-auto px-[20px] transition-all duration-300 md:px-0 w-full max-w-[854px] h-[175px] lg:h-[216px] flex items-center justify-center"
             >
               <h1
                 id="hero-header"
@@ -119,9 +128,9 @@ export function HeroSection({
                 <TypingText
                   text={messages}
                   className="text-white"
-                  typingSpeed={15}
+                  typingSpeed={40}
                   deletingSpeed={7}
-                  pauseDuration={3500}
+                  pauseDuration={4000}
                   initialDelay={0}
                   loop={true}
                   showCursor={true}
@@ -165,7 +174,7 @@ export function HeroSection({
         id="hero-venue-marquee-container"
         className="relative mt-8 w-full [@media(min-height:550px)]:absolute [@media(min-height:550px)]:bottom-10 [@media(min-height:550px)]:left-0 [@media(min-height:550px)]:-z-10 [@media(min-height:550px)]:mt-0"
       >
-        <VenueMarquee speed="slow" venueNames={venueNames} />
+        <VenueMarquee speed={speed} venueNames={venueNames} />
       </div>
     </section>
   );

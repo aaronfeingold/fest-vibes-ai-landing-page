@@ -33,7 +33,7 @@ export const trackEvent = (
   }
 };
 
-// Specific SIP analytics events
+// Specific analytics events
 export const analytics = {
   // Page views
   pageView: (page: string) => {

@@ -105,16 +105,16 @@ export const FEATURES_SKELETON: FeatureSkeleton[] = [
     color: "from-indigo-500 to-brand-primary",
   },
   {
-    id: CONTENT_IDS.FEATURES.CONNECT,
-    icon: Users,
-    iconImage: ICONS.krewe,
-    color: "from-stage-sky to-stage-turquoise",
-  },
-  {
     id: CONTENT_IDS.FEATURES.CHAT,
     icon: MessageCircle,
     iconImage: ICONS.chat,
     color: "from-brand-primary to-brand-secondary",
+  },
+  {
+    id: CONTENT_IDS.FEATURES.CONNECT,
+    icon: Users,
+    iconImage: ICONS.krewe,
+    color: "from-stage-sky to-stage-turquoise",
   },
   {
     id: CONTENT_IDS.FEATURES.ANALYTICS,
@@ -157,16 +157,17 @@ export const MOCK_EVENTS: MockEvent[] = [
 ];
 
 // Skeleton with structure only - content comes from CMS
+// Vibes plan first for better conversion on mobile carousel
 export const PRICING_SKELETON: PricingSkeleton[] = [
-  {
-    id: CONTENT_IDS.PRICING.FREE,
-    buttonVariant: "secondary",
-    isPopular: false,
-  },
   {
     id: CONTENT_IDS.PRICING.VIBES,
     buttonVariant: "default",
     isPopular: true,
+  },
+  {
+    id: CONTENT_IDS.PRICING.FREE,
+    buttonVariant: "secondary",
+    isPopular: false,
   },
 ];
 
@@ -179,6 +180,43 @@ export const DEMO_CAPABILITIES_ICONS = [
   TrendingUp,
   Clock,
 ] as const;
+
+export interface ChatMessage {
+  id: number;
+  role: "user" | "assistant";
+  content: string;
+}
+
+export const CHAT_MESSAGES: ChatMessage[] = [
+  {
+    id: 1,
+    role: "assistant",
+    content:
+      "There are plenty of great shows this weekend in New Orleans. I can make your a lineup to match your vibes. Are you into funk or psychedelic?",
+  },
+  {
+    id: 2,
+    role: "user",
+    content:
+      "nah fam. i want a chill night out, been binging some DtMF Bad Bunny tho, so find somethings with those vibes. nothing late cause i gotta wake up to watch the Saints.",
+  },
+  {
+    id: 3,
+    role: "assistant",
+    content:
+      "Yah, an early Saturday night with some hints of reggaeton. \n\naight hang on one sec...\n\n5:30p - Javier Olondo y Su Banda at Bachannal\n7:15p - Ride share to Frenchman street\n7:30P - Rastafunk at Cafe Negril\n...\n\nSound like a plan?",
+  },
+  {
+    id: 4,
+    role: "user",
+    content: "lit ty",
+  },
+  {
+    id: 5,
+    role: "assistant",
+    content: "siiic",
+  },
+];
 
 // custom icons for some local artists
 export const EVENT_ICONS = {

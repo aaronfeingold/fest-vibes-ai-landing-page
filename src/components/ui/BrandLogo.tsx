@@ -7,17 +7,15 @@ interface BrandLogoProps {
   className?: string;
 }
 
-export function BrandLogo({ name, className = "" }: BrandLogoProps) {
-  return (
-    <div
-      className={`h-auto max-h-8 w-auto max-w-full object-contain md:max-h-10 flex items-center justify-center ${className}`}
-    >
-      <span className="text-gray-400 font-bold text-sm md:text-base uppercase tracking-wider">
-        {name}
-      </span>
-    </div>
-  );
-}
+export const BrandLogo = ({ name, className = "" }: BrandLogoProps) => (
+  <div
+    className={`h-auto max-h-8 w-auto max-w-full object-contain md:max-h-10 flex items-center justify-center ${className}`}
+  >
+    <span className="text-gray-400 font-bold text-sm md:text-base uppercase tracking-wider">
+      {name}
+    </span>
+  </div>
+);
 
 // Predefined music industry brands for the marquee
 export const MUSIC_BRANDS = [
@@ -32,5 +30,5 @@ export const MUSIC_BRANDS = [
   "Rolling Stone",
   "Pitchfork",
   "Billboard",
-  "Variety"
+  "Variety",
 ] as const;

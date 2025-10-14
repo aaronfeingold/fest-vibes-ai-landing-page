@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { Button, TypingText, VenueMarquee } from "@/ui";
 import { useNoBackgroundMascots } from "@/hooks";
 import { ContentData } from "@/lib/content-loader";
+import type { Speed } from "@/ui";
 
 interface HeroSectionProps {
   isVisible: boolean;
@@ -20,11 +21,10 @@ export function HeroSection({
   showContent = true,
   venueNames,
 }: HeroSectionProps) {
-  const [speed, setSpeed] = useState<"slow" | "normal" | "fast">("slow");
+  const [speed, setSpeed] = useState<Speed>("slow");
 
   useEffect(() => {
     if (typeof window !== "undefined" && window.innerWidth < 768) {
-      console.log("setting speed to fast");
       setSpeed("fast");
     }
   }, []);
@@ -119,7 +119,7 @@ export function HeroSection({
           >
             <div
               id="hero-header-container"
-              className="mb-8 mx-auto px-[20px] transition-all duration-300 md:px-0 w-full max-w-[854px] min-h-[160px] lg:min-h-[216px] flex items-center justify-center"
+              className="mb-8 mx-auto px-[20px] transition-all duration-300 md:px-0 w-full max-w-[854px] h-[175px] lg:h-[216px] flex items-center justify-center"
             >
               <h1
                 id="hero-header"

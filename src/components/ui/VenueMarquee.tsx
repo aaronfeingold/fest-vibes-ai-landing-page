@@ -3,11 +3,19 @@
 import { Marquee, MarqueeContent, MarqueeItem } from "@/components/ui/marquee";
 import { BrandLogo } from "@/components/ui/BrandLogo";
 
+export type Speed = "slow" | "normal" | "fast";
+
 interface VenueMarqueeProps {
   venueNames: string[];
-  speed?: "slow" | "normal" | "fast";
+  speed?: Speed;
   className?: string;
 }
+
+const speedMap: Record<Speed, number> = {
+  slow: 30,
+  normal: 40,
+  fast: 50,
+} as const;
 
 export const VenueMarquee = ({
   venueNames,
@@ -28,8 +36,3 @@ export const VenueMarquee = ({
   </Marquee>
 );
 
-var speedMap = {
-  slow: 30,
-  normal: 40,
-  fast: 50,
-};

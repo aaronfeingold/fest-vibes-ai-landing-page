@@ -6,7 +6,7 @@ import { venues } from "@/lib/db/v0-schema";
 import { unstable_cache } from "next/cache";
 
 function normalizeVenueName(name: string): string {
-  // Handle cases like "restaurant, the" -> "the restaurant"
+  // Handle cases like "venue, the" -> "the venue"
   const commaPattern = /^(.+),\s*(the|a|an)$/i;
   const match = name.match(commaPattern);
 
